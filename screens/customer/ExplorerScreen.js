@@ -59,7 +59,7 @@ const renderItem = ({ item }) => {
 				flex: 1,
 				alignItems: "center",
 				justifyContent: "center",
-				marginRight: 20,
+				marginRight: 22,
 			}}
 		>
 			<Image
