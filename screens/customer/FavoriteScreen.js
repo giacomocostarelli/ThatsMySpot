@@ -7,6 +7,7 @@ import {
 	Image,
 	StyleSheet,
 	SectionList,
+	Pressable,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 
@@ -28,15 +29,21 @@ const FavoriteScreen = (props) => {
 				style={styles.sectionContainer}
 				sections={favorites}
 				renderItem={({ item }) => (
-					<View style={styles.itemContainer}>
-						<Image
-							style={styles.tinyLogo}
-							source={{
-								uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-							}}
-						/>
-						<Text style={styles.item}>{item}</Text>
-					</View>
+					<Pressable
+						onPress={() => {
+							console.log("Vai a pagina ristorante");
+						}}
+					>
+						<View style={styles.itemContainer}>
+							<Image
+								style={styles.tinyLogo}
+								source={{
+									uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
+								}}
+							/>
+							<Text style={styles.item}>{item}</Text>
+						</View>
+					</Pressable>
 				)}
 				renderSectionHeader={({ section }) => (
 					<Text style={styles.sectionHeader}>{section.title}</Text>
