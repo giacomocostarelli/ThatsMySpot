@@ -6,6 +6,7 @@ import {
 	StyleSheet,
 	ScrollView,
 	Image,
+	Pressable,
 } from "react-native";
 import Colors from "../../constants/Colors";
 
@@ -62,12 +63,18 @@ const renderItem = ({ item }) => {
 				marginRight: 22,
 			}}
 		>
-			<Image
-				style={styles.tinyLogo}
-				source={{
-					uri: item.uri,
+			<Pressable
+				onPress={() => {
+					console.log("Vai a pagina ristorante");
 				}}
-			/>
+			>
+				<Image
+					style={styles.tinyLogo}
+					source={{
+						uri: item.uri,
+					}}
+				/>
+			</Pressable>
 			<Text>{item.id}</Text>
 		</View>
 	);
@@ -90,6 +97,7 @@ const Row = ({ category }) => {
 			</View>
 			<View style={styles.list}>
 				<FlatList
+					showsHorizontalScrollIndicator={false}
 					horizontal={true}
 					style={styles.list}
 					data={RISTORANTI}
