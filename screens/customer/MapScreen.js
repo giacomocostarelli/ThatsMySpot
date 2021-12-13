@@ -7,15 +7,40 @@ import {
 	StyleSheet,
 	ActivityIndicator,
 	Dimensions,
+	Pressable,
 } from "react-native";
 import Geolocation from "react-native-geolocation-service";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
+import { Marker, Callout } from "react-native-maps";
+
+function generateCoordinate() {
+	var r = 100 / 111300, // = 100 meters
+		y0 = 45.1239837,
+		x0 = 7.6243529,
+		u = Math.random(),
+		v = Math.random(),
+		w = r * Math.sqrt(u),
+		t = 2 * Math.PI * v,
+		x = w * Math.cos(t),
+		y1 = w * Math.sin(t),
+		x1 = x / Math.cos(y0);
+
+	let newY = y0 + y1;
+	let newX = x0 + x1;
+	return { latitude: newY, longitude: newX };
+}
+
+const MARKERS = [];
+for (let step = 0; step < 10; step++) {
+	MARKERS.push(generateCoordinate());
+}
 
 const MapScreen = (props) => {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [initial, setInitial] = useState(null);
+	const { navigate } = props.navigation;
 
 	useEffect(() => {
 		(async () => {
@@ -37,22 +62,45 @@ const MapScreen = (props) => {
 					latitudeDelta: 0.0025,
 					longitudeDelta: 0.0025,
 				});
+				//console.log(initial);
 			}
 		})();
 	}, []);
+
+	const navigateToView = () => {
+		console.log("ciao");
+	};
 
 	return (
 		<View style={styles.container}>
 			{initial && (
 				<MapView
 					loadingEnabled={true}
-					showsTraffic={true}
+					showsTraffic={false}
 					mapPadding={{ top: 100 }}
 					showsMyLocationButton={true}
 					showsUserLocation={true}
 					initialRegion={initial}
 					style={styles.map}
-				/>
+				>
+					{MARKERS.map(function (object, i) {
+						return (
+							<Marker
+								onPress={(e) => console.log(e.nativeEvent)}
+								coordinate={object}
+								key={i}
+							>
+								<Callout tooltip={true}>
+									<Pressable onPress={navigateToView}>
+										<View style={{ backgroundColor: "red", padding: 10 }}>
+											<Text>SF</Text>
+										</View>
+									</Pressable>
+								</Callout>
+							</Marker>
+						);
+					})}
+				</MapView>
 			)}
 		</View>
 	);
