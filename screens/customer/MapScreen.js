@@ -8,6 +8,7 @@ import {
 	ActivityIndicator,
 	Dimensions,
 	Pressable,
+	Image,
 } from "react-native";
 import Geolocation from "react-native-geolocation-service";
 import * as Location from "expo-location";
@@ -30,7 +31,6 @@ function generateCoordinate() {
 	let newX = x0 + x1;
 	return { latitude: newY, longitude: newX };
 }
-
 const MARKERS = [];
 for (let step = 0; step < 10; step++) {
 	MARKERS.push(generateCoordinate());
@@ -67,8 +67,8 @@ const MapScreen = (props) => {
 		})();
 	}, []);
 
-	const navigateToView = () => {
-		console.log("ciao");
+	const navigateToView = (viewName) => {
+		console.log(viewName);
 	};
 
 	return (
@@ -91,11 +91,26 @@ const MapScreen = (props) => {
 								key={i}
 							>
 								<Callout tooltip={true}>
-									<Pressable onPress={navigateToView}>
-										<View style={{ backgroundColor: "red", padding: 10 }}>
-											<Text>SF</Text>
+									<View
+										style={{
+											flexDirection: "column",
+											alignItems: "center",
+											justifyContent: "flex-end",
+											flex: 1,
+										}}
+									>
+										<View>
+											<Text>Ciao</Text>
 										</View>
-									</Pressable>
+										<Text>
+											<Image
+												style={{ height: 100, width: 100, paddingBottom: 20 }}
+												source={{
+													uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
+												}}
+											/>
+										</Text>
+									</View>
 								</Callout>
 							</Marker>
 						);
