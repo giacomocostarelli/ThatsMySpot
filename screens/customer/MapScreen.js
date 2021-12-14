@@ -14,6 +14,7 @@ import Geolocation from "react-native-geolocation-service";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
+import { WebView } from "react-native-webview";
 
 function generateCoordinate() {
 	var r = 100 / 111300, // = 100 meters
@@ -90,26 +91,23 @@ const MapScreen = (props) => {
 								coordinate={object}
 								key={i}
 							>
-								<Callout tooltip={true}>
+								<Callout
+									style={{}}
+									onPress={() => {
+										//NAVIGATE TO RESTAURANT SCREEN.
+										props.navigation.navigate("Login");
+									}}
+								>
 									<View
-										style={{
-											flexDirection: "column",
-											alignItems: "center",
-											justifyContent: "flex-end",
-											flex: 1,
-										}}
+										style={{ alignItems: "center", justifyContent: "center" }}
 									>
-										<View>
-											<Text>Ciao</Text>
-										</View>
-										<Text>
-											<Image
-												style={{ height: 100, width: 100, paddingBottom: 20 }}
-												source={{
-													uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-												}}
-											/>
-										</Text>
+										<WebView
+											style={{ height: 100, width: 150 }}
+											source={{
+												uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
+											}}
+										/>
+										<Text>Nome del ristorante.</Text>
 									</View>
 								</Callout>
 							</Marker>
