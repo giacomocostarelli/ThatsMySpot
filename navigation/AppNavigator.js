@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import {
 	View,
@@ -10,7 +10,7 @@ import {
 	Image,
 } from "react-native";
 import { Icon } from "react-native-elements";
-
+import { FontAwesome } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 
@@ -21,11 +21,14 @@ import FavoriteScreen from "../screens/customer/FavoriteScreen";
 import MapScreen from "../screens/customer/MapScreen";
 import SearchScreen from "../screens/customer/SearchScreen";
 import Colors from "../constants/Colors";
+import RestaurantDetailsScreen from "../screens/customer/RestaurantDetailsScreen";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = (props) => {
+	const [isFavorite, setIsFavorite] = useState(false);
+
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
@@ -48,6 +51,43 @@ const AppNavigator = (props) => {
 					component={LoginScreen}
 					options={{
 						headerShown: false,
+					}}
+				/>
+				<Stack.Screen
+					name="Details"
+					component={RestaurantDetailsScreen}
+					options={{
+						title: "Torna a Mappa",
+						headerStyle: {
+							backgroundColor: Colors.accent,
+						},
+						headerTitleAlign: "left",
+						headerTintColor: "white",
+						headerTitleStyle: {
+							fontFamily: "roboto-font",
+						},
+						headerRight: () => {
+							let star = isFavorite ? (
+								<FontAwesome
+									name="star"
+									size={24}
+									color="white"
+									onPress={() => {
+										setIsFavorite(!isFavorite);
+									}}
+								/>
+							) : (
+								<FontAwesome
+									name="star-o"
+									size={24}
+									color="white"
+									onPress={() => {
+										setIsFavorite(!isFavorite);
+									}}
+								/>
+							);
+							return star;
+						},
 					}}
 				/>
 			</Stack.Navigator>

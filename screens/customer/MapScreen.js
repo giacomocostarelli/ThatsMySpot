@@ -95,7 +95,7 @@ const MapScreen = (props) => {
 									style={{}}
 									onPress={() => {
 										//NAVIGATE TO RESTAURANT SCREEN.
-										props.navigation.navigate("Login");
+										props.navigation.navigate("Details");
 									}}
 								>
 									<View
