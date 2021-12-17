@@ -5,77 +5,113 @@ import {
 	StyleSheet,
 	Image,
 	useWindowDimensions,
+	ImageBackground,
 } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import { TabView, SceneMap } from "react-native-tab-view";
+import { TabView, SceneMap, TabBar } from "react-native-tab-view";
+import { Divider } from "react-native-elements";
+import Card from "../../components/Card";
 
 const FavoriteRow = (props) => {
 	return (
 		<View
 			style={{
-				margin: "5%",
+				marginVertical: "5%",
 				alignItems: "center",
 				justifyContent: "center",
 				flexDirection: "row",
 			}}
 		>
-			<Text style={{ fontSize: 18, marginRight: "5%" }}>
-				{props.children} / 5
-			</Text>
-			<FontAwesome name="star" size={24} color={Colors.accent} />
+			<FontAwesome
+				name={props.iconname}
+				size={30}
+				color={Colors.accent}
+				style={{ marginRight: "10%" }}
+			/>
+			<Text style={{ fontSize: 18 }}>{props.children}</Text>
 		</View>
 	);
 };
 
-const FirstRoute = () => (
-	<View style={{ flex: 1, backgroundColor: "#ff4081" }} />
+const ProfileTab = () => (
+	<View style={styles.body}>
+		<ImageBackground
+			style={styles.imageContainer}
+			source={{
+				uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
+			}}
+		>
+			<View style={styles.bodyTitleContainer}>
+				<Text style={styles.bodyTitle}>Pizzeria da Giacomo</Text>
+			</View>
+		</ImageBackground>
+		<View style={styles.descriptionContainer}>
+			<Text style={styles.descriptionText}>
+				Pizza al mattone o al tegamino, anche per celiaci, in un locale rustico
+				con ampie vetrate e mattoni a vista.
+			</Text>
+			<View
+				style={{
+					flex: 1.5,
+					flexDirection: "column",
+					alignItems: "flex-start",
+					justifyContent: "center",
+				}}
+			>
+				<Text style={{ fontSize: 20, color: Colors.accent }}>Informazioni</Text>
+				<FavoriteRow iconname={"star"}>2.7 / 5</FavoriteRow>
+				<FavoriteRow iconname={"map-marker"}>Via delle Pizze, 22</FavoriteRow>
+				<FavoriteRow iconname={"phone"}>392 079 4885</FavoriteRow>
+			</View>
+			<Text style={{ color: Colors.primary }}>
+				Fai swipe a destra per prenotare un tavolo.{" "}
+			</Text>
+		</View>
+	</View>
 );
 
-const SecondRoute = () => (
-	<View style={{ flex: 1, backgroundColor: "#673ab7" }} />
+const BookingTab = () => <View style={{ flex: 1 }} />;
+
+const TakeawayTab = () => (
+	<View style={{ flex: 1, backgroundColor: "white" }} />
 );
 
 const renderScene = SceneMap({
-	first: FirstRoute,
-	second: SecondRoute,
+	profile: ProfileTab,
+	booking: BookingTab,
+	takeaway: TakeawayTab,
 });
 
+const renderTabBar = (props) => (
+	<TabBar
+		{...props}
+		indicatorStyle={{ backgroundColor: Colors.accent }}
+		labelStyle={{ color: Colors.accent, fontWeight: "bold" }}
+		style={{ backgroundColor: "white" }}
+	/>
+);
+
 const RestaurantDetailsScreen = (props) => {
-	const [stars, setStars] = useState(2.7);
 	const layout = useWindowDimensions();
 
 	const [index, setIndex] = useState(0);
 	const [routes] = useState([
-		{ key: "first", title: "First" },
-		{ key: "second", title: "Second" },
+		{ key: "profile", title: "Profilo" },
+		{ key: "booking", title: "Prenota" },
+		{ key: "takeaway", title: "Take Away" },
 	]);
 
 	//Component.
 	return (
 		<View style={styles.container}>
-			<View style={styles.header}>
-				<Image
-					style={styles.leftHeader}
-					source={{
-						uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-					}}
-				/>
-				<View style={styles.rightHeader}>
-					<Text style={styles.rightHeaderTitle}>Pizzeria da Giacomo</Text>
-					<Text>Via delle Pizze 22 </Text>
-					<Text>392 079 4880</Text>
-					<FavoriteRow>{stars}</FavoriteRow>
-				</View>
-			</View>
-			<View style={styles.body}>
-				<TabView
-					navigationState={{ index, routes }}
-					renderScene={renderScene}
-					onIndexChange={setIndex}
-					initialLayout={{ width: layout.width }}
-				/>
-			</View>
+			<TabView
+				navigationState={{ index, routes }}
+				renderScene={renderScene}
+				onIndexChange={setIndex}
+				initialLayout={{ width: layout.width }}
+				renderTabBar={renderTabBar}
+			/>
 		</View>
 	);
 };
@@ -85,32 +121,37 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 
-	header: {
-		flexDirection: "row",
-		flex: 2,
-		borderWidth: 1,
-		borderColor: "lightgrey",
+	body: {
+		flex: 1,
+	},
+
+	bodyTitleContainer: {
+		alignItems: "center",
+		justifyContent: "center",
+		backgroundColor: "rgba(52, 52, 52, 0.5)",
+	},
+
+	bodyTitle: {
+		color: "white",
+		fontSize: 30,
+		fontWeight: "bold",
+	},
+
+	imageContainer: {
+		flex: 4,
+	},
+
+	descriptionContainer: {
+		flex: 5,
+		flexDirection: "column",
+		alignItems: "flex-start",
+		justifyContent: "flex-start",
 		margin: "5%",
 	},
 
-	leftHeader: {
-		flex: 1,
-	},
-
-	rightHeader: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
-		margin: "3%",
-	},
-
-	rightHeaderTitle: {
-		fontFamily: "roboto-font",
+	descriptionText: {
 		fontSize: 18,
-	},
-
-	body: {
-		flex: 4,
+		textAlign: "justify",
 	},
 
 	title: {
