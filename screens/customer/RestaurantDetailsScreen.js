@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import {
+	View,
+	Text,
+	StyleSheet,
+	Image,
+	useWindowDimensions,
+} from "react-native";
 import Colors from "../../constants/Colors";
-import { Icon } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
-import PagerView from "react-native-pager-view";
+import { TabView, SceneMap } from "react-native-tab-view";
 
 const FavoriteRow = (props) => {
 	return (
@@ -23,8 +28,28 @@ const FavoriteRow = (props) => {
 	);
 };
 
+const FirstRoute = () => (
+	<View style={{ flex: 1, backgroundColor: "#ff4081" }} />
+);
+
+const SecondRoute = () => (
+	<View style={{ flex: 1, backgroundColor: "#673ab7" }} />
+);
+
+const renderScene = SceneMap({
+	first: FirstRoute,
+	second: SecondRoute,
+});
+
 const RestaurantDetailsScreen = (props) => {
 	const [stars, setStars] = useState(2.7);
+	const layout = useWindowDimensions();
+
+	const [index, setIndex] = useState(0);
+	const [routes] = useState([
+		{ key: "first", title: "First" },
+		{ key: "second", title: "Second" },
+	]);
 
 	//Component.
 	return (
@@ -44,14 +69,12 @@ const RestaurantDetailsScreen = (props) => {
 				</View>
 			</View>
 			<View style={styles.body}>
-				<PagerView style={styles.pagerView} initialPage={0}>
-					<View collapsable={false} key="1">
-						<Text>First page</Text>
-					</View>
-					<View collapsable={false} key="2">
-						<Text>Second page</Text>
-					</View>
-				</PagerView>
+				<TabView
+					navigationState={{ index, routes }}
+					renderScene={renderScene}
+					onIndexChange={setIndex}
+					initialLayout={{ width: layout.width }}
+				/>
 			</View>
 		</View>
 	);
@@ -60,16 +83,14 @@ const RestaurantDetailsScreen = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		display: "flex",
-		alignItems: "center",
-		justifyContent: "center",
 	},
 
 	header: {
 		flexDirection: "row",
 		flex: 2,
-		borderBottomWidth: 1,
-		borderBottomColor: "lightgrey",
+		borderWidth: 1,
+		borderColor: "lightgrey",
+		margin: "5%",
 	},
 
 	leftHeader: {
@@ -90,19 +111,10 @@ const styles = StyleSheet.create({
 
 	body: {
 		flex: 4,
-		alignItems: "center",
-		justifyContent: "center",
 	},
 
 	title: {
 		fontSize: 32,
-	},
-	pagerView: { flex: 1 },
-	page: {
-		width: "100%",
-		height: "100%",
-		justifyContent: "center",
-		alignItems: "center",
 	},
 });
 
