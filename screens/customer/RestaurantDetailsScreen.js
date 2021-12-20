@@ -6,12 +6,13 @@ import {
 	Image,
 	useWindowDimensions,
 	ImageBackground,
+	Button,
+	Pressable,
 } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
-import { Divider } from "react-native-elements";
-import Card from "../../components/Card";
+import DateTimePicker from "@react-native-community/datetimepicker";
 
 const FavoriteRow = (props) => {
 	return (
@@ -71,11 +72,90 @@ const ProfileTab = () => (
 	</View>
 );
 
-const BookingTab = () => <View style={{ flex: 1 }} />;
+const BookingTab = () => {
+	const [date, setDate] = useState(new Date());
+	const [mode, setMode] = useState("date");
+	const [show, setShow] = useState(false);
 
-const TakeawayTab = () => (
-	<View style={{ flex: 1, backgroundColor: "white" }} />
-);
+	const onChange = (event, selectedDate) => {
+		const currentDate = selectedDate || date;
+		setShow(Platform.OS === "ios");
+		setDate(currentDate);
+	};
+
+	const showMode = (currentMode) => {
+		setShow(true);
+		setMode(currentMode);
+	};
+
+	const showDatepicker = () => {
+		showMode("date");
+	};
+
+	const showTimepicker = () => {
+		showMode("time");
+	};
+
+	const showDate = () => {
+		//date
+		let datanew = date;
+		datanew.setHours(date.getHours() + 1);
+		console.log(
+			datanew.toISOString().slice(8, 10) +
+				"/" +
+				datanew.toISOString().slice(5, 7) +
+				"/" +
+				datanew.toISOString().slice(0, 4)
+		);
+		//time
+		console.log(datanew.toISOString().slice(11, 16));
+	};
+
+	return (
+		<View
+			style={{
+				flex: 1,
+				alignItems: "center",
+				justifyContent: "center",
+				flexDirection: "column",
+				margin: "5%",
+			}}
+		>
+			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
+				<Text style={{ fontSize: 20 }}>
+					Seleziona il giorno, l'orario e conferma la tua prenotazione.
+				</Text>
+			</View>
+			<View style={{ flex: 1 }}>
+				<Pressable style={styles.button} onPress={showDatepicker}>
+					<Text style={{ color: "white" }}>Scegli un giorno.</Text>
+				</Pressable>
+			</View>
+			<View style={{ flex: 1 }}>
+				<Pressable style={styles.button} onPress={showTimepicker}>
+					<Text style={{ color: "white" }}>Scegli un orario.</Text>
+				</Pressable>
+			</View>
+			<View style={{ flex: 1 }}>
+				<Pressable style={styles.button} onPress={showDate}>
+					<Text style={{ color: "white" }}>Mostra.</Text>
+				</Pressable>
+			</View>
+			{show && (
+				<DateTimePicker
+					testID="dateTimePicker"
+					value={date}
+					mode={mode}
+					is24Hour={false}
+					display="default"
+					onChange={onChange}
+				/>
+			)}
+		</View>
+	);
+};
+
+const TakeawayTab = () => <View style={{ flex: 1 }} />;
 
 const renderScene = SceneMap({
 	profile: ProfileTab,
@@ -146,7 +226,7 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		alignItems: "flex-start",
 		justifyContent: "flex-start",
-		margin: "5%",
+		margin: "9%",
 	},
 
 	descriptionText: {
@@ -156,6 +236,16 @@ const styles = StyleSheet.create({
 
 	title: {
 		fontSize: 32,
+	},
+	button: {
+		alignItems: "center",
+		justifyContent: "center",
+		paddingVertical: 12,
+		paddingHorizontal: 32,
+		marginTop: 15,
+		borderRadius: 4,
+		elevation: 3,
+		backgroundColor: Colors.accent,
 	},
 });
 
