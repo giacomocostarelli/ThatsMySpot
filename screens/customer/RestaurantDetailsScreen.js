@@ -80,6 +80,7 @@ const BookingTab = () => {
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate || date;
 		setShow(Platform.OS === "ios");
+		currentDate.setHours(currentDate.getHours() + 1);
 		setDate(currentDate);
 	};
 
@@ -99,7 +100,7 @@ const BookingTab = () => {
 	const showDate = () => {
 		//date
 		let datanew = date;
-		datanew.setHours(date.getHours() + 1);
+
 		console.log(
 			datanew.toISOString().slice(8, 10) +
 				"/" +
