@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
 		margin: "5%",
 	},
 	sectionHeader: {
-		color: Colors.accent,
+		color: Colors.secondary,
 		marginHorizontal: "5%",
 		marginVertical: "3%",
 		fontSize: 24,

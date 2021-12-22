@@ -29,8 +29,8 @@ const LoginScreen = (props) => {
 						<Icon
 							style={{ margin: 5 }}
 							name="user"
-							size={70}
-							color="grey"
+							size={90}
+							color="white"
 							type="evilicon"
 						/>
 						<View>
@@ -105,8 +105,8 @@ const LoginScreen = (props) => {
 						<Icon
 							style={{ paddingRight: 10 }}
 							name="user"
-							size={70}
-							color="grey"
+							size={90}
+							color="white"
 							type="evilicon"
 						/>
 						<View>
@@ -199,7 +199,7 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-end",
 	},
 	backColor: {
-		backgroundColor: Colors.primary,
+		backgroundColor: Colors.accent,
 	},
 	text: {
 		fontSize: 50,
@@ -233,7 +233,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		width: "100%",
 		minHeight: 30,
-		backgroundColor: "#F0F0F0",
+		backgroundColor: Colors.secondary,
 		alignItems: "center",
 		justifyContent: "center",
 	},
@@ -242,13 +242,13 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		width: "100%",
 		minHeight: 30,
-		backgroundColor: "#F0F0F0",
+		backgroundColor: Colors.secondary,
 		alignItems: "center",
 		justifyContent: "center",
 	},
 	textHeader: {
-		fontSize: 22,
-		color: "#484848",
+		fontSize: 26,
+		color: "white",
 		fontFamily: "roboto-font",
 	},
 	cardBody: {
@@ -282,10 +282,9 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		paddingVertical: 12,
 		paddingHorizontal: 32,
-		marginTop: 15,
 		borderRadius: 4,
 		elevation: 3,
-		backgroundColor: Colors.accent,
+		backgroundColor: Colors.secondary,
 	},
 	buttonLoginRegister: {
 		alignItems: "center",
@@ -295,7 +294,7 @@ const styles = StyleSheet.create({
 		marginTop: 15,
 		borderRadius: 4,
 		elevation: 3,
-		backgroundColor: Colors.accent,
+		backgroundColor: Colors.secondary,
 	},
 
 	buttonRegister: {
@@ -304,7 +303,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 
-	buttonRegisterText: { color: Colors.accent },
+	buttonRegisterText: { color: Colors.secondary },
 
 	buttonText: {
 		fontSize: 18,

@@ -33,13 +33,6 @@ const AppNavigator = (props) => {
 		<NavigationContainer>
 			<Stack.Navigator>
 				<Stack.Screen
-					name="Homepage"
-					component={TabNavigator}
-					options={{
-						headerShown: false,
-					}}
-				/>
-				<Stack.Screen
 					options={{
 						headerShown: false,
 					}}
@@ -49,6 +42,13 @@ const AppNavigator = (props) => {
 				<Stack.Screen
 					name="Login"
 					component={LoginScreen}
+					options={{
+						headerShown: false,
+					}}
+				/>
+				<Stack.Screen
+					name="Homepage"
+					component={TabNavigator}
 					options={{
 						headerShown: false,
 					}}
@@ -107,7 +107,7 @@ const TabNavigator = (props) => {
 					fontFamily: "roboto-font",
 					fontSize: 30,
 				},
-				tabBarActiveTintColor: Colors.accent,
+				tabBarActiveTintColor: "white",
 				tabBarInactiveTintColor: "white",
 				tabBarStyle: {
 					height: "8%",
@@ -118,7 +118,7 @@ const TabNavigator = (props) => {
 					shadowRadius: 8,
 					elevation: 5,
 				},
-				tabBarActiveBackgroundColor: "white",
+				tabBarActiveBackgroundColor: Colors.secondary,
 				tabBarItemStyle: {},
 				headerLeft: (props) => <View></View>,
 			}}

@@ -13,6 +13,7 @@ import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import DateTimePicker from "@react-native-community/datetimepicker";
+import { Divider } from "react-native-elements/dist/divider/Divider";
 
 const FavoriteRow = (props) => {
 	return (
@@ -27,7 +28,7 @@ const FavoriteRow = (props) => {
 			<FontAwesome
 				name={props.iconname}
 				size={30}
-				color={Colors.accent}
+				color={Colors.secondary}
 				style={{ marginRight: "10%" }}
 			/>
 			<Text style={{ fontSize: 18 }}>{props.children}</Text>
@@ -40,7 +41,7 @@ const ProfileTab = () => (
 		<ImageBackground
 			style={styles.imageContainer}
 			source={{
-				uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
+				uri: "https://media-cdn.tripadvisor.com/media/photo-s/1b/43/a2/c3/restaurant-blue-dining.jpg",
 			}}
 		>
 			<View style={styles.bodyTitleContainer}>
@@ -60,14 +61,16 @@ const ProfileTab = () => (
 					justifyContent: "center",
 				}}
 			>
-				<Text style={{ fontSize: 24, color: Colors.primary }}>
+				<Text
+					style={{ fontWeight: "bold", fontSize: 22, color: Colors.accent }}
+				>
 					Informazioni
 				</Text>
 				<FavoriteRow iconname={"star"}>2.7 / 5</FavoriteRow>
 				<FavoriteRow iconname={"map-marker"}>Via delle Pizze, 22</FavoriteRow>
 				<FavoriteRow iconname={"phone"}>392 079 4885</FavoriteRow>
 			</View>
-			<Text style={{ color: Colors.accent }}>
+			<Text style={{ color: Colors.secondary }}>
 				Fai swipe a destra per prenotare un tavolo.{" "}
 			</Text>
 		</View>
@@ -81,6 +84,7 @@ const BookingTab = () => {
 	const [dateFormat, setDateFormat] = useState("");
 	const [timeFormat, setTimeFormat] = useState("");
 	const [modalVisible, setModalVisible] = useState(false);
+	const [isPressable, setIsPressable] = useState(false);
 
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate || date;
@@ -115,8 +119,6 @@ const BookingTab = () => {
 
 		//time
 		setTimeFormat(datanew.toISOString().slice(11, 16));
-		console.log(dateFormat);
-		console.log(timeFormat);
 	};
 
 	return (
@@ -127,32 +129,40 @@ const BookingTab = () => {
 				justifyContent: "center",
 				flexDirection: "column",
 				margin: "9%",
+				backgroundColor: Colors.back,
 			}}
 		>
 			<View style={{ flex: 1 }}>
 				<Text
-					style={{ fontSize: 18, fontWeight: "bold", color: Colors.primary }}
+					style={{ fontSize: 18, fontWeight: "bold", color: Colors.accent }}
 				>
 					PRENOTA IL TUO TAVOLO.
 				</Text>
-				<Text style={{ fontSize: 18 }}>
+				<Text style={{ fontSize: 18, marginVertical: "5%" }}>
 					Seleziona il giorno, l'orario e conferma la tua prenotazione.
 				</Text>
 			</View>
 
-			<View style={{ flex: 5, width: "100%" }}>
+			<View style={{ flex: 5, width: "100%", alignItems: "center" }}>
 				<Pressable style={styles.button} onPress={showDatepicker}>
 					<Text style={{ color: "white" }}>Scegli un giorno.</Text>
 				</Pressable>
 				<Pressable style={styles.button} onPress={showTimepicker}>
 					<Text style={{ color: "white" }}>Scegli un orario.</Text>
 				</Pressable>
-
+				<Divider
+					width={1}
+					color={Colors.accent}
+					style={{ margin: "10%", width: "98%" }}
+				/>
 				<Pressable
 					style={styles.buttonConfirm}
-					onPress={() => setModalVisible(true)}
+					onPress={() => {
+						setModalVisible(true);
+						showDate();
+					}}
 				>
-					<Text style={{ color: "white" }}>Conferma.</Text>
+					<Text style={{ color: "white" }}>Prenota.</Text>
 				</Pressable>
 			</View>
 
@@ -167,13 +177,24 @@ const BookingTab = () => {
 			>
 				<View style={styles.centeredView}>
 					<View style={styles.modalView}>
-						<Text style={styles.modalText}>Hello World!</Text>
-						<Pressable
-							style={[styles.button, styles.buttonClose]}
-							onPress={() => setModalVisible(!modalVisible)}
-						>
-							<Text style={styles.textStyle}>Hide Modal</Text>
-						</Pressable>
+						<Text style={styles.modalText}>{dateFormat}</Text>
+						<Text style={styles.modalText}>{timeFormat}</Text>
+						<View style={{ flexDirection: "row" }}>
+							<Pressable
+								style={[styles.buttonModal, styles.buttonClose]}
+								onPress={() => {
+									setModalVisible(!modalVisible);
+								}}
+							>
+								<Text style={styles.textStyle}>CHIUDI</Text>
+							</Pressable>
+							<Pressable
+								style={[styles.buttonModal, styles.buttonClose]}
+								onPress={() => setModalVisible(!modalVisible)}
+							>
+								<Text style={styles.textStyle}>OK</Text>
+							</Pressable>
+						</View>
 					</View>
 				</View>
 			</Modal>
@@ -237,6 +258,7 @@ const RestaurantDetailsScreen = (props) => {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		backgroundColor: Colors.back,
 	},
 
 	body: {
@@ -277,6 +299,18 @@ const styles = StyleSheet.create({
 	},
 
 	button: {
+		width: "100%",
+		alignItems: "center",
+		justifyContent: "center",
+		paddingVertical: 12,
+		paddingHorizontal: 32,
+		marginTop: 15,
+		borderRadius: 4,
+		elevation: 3,
+		backgroundColor: Colors.accent,
+	},
+
+	buttonModal: {
 		alignItems: "center",
 		justifyContent: "center",
 		paddingVertical: 12,
@@ -288,25 +322,26 @@ const styles = StyleSheet.create({
 	},
 
 	buttonConfirm: {
+		width: "100%",
 		alignItems: "center",
 		justifyContent: "center",
 		paddingVertical: 12,
 		paddingHorizontal: 32,
-		marginTop: 15,
 		borderRadius: 4,
 		elevation: 3,
-		backgroundColor: "green",
-		marginTop: "20%",
+		backgroundColor: Colors.secondary,
 	},
 
 	centeredView: {
-		flex: 2,
-		justifyContent: "center",
+		flex: 1,
+		justifyContent: "flex-end",
 		alignItems: "center",
 		marginTop: 22,
 	},
 
 	modalView: {
+		width: "82%",
+		height: "30%",
 		margin: 20,
 		backgroundColor: "white",
 		borderRadius: 20,
@@ -323,7 +358,8 @@ const styles = StyleSheet.create({
 	},
 
 	buttonClose: {
-		backgroundColor: "green",
+		backgroundColor: Colors.accent,
+		margin: "5%",
 	},
 	textStyle: {
 		color: "white",
@@ -333,6 +369,9 @@ const styles = StyleSheet.create({
 	modalText: {
 		marginBottom: 15,
 		textAlign: "center",
+		fontSize: 25,
+		fontWeight: "bold",
+		color: Colors.accent,
 	},
 });
 

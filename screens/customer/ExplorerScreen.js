@@ -88,7 +88,7 @@ const Row = ({ category }) => {
 					style={{
 						fontSize: 20,
 						fontWeight: "bold",
-						color: Colors.accent,
+						color: Colors.secondary,
 						marginBottom: 20,
 					}}
 				>

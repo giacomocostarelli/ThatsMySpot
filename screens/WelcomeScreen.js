@@ -86,7 +86,7 @@ const WelcomeScreen = (props) => {
 								style={{
 									fontFamily: "roboto-font",
 									fontSize: 16,
-									color: Colors.accent,
+									color: Colors.secondary,
 									marginHorizontal: "10%",
 									marginTop: "3%",
 									lineHeight: 20,
@@ -121,7 +121,7 @@ const WelcomeScreen = (props) => {
 									style={{
 										fontFamily: "roboto-font",
 										fontSize: 16,
-										color: Colors.accent,
+										color: Colors.secondary,
 										marginHorizontal: "10%",
 										lineHeight: 20,
 									}}
@@ -145,7 +145,7 @@ const WelcomeScreen = (props) => {
 									style={{
 										fontFamily: "roboto-font",
 										fontSize: 16,
-										color: Colors.accent,
+										color: Colors.secondary,
 										marginHorizontal: "10%",
 										lineHeight: 20,
 									}}
@@ -165,7 +165,7 @@ const WelcomeScreen = (props) => {
 								style={{
 									fontFamily: "roboto-font",
 									fontSize: 16,
-									color: Colors.accent,
+									color: Colors.secondary,
 									marginHorizontal: "10%",
 								}}
 							>
@@ -195,7 +195,7 @@ const WelcomeScreen = (props) => {
 									style={{
 										fontFamily: "roboto-font",
 										fontSize: 16,
-										color: Colors.accent,
+										color: Colors.secondary,
 										marginHorizontal: "10%",
 									}}
 								>
@@ -217,7 +217,7 @@ const WelcomeScreen = (props) => {
 									style={{
 										fontFamily: "roboto-font",
 										fontSize: 16,
-										color: Colors.accent,
+										color: Colors.secondary,
 										marginHorizontal: "10%",
 									}}
 								>
@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
 	},
 
 	backColor: {
-		backgroundColor: Colors.primary,
+		backgroundColor: Colors.accent,
 	},
 
 	centered: {
@@ -309,7 +309,7 @@ const styles = StyleSheet.create({
 	text: {
 		fontFamily: "roboto-font",
 		fontSize: 28,
-		color: Colors.accent,
+		color: Colors.secondary,
 		textAlign: "center",
 		marginHorizontal: "15%",
 		marginTop: "15%",
@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
 	buttonRegisterText: {
 		margin: "15%",
 		fontSize: 16,
-		color: Colors.accent,
+		color: Colors.secondary,
 	},
 	buttonRegisterText2: {
 		fontWeight: "bold",
