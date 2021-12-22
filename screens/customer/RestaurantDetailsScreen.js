@@ -3,10 +3,8 @@ import {
 	View,
 	Text,
 	StyleSheet,
-	Image,
 	useWindowDimensions,
 	ImageBackground,
-	Button,
 	Pressable,
 } from "react-native";
 import Colors from "../../constants/Colors";
@@ -60,12 +58,12 @@ const ProfileTab = () => (
 					justifyContent: "center",
 				}}
 			>
-				<Text style={{ fontSize: 20, color: Colors.accent }}>Informazioni</Text>
+				<Text style={{ fontSize: 24, color: Colors.accent }}>Informazioni</Text>
 				<FavoriteRow iconname={"star"}>2.7 / 5</FavoriteRow>
 				<FavoriteRow iconname={"map-marker"}>Via delle Pizze, 22</FavoriteRow>
 				<FavoriteRow iconname={"phone"}>392 079 4885</FavoriteRow>
 			</View>
-			<Text style={{ color: Colors.primary }}>
+			<Text style={{ color: Colors.accent }}>
 				Fai swipe a destra per prenotare un tavolo.{" "}
 			</Text>
 		</View>
@@ -150,6 +148,7 @@ const BookingTab = () => {
 					is24Hour={false}
 					display="default"
 					onChange={onChange}
+					minimumDate={new Date()}
 				/>
 			)}
 		</View>
@@ -246,7 +245,7 @@ const styles = StyleSheet.create({
 		marginTop: 15,
 		borderRadius: 4,
 		elevation: 3,
-		backgroundColor: Colors.accent,
+		backgroundColor: Colors.primary,
 	},
 });
 
