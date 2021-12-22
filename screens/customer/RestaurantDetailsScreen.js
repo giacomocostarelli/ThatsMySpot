@@ -6,6 +6,8 @@ import {
 	useWindowDimensions,
 	ImageBackground,
 	Pressable,
+	Image,
+	Modal,
 } from "react-native";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
@@ -58,7 +60,9 @@ const ProfileTab = () => (
 					justifyContent: "center",
 				}}
 			>
-				<Text style={{ fontSize: 24, color: Colors.accent }}>Informazioni</Text>
+				<Text style={{ fontSize: 24, color: Colors.primary }}>
+					Informazioni
+				</Text>
 				<FavoriteRow iconname={"star"}>2.7 / 5</FavoriteRow>
 				<FavoriteRow iconname={"map-marker"}>Via delle Pizze, 22</FavoriteRow>
 				<FavoriteRow iconname={"phone"}>392 079 4885</FavoriteRow>
@@ -74,6 +78,9 @@ const BookingTab = () => {
 	const [date, setDate] = useState(new Date());
 	const [mode, setMode] = useState("date");
 	const [show, setShow] = useState(false);
+	const [dateFormat, setDateFormat] = useState("");
+	const [timeFormat, setTimeFormat] = useState("");
+	const [modalVisible, setModalVisible] = useState(false);
 
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate || date;
@@ -98,16 +105,18 @@ const BookingTab = () => {
 	const showDate = () => {
 		//date
 		let datanew = date;
-
-		console.log(
+		setDateFormat(
 			datanew.toISOString().slice(8, 10) +
 				"/" +
 				datanew.toISOString().slice(5, 7) +
 				"/" +
 				datanew.toISOString().slice(0, 4)
 		);
+
 		//time
-		console.log(datanew.toISOString().slice(11, 16));
+		setTimeFormat(datanew.toISOString().slice(11, 16));
+		console.log(dateFormat);
+		console.log(timeFormat);
 	};
 
 	return (
@@ -117,29 +126,58 @@ const BookingTab = () => {
 				alignItems: "center",
 				justifyContent: "center",
 				flexDirection: "column",
-				margin: "5%",
+				margin: "9%",
 			}}
 		>
-			<View style={{ flex: 1, alignItems: "center", justifyContent: "center" }}>
-				<Text style={{ fontSize: 20 }}>
+			<View style={{ flex: 1 }}>
+				<Text
+					style={{ fontSize: 18, fontWeight: "bold", color: Colors.primary }}
+				>
+					PRENOTA IL TUO TAVOLO.
+				</Text>
+				<Text style={{ fontSize: 18 }}>
 					Seleziona il giorno, l'orario e conferma la tua prenotazione.
 				</Text>
 			</View>
-			<View style={{ flex: 1 }}>
+
+			<View style={{ flex: 5, width: "100%" }}>
 				<Pressable style={styles.button} onPress={showDatepicker}>
 					<Text style={{ color: "white" }}>Scegli un giorno.</Text>
 				</Pressable>
-			</View>
-			<View style={{ flex: 1 }}>
 				<Pressable style={styles.button} onPress={showTimepicker}>
 					<Text style={{ color: "white" }}>Scegli un orario.</Text>
 				</Pressable>
-			</View>
-			<View style={{ flex: 1 }}>
-				<Pressable style={styles.button} onPress={showDate}>
-					<Text style={{ color: "white" }}>Mostra.</Text>
+
+				<Pressable
+					style={styles.buttonConfirm}
+					onPress={() => setModalVisible(true)}
+				>
+					<Text style={{ color: "white" }}>Conferma.</Text>
 				</Pressable>
 			</View>
+
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => {
+					Alert.alert("Modal has been closed.");
+					setModalVisible(!modalVisible);
+				}}
+			>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<Text style={styles.modalText}>Hello World!</Text>
+						<Pressable
+							style={[styles.button, styles.buttonClose]}
+							onPress={() => setModalVisible(!modalVisible)}
+						>
+							<Text style={styles.textStyle}>Hide Modal</Text>
+						</Pressable>
+					</View>
+				</View>
+			</Modal>
+
 			{show && (
 				<DateTimePicker
 					testID="dateTimePicker"
@@ -237,6 +275,7 @@ const styles = StyleSheet.create({
 	title: {
 		fontSize: 32,
 	},
+
 	button: {
 		alignItems: "center",
 		justifyContent: "center",
@@ -246,6 +285,54 @@ const styles = StyleSheet.create({
 		borderRadius: 4,
 		elevation: 3,
 		backgroundColor: Colors.primary,
+	},
+
+	buttonConfirm: {
+		alignItems: "center",
+		justifyContent: "center",
+		paddingVertical: 12,
+		paddingHorizontal: 32,
+		marginTop: 15,
+		borderRadius: 4,
+		elevation: 3,
+		backgroundColor: "green",
+		marginTop: "20%",
+	},
+
+	centeredView: {
+		flex: 2,
+		justifyContent: "center",
+		alignItems: "center",
+		marginTop: 22,
+	},
+
+	modalView: {
+		margin: 20,
+		backgroundColor: "white",
+		borderRadius: 20,
+		padding: 35,
+		alignItems: "center",
+		shadowColor: "#000",
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 4,
+		elevation: 5,
+	},
+
+	buttonClose: {
+		backgroundColor: "green",
+	},
+	textStyle: {
+		color: "white",
+		fontWeight: "bold",
+		textAlign: "center",
+	},
+	modalText: {
+		marginBottom: 15,
+		textAlign: "center",
 	},
 });
 
