@@ -250,7 +250,7 @@ const WelcomeScreen = (props) => {
 				<ActivityIndicator
 					style={{ margin: "8%" }}
 					size={60}
-					color={Colors.accent}
+					color={Colors.secondary}
 				/>
 			</View>
 		);
