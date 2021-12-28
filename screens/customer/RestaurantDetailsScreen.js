@@ -230,7 +230,162 @@ const BookingTab = () => {
 	);
 };
 
-const TakeawayTab = () => <View style={{ flex: 1 }} />;
+const TakeawayTab = () => {
+	const [date, setDate] = useState(new Date());
+	const [mode, setMode] = useState("date");
+	const [show, setShow] = useState(false);
+	const [dateFormat, setDateFormat] = useState("");
+	const [timeFormat, setTimeFormat] = useState("");
+	const [modalVisible, setModalVisible] = useState(false);
+	const [isPressable, setIsPressable] = useState(false);
+
+	const onChange = (event, selectedDate) => {
+		const currentDate = selectedDate || date;
+		setShow(Platform.OS === "ios");
+		currentDate.setHours(currentDate.getHours() + 1);
+		setDate(currentDate);
+	};
+
+	const showMode = (currentMode) => {
+		setShow(true);
+		setMode(currentMode);
+	};
+
+	const showDatepicker = () => {
+		showMode("date");
+	};
+
+	const showTimepicker = () => {
+		showMode("time");
+	};
+
+	const showDate = () => {
+		//date
+		let datanew = date;
+		setDateFormat(
+			datanew.toISOString().slice(8, 10) +
+				"/" +
+				datanew.toISOString().slice(5, 7) +
+				"/" +
+				datanew.toISOString().slice(0, 4)
+		);
+
+		//time
+		setTimeFormat(datanew.toISOString().slice(11, 16));
+	};
+
+	const sendEmail = async () => {
+		let response = await fetch("http://192.168.1.59:3000", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify({
+				date: dateFormat,
+				time: timeFormat,
+			}),
+		});
+		let json = await response.json();
+	};
+
+	return (
+		<View
+			style={{
+				flex: 1,
+				alignItems: "center",
+				justifyContent: "center",
+				flexDirection: "column",
+				margin: "9%",
+				backgroundColor: Colors.back,
+			}}
+		>
+			<View style={{ flex: 1 }}>
+				<Text
+					style={{ fontSize: 18, fontWeight: "bold", color: Colors.accent }}
+				>
+					ORDINA IL TUO TAKE AWAY.
+				</Text>
+				<Text style={{ fontSize: 18, marginVertical: "5%" }}>
+					Sfoglia il menù, seleziona un giorno ed un orario a cui passare a
+					prendere il tuo ordine.
+				</Text>
+			</View>
+
+			<View style={{ flex: 3, width: "100%", alignItems: "center" }}>
+				<Pressable style={styles.button} onPress={showDatepicker}>
+					<Text style={{ color: "white" }}>Scegli un giorno.</Text>
+				</Pressable>
+				<Pressable style={styles.button} onPress={showTimepicker}>
+					<Text style={{ color: "white" }}>Scegli un orario.</Text>
+				</Pressable>
+				<Pressable style={styles.button} onPress={() => {}}>
+					<Text style={{ color: "white" }}>Guarda il menu</Text>
+				</Pressable>
+				<Divider
+					width={1}
+					color={Colors.accent}
+					style={{ margin: "10%", width: "98%" }}
+				/>
+				<Pressable
+					style={styles.buttonConfirm}
+					onPress={() => {
+						setModalVisible(true);
+						showDate();
+					}}
+				>
+					<Text style={{ color: "white" }}>Prenota.</Text>
+				</Pressable>
+			</View>
+
+			<Modal
+				animationType="slide"
+				transparent={true}
+				visible={modalVisible}
+				onRequestClose={() => {
+					Alert.alert("Modal has been closed.");
+					setModalVisible(!modalVisible);
+				}}
+			>
+				<View style={styles.centeredView}>
+					<View style={styles.modalView}>
+						<Text style={styles.modalText}>{dateFormat}</Text>
+						<Text style={styles.modalText}>{timeFormat}</Text>
+						<View style={{ flexDirection: "row" }}>
+							<Pressable
+								style={[styles.buttonModal, styles.buttonClose]}
+								onPress={() => {
+									setModalVisible(!modalVisible);
+								}}
+							>
+								<Text style={styles.textStyle}>Annulla</Text>
+							</Pressable>
+							<Pressable
+								style={[styles.buttonModal, styles.buttonClose]}
+								onPress={() => {
+									setModalVisible(!modalVisible), sendEmail();
+								}}
+							>
+								<Text style={styles.textStyle}>Conferma</Text>
+							</Pressable>
+						</View>
+					</View>
+				</View>
+			</Modal>
+
+			{show && (
+				<DateTimePicker
+					testID="dateTimePicker"
+					value={date}
+					mode={mode}
+					is24Hour={false}
+					display="default"
+					onChange={onChange}
+					minimumDate={new Date()}
+				/>
+			)}
+		</View>
+	);
+};
 
 const renderScene = SceneMap({
 	profile: ProfileTab,
