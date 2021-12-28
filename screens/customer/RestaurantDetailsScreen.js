@@ -121,6 +121,20 @@ const BookingTab = () => {
 		setTimeFormat(datanew.toISOString().slice(11, 16));
 	};
 
+	const sendEmail = async () => {
+		let response = await fetch("http://192.168.1.59:3000", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify({
+				date: dateFormat,
+				time: timeFormat,
+			}),
+		});
+		let json = await response.json();
+	};
+
 	return (
 		<View
 			style={{
@@ -186,13 +200,15 @@ const BookingTab = () => {
 									setModalVisible(!modalVisible);
 								}}
 							>
-								<Text style={styles.textStyle}>CHIUDI</Text>
+								<Text style={styles.textStyle}>Annulla</Text>
 							</Pressable>
 							<Pressable
 								style={[styles.buttonModal, styles.buttonClose]}
-								onPress={() => setModalVisible(!modalVisible)}
+								onPress={() => {
+									setModalVisible(!modalVisible), sendEmail();
+								}}
 							>
-								<Text style={styles.textStyle}>OK</Text>
+								<Text style={styles.textStyle}>Conferma</Text>
 							</Pressable>
 						</View>
 					</View>
