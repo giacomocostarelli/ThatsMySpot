@@ -60,6 +60,7 @@ export const login = (email, password) => {
 			} else if (errorId === "INVALID_PASSWORD") {
 				message = "This password is not valid!";
 			}
+
 			throw new Error(message);
 		}
 

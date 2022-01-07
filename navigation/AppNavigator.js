@@ -112,7 +112,17 @@ const TabNavigator = (props) => {
 				},
 				tabBarActiveBackgroundColor: Colors.secondary,
 				tabBarItemStyle: {},
-				headerLeft: (props) => <View></View>,
+				headerRight: (props) => (
+					<View style={{ marginHorizontal: 10 }}>
+						<Icon
+							name="sign-out"
+							color="white"
+							size={25}
+							type="font-awesome"
+							style={{ marginTop: 10 }}
+						/>
+					</View>
+				),
 			}}
 		>
 			<Tab.Screen
