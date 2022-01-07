@@ -86,7 +86,7 @@ const AppNavigator = (props) => {
 		</NavigationContainer>
 	);
 };
-const TabNavigator = (props) => {
+const TabNavigator = ({ navigation }) => {
 	return (
 		<Tab.Navigator
 			screenOptions={{
@@ -120,6 +120,9 @@ const TabNavigator = (props) => {
 							size={25}
 							type="font-awesome"
 							style={{ marginTop: 10 }}
+							onPress={() => {
+								navigation.replace("Login");
+							}}
 						/>
 					</View>
 				),
