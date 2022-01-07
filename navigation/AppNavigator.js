@@ -1,14 +1,6 @@
 import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import {
-	View,
-	Text,
-	FlatList,
-	Button,
-	StyleSheet,
-	ActivityIndicator,
-	Image,
-} from "react-native";
+import { View, Image } from "react-native";
 import { Icon } from "react-native-elements";
 import { FontAwesome } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
@@ -33,8 +25,8 @@ const AppNavigator = (props) => {
 		<NavigationContainer>
 			<Stack.Navigator>
 				<Stack.Screen
-					name="Homepage"
-					component={TabNavigator}
+					name="Login"
+					component={LoginScreen}
 					options={{
 						headerShown: false,
 					}}
@@ -47,8 +39,8 @@ const AppNavigator = (props) => {
 					component={WelcomeScreen}
 				/>
 				<Stack.Screen
-					name="Login"
-					component={LoginScreen}
+					name="Homepage"
+					component={TabNavigator}
 					options={{
 						headerShown: false,
 					}}

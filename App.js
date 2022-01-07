@@ -1,8 +1,18 @@
 import React, { useState, useEffect } from "react";
 import AppLoading from "expo-app-loading";
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import { Provider } from "react-redux";
 import * as Font from "expo-font";
+import ReduxThunk from "redux-thunk";
+import authReducer from "./store/reducers/auth";
 
 import AppNavigator from "./navigation/AppNavigator";
+
+const rootReducer = combineReducers({
+	auth: authReducer,
+});
+
+const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
 const fetchFonts = async () => {
 	return Font.loadAsync({
@@ -36,5 +46,9 @@ export default function App() {
 		);
 	}
 
-	return <AppNavigator />;
+	return (
+		<Provider store={store}>
+			<AppNavigator />
+		</Provider>
+	);
 }

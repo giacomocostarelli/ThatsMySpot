@@ -1,23 +1,111 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useReducer, useCallback } from "react";
 import {
 	View,
 	Text,
 	FlatList,
 	StyleSheet,
-	ActivityIndicator,
 	Pressable,
-	KeyboardAvoidingView,
+	ActivityIndicator,
+	Alert,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import Card from "../components/Card";
-import { Input, Switch } from "react-native-elements";
+import { useDispatch } from "react-redux";
+import { Switch } from "react-native-elements";
+import Input from "../components/Input";
 import Colors from "../constants/Colors";
+import * as authActions from "../store/actions/auth";
+
+const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
+
+const formReducer = (state, action) => {
+	if (action.type === FORM_INPUT_UPDATE) {
+		const updatedValues = {
+			...state.inputValues,
+			[action.input]: action.value,
+		};
+		const updatedValidities = {
+			...state.inputValidities,
+			[action.input]: action.isValid,
+		};
+		let updatedFormIsValid = true;
+		for (const key in updatedValidities) {
+			updatedFormIsValid = updatedFormIsValid && updatedValidities[key];
+		}
+		return {
+			formIsValid: updatedFormIsValid,
+			inputValidities: updatedValidities,
+			inputValues: updatedValues,
+		};
+	}
+	return state;
+};
 
 const LoginScreen = (props) => {
-	const [isRegister, setIsRegister] = useState(false);
+	const [isLoading, setIsLoading] = useState(false);
+	const [error, setError] = useState();
 	const [switchValue, setSwitchValue] = useState(false);
+	const [isSignup, setIsSignup] = useState(false);
+	const dispatch = useDispatch();
+
+	const [formState, dispatchFormState] = useReducer(formReducer, {
+		inputValues: {
+			email: "",
+			password: "",
+		},
+		inputValidities: {
+			email: false,
+			password: false,
+		},
+		formIsValid: false,
+	});
+
+	useEffect(() => {
+		if (error) {
+			Alert.alert("AUTENTICAZIONE FALLITA", "I dati di login sono errati", [
+				{ text: "Okay" },
+			]);
+		}
+	}, [error]);
+
+	const authHandler = async () => {
+		let action;
+		if (isSignup) {
+			action = authActions.signup(
+				formState.inputValues.email,
+				formState.inputValues.password
+			);
+		} else {
+			action = authActions.login(
+				formState.inputValues.email,
+				formState.inputValues.password
+			);
+		}
+		setError(null);
+		setIsLoading(true);
+		try {
+			await dispatch(action);
+			props.navigation.replace("Homepage");
+		} catch (err) {
+			setError(err.message);
+			setIsLoading(false);
+		}
+	};
+
+	const inputChangeHandler = useCallback(
+		(inputIdentifier, inputValue, inputValidity) => {
+			dispatchFormState({
+				type: FORM_INPUT_UPDATE,
+				value: inputValue,
+				isValid: inputValidity,
+				input: inputIdentifier,
+			});
+		},
+		[dispatchFormState]
+	);
+
 	let loginRegisterComponent;
-	if (!isRegister) {
+	if (!isSignup) {
 		loginRegisterComponent = (
 			<View style={[styles.centered, styles.backColor]}>
 				<View style={styles.titleText}>
@@ -44,47 +132,43 @@ const LoginScreen = (props) => {
 						</View>
 
 						<Input
-							placeholder="Email"
-							leftIcon={
-								<Icon
-									style={{ paddingRight: 10 }}
-									name="user"
-									size={20}
-									color="lightgrey"
-									type="font-awesome"
-								/>
-							}
+							id="email"
+							label="E-Mail"
+							keyboardType="email-address"
+							required
+							email
+							autoCapitalize="none"
+							onInputChange={inputChangeHandler}
+							initialValue=""
 						/>
 						<Input
-							placeholder="Password"
-							leftIcon={
-								<Icon
-									style={{ paddingRight: 10 }}
-									name="lock"
-									size={20}
-									color="lightgrey"
-									type="font-awesome"
-								/>
-							}
-							secureTextEntry={true}
+							id="password"
+							label="Password"
+							keyboardType="default"
+							secureTextEntry
+							required
+							minLength={5}
+							autoCapitalize="none"
+							onInputChange={inputChangeHandler}
+							initialValue=""
 						/>
 					</View>
 					<View style={styles.cardFooter}>
-						<Pressable
-							style={styles.buttonLogin}
-							onPress={() => {
-								props.navigation.navigate("Homepage");
-							}}
-						>
-							<Text style={styles.buttonText}>Login</Text>
-						</Pressable>
+						{isLoading ? (
+							<ActivityIndicator size="small" color={Colors.primary} />
+						) : (
+							<Pressable style={styles.buttonLogin} onPress={authHandler}>
+								<Text style={styles.buttonText}>Login</Text>
+							</Pressable>
+						)}
+
 						<View style={{ marginTop: 20 }}>
 							<Text style={styles.font}> Non hai ancora un account?</Text>
 						</View>
 						<Pressable
 							style={styles.buttonRegister}
 							onPress={() => {
-								setIsRegister((prevState) => !prevState);
+								setIsSignup((prevState) => !prevState);
 							}}
 						>
 							<Text style={styles.buttonRegisterText}>Registrati</Text>
@@ -115,42 +199,34 @@ const LoginScreen = (props) => {
 					</View>
 					<View style={styles.cardBody}>
 						<Input
-							placeholder="Email"
-							leftIcon={
-								<Icon
-									style={{ paddingRight: 10 }}
-									name="user"
-									size={20}
-									color="lightgrey"
-									type="font-awesome"
-								/>
-							}
+							id="email"
+							label="E-Mail"
+							keyboardType="email-address"
+							required
+							email
+							autoCapitalize="none"
+							onInputChange={inputChangeHandler}
+							initialValue=""
 						/>
 						<Input
-							placeholder="Password"
-							leftIcon={
-								<Icon
-									style={{ paddingRight: 10 }}
-									name="lock"
-									size={20}
-									color="lightgrey"
-									type="font-awesome"
-								/>
-							}
-							secureTextEntry={true}
+							id="password"
+							label="Password"
+							keyboardType="default"
+							required
+							minLength={5}
+							autoCapitalize="none"
+							onInputChange={inputChangeHandler}
+							initialValue=""
 						/>
 						<Input
-							placeholder=" Conferma Password"
-							leftIcon={
-								<Icon
-									style={{ paddingRight: 10 }}
-									name="lock"
-									size={20}
-									color="lightgrey"
-									type="font-awesome"
-								/>
-							}
-							secureTextEntry={true}
+							id="password"
+							label="Password"
+							keyboardType="default"
+							required
+							minLength={5}
+							autoCapitalize="none"
+							onInputChange={inputChangeHandler}
+							initialValue=""
 						/>
 						<View style={styles.textSwitch}>
 							<Text style={{ fontFamily: "roboto-font", fontSize: 16 }}>
@@ -162,20 +238,23 @@ const LoginScreen = (props) => {
 								color={Colors.accent}
 							/>
 						</View>
-						<Pressable
-							style={styles.buttonLoginRegister}
-							onPress={() => {
-								props.navigation.navigate("Homepage");
-							}}
-						>
-							<Text style={styles.buttonText}>Registrati</Text>
-						</Pressable>
+						{isLoading ? (
+							<ActivityIndicator size="small" color={Colors.primary} />
+						) : (
+							<Pressable
+								style={styles.buttonLoginRegister}
+								onPress={authHandler}
+							>
+								<Text style={styles.buttonText}>Registrati</Text>
+							</Pressable>
+						)}
+
 						<View style={styles.cardFooterRegister}>
 							<Text style={styles.font}>Hai già un account?</Text>
 							<Pressable
 								style={styles.buttonRegister}
 								onPress={() => {
-									setIsRegister((prevState) => !prevState);
+									setIsSignup((prevState) => !prevState);
 								}}
 							>
 								<Text style={styles.buttonRegisterText}>Accedi.</Text>
