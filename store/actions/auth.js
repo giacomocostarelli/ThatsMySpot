@@ -1,5 +1,7 @@
 export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
+export const LOGOUT = "LOGOUT";
+export const CHECK_USER = "CHECK_USER";
 
 export const signup = (email, password) => {
 	return async (dispatch) => {
@@ -69,4 +71,9 @@ export const login = (email, password) => {
 		console.log(resData);
 		dispatch({ type: LOGIN, token: resData.idToken, userId: resData.localId });
 	};
+};
+
+// crea an action to delete the token and userId from the store
+export const logout = () => {
+	return { type: LOGOUT };
 };

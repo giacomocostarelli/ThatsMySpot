@@ -8,6 +8,8 @@ import {
 	Image,
 	Pressable,
 } from "react-native";
+
+import { useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 
 const RISTORANTI = [
@@ -63,11 +65,7 @@ const renderItem = ({ item }) => {
 				marginRight: 22,
 			}}
 		>
-			<Pressable
-				onPress={() => {
-					console.log("Vai a pagina ristorante");
-				}}
-			>
+			<Pressable onPress={() => {}}>
 				<Image
 					style={styles.tinyLogo}
 					source={{
@@ -81,6 +79,8 @@ const renderItem = ({ item }) => {
 };
 
 const Row = ({ category }) => {
+	const userId = useSelector((state) => state.auth.userId);
+	const token = useSelector((state) => state.auth.token);
 	return (
 		<View style={styles.rowContainer}>
 			<View style={styles.tipology}>
@@ -90,6 +90,10 @@ const Row = ({ category }) => {
 						fontWeight: "bold",
 						color: Colors.secondary,
 						marginBottom: 20,
+					}}
+					onPress={() => {
+						console.log("USER ID : ", userId);
+						console.log("TOKEN : ", token);
 					}}
 				>
 					{category}

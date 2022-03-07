@@ -14,6 +14,8 @@ import MapScreen from "../screens/customer/MapScreen";
 import SearchScreen from "../screens/customer/SearchScreen";
 import Colors from "../constants/Colors";
 import RestaurantDetailsScreen from "../screens/customer/RestaurantDetailsScreen";
+import { logout } from "../store/actions/auth";
+import { useDispatch } from "react-redux";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -87,6 +89,11 @@ const AppNavigator = (props) => {
 	);
 };
 const TabNavigator = ({ navigation }) => {
+	const dispatch = useDispatch();
+	const logoutHandler = () => {
+		dispatch(logout());
+	};
+
 	return (
 		<Tab.Navigator
 			screenOptions={{
@@ -121,6 +128,7 @@ const TabNavigator = ({ navigation }) => {
 							type="font-awesome"
 							style={{ marginTop: 10 }}
 							onPress={() => {
+								logoutHandler();
 								navigation.replace("Login");
 							}}
 						/>

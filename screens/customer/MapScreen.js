@@ -1,16 +1,5 @@
 import React, { useState, useEffect, setState } from "react";
-import {
-	View,
-	Text,
-	FlatList,
-	Button,
-	StyleSheet,
-	ActivityIndicator,
-	Dimensions,
-	Pressable,
-	Image,
-} from "react-native";
-import Geolocation from "react-native-geolocation-service";
+import { View, Text, StyleSheet, Dimensions } from "react-native";
 import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
