@@ -5,11 +5,13 @@ import { Provider } from "react-redux";
 import * as Font from "expo-font";
 import ReduxThunk from "redux-thunk";
 import authReducer from "./store/reducers/auth";
+import restaurantsReducer from "./store/reducers/restaurants";
 
 import AppNavigator from "./navigation/AppNavigator";
 
 const rootReducer = combineReducers({
 	auth: authReducer,
+	restaurants: restaurantsReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

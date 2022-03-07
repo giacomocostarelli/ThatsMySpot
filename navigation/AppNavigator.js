@@ -158,6 +158,7 @@ const TabNavigator = ({ navigation }) => {
 			/>
 			<Tab.Screen
 				name="Cerca"
+				//TO BE CHANGED WITH 'SearchScreen'
 				component={SearchScreen}
 				options={{
 					tabBarLabel: "Cerca",

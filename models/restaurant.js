@@ -1,7 +1,7 @@
 class Restaurant {
 	constructor(
-		id,
 		name,
+		ownerId,
 		imageUrl,
 		description,
 		stars,
@@ -16,8 +16,8 @@ class Restaurant {
 		prenotations,
 		takeaways
 	) {
-		this.id = id;
 		this.name = name;
+		this.ownerId = ownerId;
 		this.imageUrl = imageUrl;
 		this.description = description;
 		this.stars = stars;
