@@ -3,15 +3,34 @@ import {
 	View,
 	Text,
 	FlatList,
-	Button,
 	StyleSheet,
-	ActivityIndicator,
-	ScrollView,
 	Pressable,
+	Button,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import Colors from "../../constants/Colors";
-import Card from "../../components/Card";
+import Restaurant from "../../models/restaurant";
+import { createRestaurant } from "../../store/actions/restaurants";
+import { useDispatch } from "react-redux";
+
+const RESTA = {
+	name: "Ham & Cheese",
+	ownerId: null,
+	imageUrl:
+		"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190319-ham-and-cheese-416-1553791878.jpg",
+	description: "Pizza e panini",
+	stars: "4",
+	phoneNumber: "123456789",
+	address: "Via delle palme",
+	city: "Torino",
+	latitude: "45.4",
+	longitude: "45.4",
+	openingTime: "12:00",
+	closingTime: "23:00",
+	menu: null,
+	prenotations: null,
+	takeaways: null,
+};
 
 const DUMMYDATA = [
 	{
@@ -54,6 +73,8 @@ const Item = ({ item, onPress, backgroundColor, textColor }) => (
 );
 
 const SearchScreen = (props) => {
+	const dispatch = useDispatch();
+
 	//States.
 	const [searchText, setSearchText] = useState(" ");
 
@@ -80,6 +101,13 @@ const SearchScreen = (props) => {
 	//Component.
 	return (
 		<View style={styles.container}>
+			<Button
+				title="ADD RESTAURANT"
+				onPress={() => {
+					dispatch(createRestaurant(RESTA));
+					console.log("PRESSATO");
+				}}
+			/>
 			<SearchBar
 				platform="android"
 				containerStyle={styles.containerStyle}
