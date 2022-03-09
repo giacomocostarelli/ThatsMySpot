@@ -4,6 +4,7 @@ class Restaurant {
 		ownerId,
 		imageUrl,
 		description,
+		category,
 		stars,
 		phoneNumber,
 		address,
@@ -20,6 +21,7 @@ class Restaurant {
 		this.ownerId = ownerId;
 		this.imageUrl = imageUrl;
 		this.description = description;
+		this.category = category;
 		this.stars = stars;
 		this.address = address;
 		this.city = city;

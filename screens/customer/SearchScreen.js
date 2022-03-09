@@ -13,25 +13,6 @@ import Restaurant from "../../models/restaurant";
 import { createRestaurant } from "../../store/actions/restaurants";
 import { useDispatch } from "react-redux";
 
-const RESTA = {
-	name: "Ham & Cheese",
-	ownerId: null,
-	imageUrl:
-		"https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190319-ham-and-cheese-416-1553791878.jpg",
-	description: "Pizza e panini",
-	stars: "4",
-	phoneNumber: "123456789",
-	address: "Via delle palme",
-	city: "Torino",
-	latitude: "45.4",
-	longitude: "45.4",
-	openingTime: "12:00",
-	closingTime: "23:00",
-	menu: null,
-	prenotations: null,
-	takeaways: null,
-};
-
 const DUMMYDATA = [
 	{
 		id: "1",
@@ -66,6 +47,26 @@ const DUMMYDATA = [
 		title: "Third Item",
 	},
 ];
+
+const RESTA = new Restaurant(
+	"Fast Food 3",
+	null,
+	"https://blog.italotreno.it/wp-content/uploads/2018/10/Ristoranti-particolari-Brescia-Areadocks-4-1140x660.jpg",
+	"Fast food di prima classe per i più piccoli e per i più grandi",
+	"Fast",
+	5,
+	123456789,
+	"Via del Veloce 3",
+	"Torino",
+	"39.2343",
+	"12.3456",
+	"08:00",
+	"22:00",
+	null,
+	null,
+	null
+);
+
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
 	<Pressable onPress={onPress} style={[styles.item, backgroundColor]}>
 		<Text style={[styles.title, textColor]}>{item.title}</Text>

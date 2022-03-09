@@ -18,6 +18,7 @@ export default (state = initialState, action) => {
 				action.restaurantData.ownerId,
 				action.restaurantData.imageUrl,
 				action.restaurantData.description,
+				action.restaurantData.category,
 				action.restaurantData.stars,
 				action.restaurantData.phoneNumber,
 				action.restaurantData.address,
