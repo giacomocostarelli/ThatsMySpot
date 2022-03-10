@@ -7,7 +7,7 @@ import {
 import Restaurant from "../../models/restaurant";
 
 const initialState = {
-	restaurants: [],
+	restaurantsState: [],
 };
 
 export default (state = initialState, action) => {
@@ -35,9 +35,33 @@ export default (state = initialState, action) => {
 				...state,
 				restaurants: state.restaurants.concat(newRestaurant),
 			};
-		case DELETE_RESTAURANT:
-			return state;
 		case FETCH_RESTAURANTS:
+			const loadedRestaurants = [];
+			for (const key in action.restaurantsData) {
+				loadedRestaurants.push(
+					new Restaurant(
+						key,
+						action.restaurantsData[key].ownerId,
+						action.restaurantsData[key].imageUrl,
+						action.restaurantsData[key].description,
+						action.restaurantsData[key].category,
+						action.restaurantsData[key].stars,
+						action.restaurantsData[key].phoneNumber,
+						action.restaurantsData[key].address,
+						action.restaurantsData[key].city,
+						action.restaurantsData[key].latitude,
+						action.restaurantsData[key].longitude,
+						action.restaurantsData[key].openingTime,
+						action.restaurantsData[key].closingTime
+					)
+				);
+			}
+			return {
+				...state,
+				restaurantsState: loadedRestaurants,
+			};
+
+		case DELETE_RESTAURANT:
 			return state;
 		default:
 			return state;

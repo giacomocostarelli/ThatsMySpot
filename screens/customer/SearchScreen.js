@@ -10,8 +10,11 @@ import {
 import { SearchBar } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import Restaurant from "../../models/restaurant";
-import { createRestaurant } from "../../store/actions/restaurants";
-import { useDispatch } from "react-redux";
+import {
+	createRestaurant,
+	fetchRestaurants,
+} from "../../store/actions/restaurants";
+import { useDispatch, useSelector } from "react-redux";
 
 const DUMMYDATA = [
 	{
@@ -48,25 +51,6 @@ const DUMMYDATA = [
 	},
 ];
 
-const RESTA = new Restaurant(
-	"Fast Food 3",
-	null,
-	"https://blog.italotreno.it/wp-content/uploads/2018/10/Ristoranti-particolari-Brescia-Areadocks-4-1140x660.jpg",
-	"Fast food di prima classe per i più piccoli e per i più grandi",
-	"Fast",
-	5,
-	123456789,
-	"Via del Veloce 3",
-	"Torino",
-	"39.2343",
-	"12.3456",
-	"08:00",
-	"22:00",
-	null,
-	null,
-	null
-);
-
 const Item = ({ item, onPress, backgroundColor, textColor }) => (
 	<Pressable onPress={onPress} style={[styles.item, backgroundColor]}>
 		<Text style={[styles.title, textColor]}>{item.title}</Text>
@@ -78,12 +62,12 @@ const SearchScreen = (props) => {
 
 	//States.
 	const [searchText, setSearchText] = useState(" ");
+	const [selectedId, setSelectedId] = useState(null);
 
 	//Handlers.
 	const updateSearch = (search) => {
 		setSearchText(search);
 	};
-	const [selectedId, setSelectedId] = useState(null);
 
 	const renderItem = ({ item }) => {
 		const backgroundColor =
@@ -103,9 +87,9 @@ const SearchScreen = (props) => {
 	return (
 		<View style={styles.container}>
 			<Button
-				title="ADD RESTAURANT"
+				title="FETCH"
 				onPress={() => {
-					dispatch(createRestaurant(RESTA));
+					dispatch(fetchRestaurants());
 					console.log("PRESSATO");
 				}}
 			/>
