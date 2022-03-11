@@ -1,3 +1,5 @@
+import Restaurant from "../../models/restaurant";
+
 export const CREATE_RESTAURANT = "CREATE_RESTAURANTS";
 export const DELETE_RESTAURANT = "DELETE_RESTAURANTS";
 export const FETCH_RESTAURANTS = "FETCH_RESTAURANTS";
@@ -9,20 +11,37 @@ export const fetchRestaurants = () => {
 			const response = await fetch(
 				"https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/restaurants.json"
 			);
-
 			if (!response.ok) {
 				throw new Error("Something went wrong!");
 			}
 
 			const resData = await response.json();
 			console.log("fetchRestaurants RESPONSE");
-			console.log(resData);
+			//console.log(resData);
 
 			const loadedRestaurants = [];
-			for (const name in resData) {
-				loadedRestaurants.push(name);
+			for (let restaurantName in resData) {
+				loadedRestaurants.push(
+					new Restaurant(
+						restaurantName,
+						resData[restaurantName].ownerId,
+						resData[restaurantName].imageUrl,
+						resData[restaurantName].description,
+						resData[restaurantName].category,
+						resData[restaurantName].stars,
+						resData[restaurantName].phoneNumber,
+						resData[restaurantName].address,
+						resData[restaurantName].city,
+						resData[restaurantName].latitude,
+						resData[restaurantName].longitude,
+						resData[restaurantName].openingTime,
+						resData[restaurantName].closingTime,
+						null, //resData[restaurantName].menu,
+						null, //resData[restaurantName].prenotations,
+						null //resData[restaurantName].takeaways
+					)
+				);
 			}
-
 			dispatch({
 				type: FETCH_RESTAURANTS,
 				restaurantsData: loadedRestaurants,
