@@ -10,11 +10,12 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import Card from "../components/Card";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Switch } from "react-native-elements";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
+import { fetchRestaurants } from "../store/actions/restaurants";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -59,6 +60,10 @@ const LoginScreen = (props) => {
 		},
 		formIsValid: false,
 	});
+
+	useEffect(() => {
+		dispatch(fetchRestaurants());
+	}, [dispatch]);
 
 	useEffect(() => {
 		if (error) {

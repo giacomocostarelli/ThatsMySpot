@@ -9,12 +9,8 @@ import {
 } from "react-native";
 import { SearchBar } from "react-native-elements";
 import Colors from "../../constants/Colors";
-import Restaurant from "../../models/restaurant";
-import {
-	createRestaurant,
-	fetchRestaurants,
-} from "../../store/actions/restaurants";
-import { useDispatch, useSelector } from "react-redux";
+import { fetchRestaurants } from "../../store/actions/restaurants";
+import { useDispatch } from "react-redux";
 
 const DUMMYDATA = [
 	{

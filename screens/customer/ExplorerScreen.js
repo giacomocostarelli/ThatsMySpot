@@ -69,11 +69,17 @@ const renderItem = ({ item }) => {
 				<Image
 					style={styles.tinyLogo}
 					source={{
-						uri: item.uri,
+						uri: item.imageUrl,
 					}}
 				/>
 			</Pressable>
-			<Text>{item.id}</Text>
+			<Text
+				style={{
+					fontSize: 17,
+				}}
+			>
+				{item.name}
+			</Text>
 		</View>
 	);
 };
@@ -81,6 +87,9 @@ const renderItem = ({ item }) => {
 const Row = ({ category }) => {
 	const userId = useSelector((state) => state.auth.userId);
 	const token = useSelector((state) => state.auth.token);
+	const rests = useSelector((state) => state.restaurants.restaurantsState);
+	// restaurant with category = category
+	const restsWithCategory = rests.filter((rest) => rest.category === category);
 	return (
 		<View style={styles.rowContainer}>
 			<View style={styles.tipology}>
@@ -94,6 +103,7 @@ const Row = ({ category }) => {
 					onPress={() => {
 						console.log("USER ID : ", userId);
 						console.log("TOKEN : ", token);
+						//console.log("REST : ", rests);
 					}}
 				>
 					{category}
@@ -104,7 +114,7 @@ const Row = ({ category }) => {
 					showsHorizontalScrollIndicator={false}
 					horizontal={true}
 					style={styles.list}
-					data={RISTORANTI}
+					data={restsWithCategory}
 					renderItem={renderItem}
 					keyExtractor={(item) => item.id}
 				/>
@@ -121,16 +131,11 @@ const ExplorerScreen = () => {
 				<Row category={"Hamburger"} />
 				<Row category={"Sushi"} />
 				<Row category={"Tavola Calda"} />
-				<Row category={"Ristoranti di Pesce"} />
-				<Row category={"Ristoranti di Carne"} />
+				<Row category={"Pesce"} />
+				<Row category={"Carne"} />
 				<Row category={"Fast Food"} />
-				<Row category={"Finger Food"} />
-				<Row category={"Aperitivo"} />
-				<Row category={"Novelle Cuisine"} />
-				<Row category={"Ristoranti Stellati"} />
 				<Row category={"Messicano"} />
 				<Row category={"Greco"} />
-				<Row category={"Turco"} />
 			</ScrollView>
 		</View>
 	);
