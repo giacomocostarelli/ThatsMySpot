@@ -10,6 +10,9 @@ import {
 	Pressable,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
+import { useDispatch } from "react-redux";
+
+import { getStarred } from "../../store/actions/users";
 
 import Colors from "../../constants/Colors";
 
@@ -22,6 +25,8 @@ const FavoriteScreen = (props) => {
 		{ title: "J", data: ["Jackson", "James", "Jillian"] },
 		{ title: "M", data: ["Marco", "Moira", "Martina"] },
 	];
+
+	const dispatch = useDispatch();
 
 	return (
 		<View style={styles.container}>

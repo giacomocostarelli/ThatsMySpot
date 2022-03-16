@@ -1,17 +1,21 @@
 import React, { useState, useEffect } from "react";
-import AppLoading from "expo-app-loading";
-import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
-import * as Font from "expo-font";
+import { createStore, combineReducers, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
+
+import AppLoading from "expo-app-loading";
+import * as Font from "expo-font";
+
 import authReducer from "./store/reducers/auth";
 import restaurantsReducer from "./store/reducers/restaurants";
+import usersReducer from "./store/reducers/users";
 
 import AppNavigator from "./navigation/AppNavigator";
 
 const rootReducer = combineReducers({
 	auth: authReducer,
 	restaurants: restaurantsReducer,
+	users: usersReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

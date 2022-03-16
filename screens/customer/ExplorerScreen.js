@@ -12,49 +12,6 @@ import {
 import { useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 
-const RISTORANTI = [
-	{
-		id: "1",
-		title: "First ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-	{
-		id: "2",
-		title: "Second ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-	{
-		id: "3",
-		title: "Third ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-	{
-		id: "4",
-		title: "Third ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-	{
-		id: "5",
-		title: "Third ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-	{
-		id: "6",
-		title: "Third ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-	{
-		id: "7",
-		title: "Third ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-	{
-		id: "8",
-		title: "Third ",
-		uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-	},
-];
-
 const renderItem = ({ item }) => {
 	return (
 		<View
@@ -103,7 +60,6 @@ const Row = ({ category }) => {
 					onPress={() => {
 						console.log("USER ID : ", userId);
 						console.log("TOKEN : ", token);
-						//console.log("REST : ", rests);
 					}}
 				>
 					{category}
@@ -116,7 +72,7 @@ const Row = ({ category }) => {
 					style={styles.list}
 					data={restsWithCategory}
 					renderItem={renderItem}
-					keyExtractor={(item) => item.id}
+					keyExtractor={(item) => item.name}
 				/>
 			</View>
 		</View>

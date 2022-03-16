@@ -7,10 +7,13 @@ import {
 	Pressable,
 	Button,
 } from "react-native";
+import { useDispatch } from "react-redux";
 import { SearchBar } from "react-native-elements";
 import Colors from "../../constants/Colors";
+
+//Redux actions.
 import { fetchRestaurants } from "../../store/actions/restaurants";
-import { useDispatch } from "react-redux";
+import { getStarred } from "../../store/actions/users";
 
 const DUMMYDATA = [
 	{
@@ -86,7 +89,14 @@ const SearchScreen = (props) => {
 				title="FETCH"
 				onPress={() => {
 					dispatch(fetchRestaurants());
-					console.log("PRESSATO");
+					console.log("FETCH");
+				}}
+			/>
+			<Button
+				title="STARRED"
+				onPress={() => {
+					dispatch(getStarred());
+					console.log(" -- Button for GET_STARRED -- ");
 				}}
 			/>
 			<SearchBar
