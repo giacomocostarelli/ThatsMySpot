@@ -92,13 +92,17 @@ const SearchScreen = (props) => {
 					console.log("FETCH");
 				}}
 			/>
-			<Button
+
+			{/*
+            <Button
 				title="STARRED"
 				onPress={() => {
 					dispatch(getStarred());
 					console.log(" -- Button for GET_STARRED -- ");
 				}}
-			/>
+			/> 
+            */}
+
 			<SearchBar
 				platform="android"
 				containerStyle={styles.containerStyle}

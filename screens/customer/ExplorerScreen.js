@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	View,
 	Text,
@@ -9,7 +9,9 @@ import {
 	Pressable,
 } from "react-native";
 
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { getStarred } from "../../store/actions/users";
+
 import Colors from "../../constants/Colors";
 
 const renderItem = ({ item }) => {

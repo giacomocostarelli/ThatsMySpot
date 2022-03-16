@@ -16,7 +16,7 @@ import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
 import { fetchRestaurants } from "../store/actions/restaurants";
-
+import { getStarred } from "../store/actions/users";
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
 const formReducer = (state, action) => {
@@ -60,7 +60,6 @@ const LoginScreen = (props) => {
 		},
 		formIsValid: false,
 	});
-
 	useEffect(() => {
 		dispatch(fetchRestaurants());
 	}, [dispatch]);
@@ -90,6 +89,7 @@ const LoginScreen = (props) => {
 		setIsLoading(true);
 		try {
 			await dispatch(action);
+			dispatch(getStarred());
 			props.navigation.replace("Homepage");
 		} catch (err) {
 			setError(err.message);

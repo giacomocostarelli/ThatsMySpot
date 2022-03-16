@@ -17,6 +17,7 @@ export default (state = initialState, action) => {
 				...state,
 				userStarred: action.userStarredAct,
 			};
+
 		default:
 			return state;
 	}

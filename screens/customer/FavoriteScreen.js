@@ -10,14 +10,14 @@ import {
 	Pressable,
 } from "react-native";
 import { SearchBar } from "react-native-elements";
-import { useDispatch } from "react-redux";
-
-import { getStarred } from "../../store/actions/users";
+import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../../constants/Colors";
 
 const FavoriteScreen = (props) => {
 	//Data for the section list.
+	const starred = useSelector((state) => state.users.userStarred);
+
 	const favorites = [
 		{ title: "A", data: ["Alberto", "Angelo", "Anna"] },
 		{ title: "D", data: ["Devin", "Dan", "Dominic"] },
@@ -25,8 +25,6 @@ const FavoriteScreen = (props) => {
 		{ title: "J", data: ["Jackson", "James", "Jillian"] },
 		{ title: "M", data: ["Marco", "Moira", "Martina"] },
 	];
-
-	const dispatch = useDispatch();
 
 	return (
 		<View style={styles.container}>
@@ -36,7 +34,7 @@ const FavoriteScreen = (props) => {
 				renderItem={({ item }) => (
 					<Pressable
 						onPress={() => {
-							console.log("Vai a pagina ristorante");
+							console.log(starred);
 						}}
 					>
 						<View style={styles.itemContainer}>
