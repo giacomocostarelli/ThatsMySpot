@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	Text,
@@ -9,7 +9,6 @@ import {
 	SectionList,
 	Pressable,
 } from "react-native";
-import { SearchBar } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 
 import Colors from "../../constants/Colors";
@@ -17,6 +16,45 @@ import Colors from "../../constants/Colors";
 const FavoriteScreen = (props) => {
 	//Data for the section list.
 	const starred = useSelector((state) => state.users.userStarred);
+	const favs = [
+		{ title: "A", data: [] },
+		{ title: "B", data: [] },
+		{ title: "C", data: [] },
+		{ title: "D", data: [] },
+		{ title: "E", data: [] },
+		{ title: "F", data: [] },
+		{ title: "G", data: [] },
+		{ title: "H", data: [] },
+		{ title: "I", data: [] },
+		{ title: "J", data: [] },
+		{ title: "K", data: [] },
+		{ title: "L", data: [] },
+		{ title: "M", data: [] },
+		{ title: "N", data: [] },
+		{ title: "O", data: [] },
+		{ title: "P", data: [] },
+		{ title: "Q", data: [] },
+		{ title: "R", data: [] },
+		{ title: "S", data: [] },
+		{ title: "T", data: [] },
+		{ title: "U", data: [] },
+		{ title: "V", data: [] },
+		{ title: "W", data: [] },
+		{ title: "X", data: [] },
+		{ title: "Y", data: [] },
+		{ title: "Z", data: [] },
+	];
+	const [favsState, setFavsState] = useState(favs);
+	useEffect(() => {
+		for (let restaurant in starred) {
+			for (let i = 0; i < favs.length; i++) {
+				if (favs[i].title.toLowerCase() === restaurant[0]) {
+					favs[i].data.push(restaurant);
+				}
+			}
+		}
+		setFavsState(favs);
+	}, [starred]);
 
 	const favorites = [
 		{ title: "A", data: ["Alberto", "Angelo", "Anna"] },
@@ -30,13 +68,9 @@ const FavoriteScreen = (props) => {
 		<View style={styles.container}>
 			<SectionList
 				style={styles.sectionContainer}
-				sections={favorites}
+				sections={favsState}
 				renderItem={({ item }) => (
-					<Pressable
-						onPress={() => {
-							console.log(starred);
-						}}
-					>
+					<Pressable onPress={() => {}}>
 						<View style={styles.itemContainer}>
 							<Image
 								style={styles.tinyLogo}
@@ -48,9 +82,11 @@ const FavoriteScreen = (props) => {
 						</View>
 					</Pressable>
 				)}
-				renderSectionHeader={({ section }) => (
-					<Text style={styles.sectionHeader}>{section.title}</Text>
-				)}
+				renderSectionHeader={({ section }) =>
+					section.data.length !== 0 && (
+						<Text style={styles.sectionHeader}>{section.title}</Text>
+					)
+				}
 				keyExtractor={(item, index) => index}
 			/>
 		</View>
