@@ -44,8 +44,14 @@ const FavoriteScreen = (props) => {
 		{ title: "Y", data: [] },
 		{ title: "Z", data: [] },
 	];
-	const [favsState, setFavsState] = useState(favs);
+	const [favsState, setFavsState] = useState([]);
+
 	useEffect(() => {
+		createSections();
+	}, [starred]);
+
+	const createSections = () => {
+		//Create sections for the list.
 		for (let restaurant in starred) {
 			for (let i = 0; i < favs.length; i++) {
 				if (favs[i].title.toLowerCase() === restaurant[0]) {
@@ -53,47 +59,76 @@ const FavoriteScreen = (props) => {
 				}
 			}
 		}
-		setFavsState(favs);
-	}, [starred]);
+		let sectionsFilled = [];
+		for (let i = 0; i < favs.length; i++) {
+			if (favs[i].data.length > 0) {
+				console.log(favs[i].data);
+				sectionsFilled.push({ title: favs[i].title, data: favs[i].data });
+			}
+		}
+		//console.log(sectionsFilled)
+		setFavsState(sectionsFilled);
+	};
 
-	const favorites = [
-		{ title: "A", data: ["Alberto", "Angelo", "Anna"] },
-		{ title: "D", data: ["Devin", "Dan", "Dominic"] },
-		{ title: "E", data: ["Emanuele", "Elia", "Ernesto"] },
-		{ title: "J", data: ["Jackson", "James", "Jillian"] },
-		{ title: "M", data: ["Marco", "Moira", "Martina"] },
-	];
+	//write a function that check if favs.data is empty
+	const isEmpty = (favs) => {
+		for (let i = 0; i < favs.length; i++) {
+			if (favs[i].data.length > 0) {
+				return false;
+			}
+		}
+		return true;
+	};
 
-	return (
-		<View style={styles.container}>
-			<SectionList
-				style={styles.sectionContainer}
-				sections={favsState}
-				renderItem={({ item }) => (
-					<Pressable onPress={() => {}}>
-						<View style={styles.itemContainer}>
-							<Image
-								style={styles.tinyLogo}
-								source={{
-									uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-								}}
-							/>
-							<Text style={styles.item}>{item}</Text>
-						</View>
-					</Pressable>
-				)}
-				renderSectionHeader={({ section }) =>
-					section.data.length !== 0 && (
+	let favComponent;
+	if (isEmpty(favsState)) {
+		favComponent = (
+			<View style={styles.containerEmpty}>
+				<Text style={styles.emptyText}>
+					Non hai ancora aggiunto dei Preferiti.
+				</Text>
+			</View>
+		);
+	} else {
+		favComponent = (
+			<View style={styles.container}>
+				<SectionList
+					style={styles.sectionContainer}
+					sections={favsState}
+					renderItem={({ item }) => (
+						<Pressable
+							onPress={() => {
+								console.log("PRESSED");
+							}}
+						>
+							<View style={styles.itemContainer}>
+								<Image
+									style={styles.tinyLogo}
+									source={{
+										uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
+									}}
+								/>
+								<Text style={styles.item}>{item}</Text>
+							</View>
+						</Pressable>
+					)}
+					renderSectionHeader={({ section }) => (
 						<Text style={styles.sectionHeader}>{section.title}</Text>
-					)
-				}
-				keyExtractor={(item, index) => index}
-			/>
-		</View>
-	);
+					)}
+					keyExtractor={(item, index) => index}
+				/>
+			</View>
+		);
+	}
+	return favComponent;
 };
 
 const styles = StyleSheet.create({
+	containerEmpty: {
+		flex: 1,
+		justifyContent: "center",
+		alignItems: "center",
+	},
 	container: {
 		flex: 1,
 	},
@@ -124,6 +159,11 @@ const styles = StyleSheet.create({
 		flex: 2,
 		width: 50,
 		height: 50,
+	},
+	emptyText: {
+		fontSize: 18,
+		color: Colors.secondary,
+		fontFamily: "open-sans",
 	},
 });
 
