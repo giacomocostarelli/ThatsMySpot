@@ -6,7 +6,7 @@ import { Marker, Callout } from "react-native-maps";
 import { WebView } from "react-native-webview";
 
 function generateCoordinate() {
-	var r = 100 / 111300, // = 100 meters
+	var r = 200 / 111300, // = 100 meters
 		y0 = 45.1239837,
 		x0 = 7.6243529,
 		u = Math.random(),
@@ -21,10 +21,12 @@ function generateCoordinate() {
 	let newX = x0 + x1;
 	return { latitude: newY, longitude: newX };
 }
+
 const MARKERS = [];
-for (let step = 0; step < 10; step++) {
+for (let step = 0; step < 31; step++) {
 	MARKERS.push(generateCoordinate());
 }
+console.log(MARKERS);
 
 const MapScreen = (props) => {
 	const [location, setLocation] = useState(null);
