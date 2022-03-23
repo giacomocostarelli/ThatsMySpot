@@ -48,13 +48,14 @@ const FavoriteScreen = (props) => {
 
 	useEffect(() => {
 		createSections();
+		//console.log(starred);
 	}, [starred]);
 
 	const createSections = () => {
 		//Create sections for the list.
 		for (let restaurant in starred) {
 			for (let i = 0; i < favs.length; i++) {
-				if (favs[i].title.toLowerCase() === restaurant[0]) {
+				if (favs[i].title === restaurant[0]) {
 					favs[i].data.push(restaurant);
 				}
 			}
@@ -62,7 +63,6 @@ const FavoriteScreen = (props) => {
 		let sectionsFilled = [];
 		for (let i = 0; i < favs.length; i++) {
 			if (favs[i].data.length > 0) {
-				console.log(favs[i].data);
 				sectionsFilled.push({ title: favs[i].title, data: favs[i].data });
 			}
 		}
