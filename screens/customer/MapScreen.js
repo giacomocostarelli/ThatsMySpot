@@ -24,8 +24,8 @@ function generateCoordinate() {
 	return { latitude: newY, longitude: newX };
 }
 */
-
-function fillMarkers(state) {
+/* // given a list of restaus returns their coordinates.
+function findCoordinates(state) {
 	let markers = [];
 	const restaurantLatLong = state;
 	for (let i = 0; i < restaurantLatLong.length; i++) {
@@ -36,6 +36,7 @@ function fillMarkers(state) {
 	}
 	return markers;
 }
+*/
 
 const MapScreen = (props) => {
 	const [location, setLocation] = useState(null);
@@ -44,8 +45,9 @@ const MapScreen = (props) => {
 	const { navigate } = props.navigation;
 
 	//Read restaurants coordinates from redux store.
-	const latLong = useSelector((state) => state.restaurants.restaurantsState);
-	const MARKERS = fillMarkers(latLong);
+	const restaurants = useSelector(
+		(state) => state.restaurants.restaurantsState
+	);
 
 	useEffect(() => {
 		(async () => {
@@ -72,10 +74,6 @@ const MapScreen = (props) => {
 		})();
 	}, []);
 
-	const navigateToView = (viewName) => {
-		console.log(viewName);
-	};
-
 	return (
 		<View style={styles.container}>
 			{initial && (
@@ -88,11 +86,14 @@ const MapScreen = (props) => {
 					initialRegion={initial}
 					style={styles.map}
 				>
-					{MARKERS.map(function (object, i) {
+					{restaurants.map(function (object, i) {
 						return (
 							<Marker
 								onPress={(e) => console.log(e.nativeEvent)}
-								coordinate={object}
+								coordinate={{
+									latitude: object.latitude,
+									longitude: object.longitude,
+								}}
 								key={i}
 							>
 								<Callout
@@ -108,10 +109,10 @@ const MapScreen = (props) => {
 										<WebView
 											style={{ height: 100, width: 150 }}
 											source={{
-												uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
+												uri: object.imageUrl,
 											}}
 										/>
-										<Text>Nome del ristorante.</Text>
+										<Text>{object.name}</Text>
 									</View>
 								</Callout>
 							</Marker>
