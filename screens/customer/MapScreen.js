@@ -4,7 +4,9 @@ import * as Location from "expo-location";
 import MapView from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
 import { WebView } from "react-native-webview";
+import { useDispatch, useSelector } from "react-redux";
 
+/*// generate random coords around x0 and y0.
 function generateCoordinate() {
 	var r = 200 / 111300, // = 100 meters
 		y0 = 45.1239837,
@@ -21,18 +23,29 @@ function generateCoordinate() {
 	let newX = x0 + x1;
 	return { latitude: newY, longitude: newX };
 }
+*/
 
-const MARKERS = [];
-for (let step = 0; step < 31; step++) {
-	MARKERS.push(generateCoordinate());
+function fillMarkers(state) {
+	let markers = [];
+	const restaurantLatLong = state;
+	for (let i = 0; i < restaurantLatLong.length; i++) {
+		markers.push({
+			latitude: restaurantLatLong[i].latitude,
+			longitude: restaurantLatLong[i].longitude,
+		});
+	}
+	return markers;
 }
-console.log(MARKERS);
 
 const MapScreen = (props) => {
 	const [location, setLocation] = useState(null);
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [initial, setInitial] = useState(null);
 	const { navigate } = props.navigation;
+
+	//Read restaurants coordinates from redux store.
+	const latLong = useSelector((state) => state.restaurants.restaurantsState);
+	const MARKERS = fillMarkers(latLong);
 
 	useEffect(() => {
 		(async () => {
