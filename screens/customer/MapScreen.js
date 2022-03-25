@@ -5,6 +5,7 @@ import MapView from "react-native-maps";
 import { Marker, Callout } from "react-native-maps";
 import { WebView } from "react-native-webview";
 import { useDispatch, useSelector } from "react-redux";
+import { getCurrentRestaurant } from "../../store/actions/restaurants";
 
 /*// generate random coords around x0 and y0.
 function generateCoordinate() {
@@ -43,7 +44,7 @@ const MapScreen = (props) => {
 	const [errorMsg, setErrorMsg] = useState(null);
 	const [initial, setInitial] = useState(null);
 	const { navigate } = props.navigation;
-
+	const dispatch = useDispatch();
 	//Read restaurants coordinates from redux store.
 	const restaurants = useSelector(
 		(state) => state.restaurants.restaurantsState
@@ -100,6 +101,7 @@ const MapScreen = (props) => {
 									style={{}}
 									onPress={() => {
 										//NAVIGATE TO RESTAURANT SCREEN.
+										dispatch(getCurrentRestaurant(object.name));
 										props.navigation.navigate("Details");
 									}}
 								>

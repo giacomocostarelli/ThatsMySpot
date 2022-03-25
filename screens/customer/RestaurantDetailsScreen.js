@@ -9,6 +9,7 @@ import {
 	Image,
 	Modal,
 } from "react-native";
+import { useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
@@ -36,47 +37,51 @@ const FavoriteRow = (props) => {
 	);
 };
 
-const ProfileTab = () => (
-	<View style={styles.body}>
-		<ImageBackground
-			style={styles.imageContainer}
-			source={{
-				uri: "https://media-cdn.tripadvisor.com/media/photo-s/1b/43/a2/c3/restaurant-blue-dining.jpg",
-			}}
-		>
-			<View style={styles.bodyTitleContainer}>
-				<Text style={styles.bodyTitle}>Pizzeria da Giacomo</Text>
-			</View>
-		</ImageBackground>
-		<View style={styles.descriptionContainer}>
-			<Text style={styles.descriptionText}>
-				Pizza al mattone o al tegamino, anche per celiaci, in un locale rustico
-				con ampie vetrate e mattoni a vista.
-			</Text>
-			<View
-				style={{
-					flex: 1.5,
-					flexDirection: "column",
-					alignItems: "flex-start",
-					justifyContent: "center",
+const ProfileTab = () => {
+	const current = useSelector((state) => state.restaurants.currentRestaurant);
+	console.log("PROFILETAB", current);
+
+	return (
+		<View style={styles.body}>
+			<ImageBackground
+				style={styles.imageContainer}
+				source={{
+					uri: "https://media-cdn.tripadvisor.com/media/photo-s/1b/43/a2/c3/restaurant-blue-dining.jpg",
 				}}
 			>
-				<Text
-					style={{ fontWeight: "bold", fontSize: 22, color: Colors.accent }}
-				>
-					Informazioni
+				<View style={styles.bodyTitleContainer}>
+					<Text style={styles.bodyTitle}>Pizzeria da Giacomo</Text>
+				</View>
+			</ImageBackground>
+			<View style={styles.descriptionContainer}>
+				<Text style={styles.descriptionText}>
+					Pizza al mattone o al tegamino, anche per celiaci, in un locale
+					rustico con ampie vetrate e mattoni a vista.
 				</Text>
-				<FavoriteRow iconname={"star"}>2.7 / 5</FavoriteRow>
-				<FavoriteRow iconname={"map-marker"}>Via delle Pizze, 22</FavoriteRow>
-				<FavoriteRow iconname={"phone"}>392 079 4885</FavoriteRow>
+				<View
+					style={{
+						flex: 1.5,
+						flexDirection: "column",
+						alignItems: "flex-start",
+						justifyContent: "center",
+					}}
+				>
+					<Text
+						style={{ fontWeight: "bold", fontSize: 22, color: Colors.accent }}
+					>
+						Informazioni
+					</Text>
+					<FavoriteRow iconname={"star"}>2.7 / 5</FavoriteRow>
+					<FavoriteRow iconname={"map-marker"}>Via delle Pizze, 22</FavoriteRow>
+					<FavoriteRow iconname={"phone"}>392 079 4885</FavoriteRow>
+				</View>
+				<Text style={{ color: Colors.secondary }}>
+					Fai swipe a destra per prenotare un tavolo.{" "}
+				</Text>
 			</View>
-			<Text style={{ color: Colors.secondary }}>
-				Fai swipe a destra per prenotare un tavolo.{" "}
-			</Text>
 		</View>
-	</View>
-);
-
+	);
+};
 const BookingTab = () => {
 	const [date, setDate] = useState(new Date());
 	const [mode, setMode] = useState("date");
@@ -386,6 +391,13 @@ const TakeawayTab = () => {
 		</View>
 	);
 };
+/*
+const renderScene = SceneMap({
+	profile: ProfileTab,
+	booking: BookingTab,
+	takeaway: TakeawayTab,
+}); 
+*/
 
 const renderScene = SceneMap({
 	profile: ProfileTab,
@@ -393,16 +405,18 @@ const renderScene = SceneMap({
 	takeaway: TakeawayTab,
 });
 
-const renderTabBar = (props) => (
-	<TabBar
-		{...props}
-		indicatorStyle={{ backgroundColor: Colors.accent }}
-		labelStyle={{ color: Colors.accent, fontWeight: "bold" }}
-		style={{ backgroundColor: "white" }}
-	/>
-);
+const renderTabBar = (props) => {
+	return (
+		<TabBar
+			{...props}
+			indicatorStyle={{ backgroundColor: Colors.accent }}
+			labelStyle={{ color: Colors.accent, fontWeight: "bold" }}
+			style={{ backgroundColor: "white" }}
+		/>
+	);
+};
 
-const RestaurantDetailsScreen = (props) => {
+const RestaurantDetailsScreen = () => {
 	const layout = useWindowDimensions();
 
 	const [index, setIndex] = useState(0);

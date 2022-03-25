@@ -2,12 +2,14 @@ import {
 	CREATE_RESTAURANT,
 	DELETE_RESTAURANT,
 	FETCH_RESTAURANTS,
+	GET_CURRENT_RESTAURANT,
 } from "../actions/restaurants";
 
 import Restaurant from "../../models/restaurant";
 
 const initialState = {
 	restaurantsState: [],
+	currentRestaurant: null,
 };
 
 export default (state = initialState, action) => {
@@ -33,7 +35,7 @@ export default (state = initialState, action) => {
 			);
 			return {
 				...state,
-				restaurants: state.restaurants.concat(newRestaurant),
+				restaurantsState: state.restaurants.concat(newRestaurant),
 			};
 		case FETCH_RESTAURANTS:
 			return {
@@ -41,6 +43,14 @@ export default (state = initialState, action) => {
 			};
 		case DELETE_RESTAURANT:
 			return state;
+		case GET_CURRENT_RESTAURANT:
+			const currentRestaurantObj = state.restaurantsState.find(
+				(restaurant) => restaurant.name === action.currentRestName
+			);
+			return {
+				...state,
+				currentRestaurant: currentRestaurantObj,
+			};
 		default:
 			return state;
 	}
