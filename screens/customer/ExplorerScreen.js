@@ -8,46 +8,19 @@ import {
 	Image,
 	Pressable,
 } from "react-native";
-
+import { useNavigation } from "@react-navigation/native";
 import { useSelector, useDispatch } from "react-redux";
 import { getStarred } from "../../store/actions/users";
-
+import { getCurrentRestaurant } from "../../store/actions/restaurants";
 import Colors from "../../constants/Colors";
 
-const renderItem = ({ item }) => {
-	return (
-		<View
-			style={{
-				flex: 1,
-				alignItems: "center",
-				justifyContent: "center",
-				marginRight: 22,
-			}}
-		>
-			<Pressable onPress={() => {}}>
-				<Image
-					style={styles.tinyLogo}
-					source={{
-						uri: item.imageUrl,
-					}}
-				/>
-			</Pressable>
-			<Text
-				style={{
-					fontSize: 17,
-				}}
-			>
-				{item.name}
-			</Text>
-		</View>
-	);
-};
-
-const Row = ({ category }) => {
+const Row = (props) => {
 	const userId = useSelector((state) => state.auth.userId);
 	const token = useSelector((state) => state.auth.token);
 	const rests = useSelector((state) => state.restaurants.restaurantsState);
-	// restaurant with category = category
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
+	const { category } = props;
 	const restsWithCategory = rests.filter((rest) => rest.category === category);
 	return (
 		<View style={styles.rowContainer}>
@@ -73,7 +46,37 @@ const Row = ({ category }) => {
 					horizontal={true}
 					style={styles.list}
 					data={restsWithCategory}
-					renderItem={renderItem}
+					renderItem={({ item }) => (
+						<View
+							style={{
+								flex: 1,
+								alignItems: "center",
+								justifyContent: "center",
+								marginRight: 22,
+							}}
+						>
+							<Pressable
+								onPress={() => {
+									dispatch(getCurrentRestaurant(item.name));
+									navigation.navigate("Details");
+								}}
+							>
+								<Image
+									style={styles.tinyLogo}
+									source={{
+										uri: item.imageUrl,
+									}}
+								/>
+							</Pressable>
+							<Text
+								style={{
+									fontSize: 17,
+								}}
+							>
+								{item.name}
+							</Text>
+						</View>
+					)}
 					keyExtractor={(item) => item.name}
 				/>
 			</View>
