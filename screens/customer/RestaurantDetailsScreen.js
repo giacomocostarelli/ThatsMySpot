@@ -46,18 +46,15 @@ const ProfileTab = () => {
 			<ImageBackground
 				style={styles.imageContainer}
 				source={{
-					uri: "https://media-cdn.tripadvisor.com/media/photo-s/1b/43/a2/c3/restaurant-blue-dining.jpg",
+					uri: current.imageUrl,
 				}}
 			>
 				<View style={styles.bodyTitleContainer}>
-					<Text style={styles.bodyTitle}>Pizzeria da Giacomo</Text>
+					<Text style={styles.bodyTitle}>{current.name}</Text>
 				</View>
 			</ImageBackground>
 			<View style={styles.descriptionContainer}>
-				<Text style={styles.descriptionText}>
-					Pizza al mattone o al tegamino, anche per celiaci, in un locale
-					rustico con ampie vetrate e mattoni a vista.
-				</Text>
+				<Text style={styles.descriptionText}>{current.description}</Text>
 				<View
 					style={{
 						flex: 1.5,
@@ -71,9 +68,9 @@ const ProfileTab = () => {
 					>
 						Informazioni
 					</Text>
-					<FavoriteRow iconname={"star"}>2.7 / 5</FavoriteRow>
-					<FavoriteRow iconname={"map-marker"}>Via delle Pizze, 22</FavoriteRow>
-					<FavoriteRow iconname={"phone"}>392 079 4885</FavoriteRow>
+					<FavoriteRow iconname={"star"}>{current.stars} / 5</FavoriteRow>
+					<FavoriteRow iconname={"map-marker"}>{current.address}</FavoriteRow>
+					<FavoriteRow iconname={"phone"}>{current.phoneNumber}</FavoriteRow>
 				</View>
 				<Text style={{ color: Colors.secondary }}>
 					Fai swipe a destra per prenotare un tavolo.{" "}
