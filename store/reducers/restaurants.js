@@ -39,6 +39,7 @@ export default (state = initialState, action) => {
 			};
 		case FETCH_RESTAURANTS:
 			return {
+				...state,
 				restaurantsState: action.restaurantsData,
 			};
 		case DELETE_RESTAURANT:

@@ -27,6 +27,13 @@ const AppNavigator = (props) => {
 		<NavigationContainer>
 			<Stack.Navigator>
 				<Stack.Screen
+					name="Homepage"
+					component={TabNavigator}
+					options={{
+						headerShown: false,
+					}}
+				/>
+				<Stack.Screen
 					name="Login"
 					component={LoginScreen}
 					options={{
@@ -39,13 +46,6 @@ const AppNavigator = (props) => {
 					}}
 					name="Welcome"
 					component={WelcomeScreen}
-				/>
-				<Stack.Screen
-					name="Homepage"
-					component={TabNavigator}
-					options={{
-						headerShown: false,
-					}}
 				/>
 				<Stack.Screen
 					name="Details"

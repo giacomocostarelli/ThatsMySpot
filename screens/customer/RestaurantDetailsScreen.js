@@ -39,7 +39,6 @@ const FavoriteRow = (props) => {
 
 const ProfileTab = () => {
 	const current = useSelector((state) => state.restaurants.currentRestaurant);
-	console.log("PROFILETAB", current);
 
 	return (
 		<View style={styles.body}>
