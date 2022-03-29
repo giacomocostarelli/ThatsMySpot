@@ -10,28 +10,37 @@ import {
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { SearchBar } from "react-native-elements";
+import { useNavigation } from "@react-navigation/native";
 
 //Redux actions.
-import { fetchRestaurants } from "../../store/actions/restaurants";
+import {
+	fetchRestaurants,
+	getCurrentRestaurant,
+} from "../../store/actions/restaurants";
 import { getStarred } from "../../store/actions/users";
 
-const Item = ({ item }) => (
-	<Pressable
-		onPress={() => {
-			console.log("PRESSED");
-		}}
-	>
-		<View style={styles.itemContainer}>
-			<Image
-				style={styles.tinyLogo}
-				source={{
-					uri: item.imageUrl,
-				}}
-			/>
-			<Text style={styles.item}>{item.name}</Text>
-		</View>
-	</Pressable>
-);
+const Item = ({ item }) => {
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
+	return (
+		<Pressable
+			onPress={() => {
+				dispatch(getCurrentRestaurant(item.name));
+				navigation.navigate("Details");
+			}}
+		>
+			<View style={styles.itemContainer}>
+				<Image
+					style={styles.tinyLogo}
+					source={{
+						uri: item.imageUrl,
+					}}
+				/>
+				<Text style={styles.item}>{item.name}</Text>
+			</View>
+		</Pressable>
+	);
+};
 
 const SearchScreen = (props) => {
 	const dispatch = useDispatch();
