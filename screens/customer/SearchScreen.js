@@ -1,58 +1,35 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	Text,
 	FlatList,
 	StyleSheet,
 	Pressable,
+	Image,
 	Button,
 } from "react-native";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { SearchBar } from "react-native-elements";
-import Colors from "../../constants/Colors";
 
 //Redux actions.
 import { fetchRestaurants } from "../../store/actions/restaurants";
 import { getStarred } from "../../store/actions/users";
 
-const DUMMYDATA = [
-	{
-		id: "1",
-		title: "First Item",
-	},
-	{
-		id: "2",
-		title: "Second Item",
-	},
-	{
-		id: "3",
-		title: "Third Item",
-	},
-	{
-		id: "4",
-		title: "Third Item",
-	},
-	{
-		id: "5",
-		title: "Third Item",
-	},
-	{
-		id: "6",
-		title: "Third Item",
-	},
-	{
-		id: "7",
-		title: "Third Item",
-	},
-	{
-		id: "8",
-		title: "Third Item",
-	},
-];
-
-const Item = ({ item, onPress, backgroundColor, textColor }) => (
-	<Pressable onPress={onPress} style={[styles.item, backgroundColor]}>
-		<Text style={[styles.title, textColor]}>{item.title}</Text>
+const Item = ({ item }) => (
+	<Pressable
+		onPress={() => {
+			console.log("PRESSED");
+		}}
+	>
+		<View style={styles.itemContainer}>
+			<Image
+				style={styles.tinyLogo}
+				source={{
+					uri: item.imageUrl,
+				}}
+			/>
+			<Text style={styles.item}>{item.name}</Text>
+		</View>
 	</Pressable>
 );
 
@@ -60,26 +37,28 @@ const SearchScreen = (props) => {
 	const dispatch = useDispatch();
 
 	//States.
-	const [searchText, setSearchText] = useState(" ");
-	const [selectedId, setSelectedId] = useState(null);
+	const [searchText, setSearchText] = useState("");
+	const [searchResult, setSearchResult] = useState([]);
+	const searchTemp = useSelector((state) => state.restaurants.restaurantsState);
 
 	//Handlers.
 	const updateSearch = (search) => {
 		setSearchText(search);
 	};
 
+	useEffect(() => {
+		if (searchText !== "") {
+			const searchTempFiltered = searchTemp.filter((restaurant) =>
+				restaurant.name.toLowerCase().includes(searchText.toLowerCase())
+			);
+			setSearchResult(searchTempFiltered);
+		} else {
+			setSearchResult([]);
+		}
+	}, [searchText]);
+
 	const renderItem = ({ item }) => {
-		const backgroundColor =
-			item.id === selectedId ? Colors.accent : Colors.primary;
-		const color = item.id === selectedId ? "white" : "black";
-		return (
-			<Item
-				item={item}
-				onPress={() => setSelectedId(item.id)}
-				backgroundColor={{ backgroundColor }}
-				textColor={{ color }}
-			/>
-		);
+		return <Item item={item} />;
 	};
 
 	//Component.
@@ -93,15 +72,12 @@ const SearchScreen = (props) => {
 				}}
 			/>
 
-			{/*
-            <Button
+			<Button
 				title="STARRED"
 				onPress={() => {
-					dispatch(getStarred());
-					console.log(" -- Button for GET_STARRED -- ");
+					console.log(searchResult);
 				}}
-			/> 
-            */}
+			/>
 
 			<SearchBar
 				platform="android"
@@ -112,10 +88,9 @@ const SearchScreen = (props) => {
 			/>
 			<FlatList
 				style={styles.flatlist}
-				data={DUMMYDATA}
+				data={searchResult}
 				renderItem={renderItem}
-				keyExtractor={(item) => item.id}
-				extraData={selectedId}
+				keyExtractor={(item) => item.name}
 			/>
 		</View>
 	);
@@ -138,10 +113,23 @@ const styles = StyleSheet.create({
 	flatlist: {
 		width: "90%",
 	},
+	itemContainer: {
+		display: "flex",
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+	},
 	item: {
-		padding: 20,
-		marginVertical: 8,
-		marginHorizontal: 16,
+		flex: 8,
+		margin: "5%",
+		padding: 10,
+		fontSize: 18,
+		height: 44,
+	},
+	tinyLogo: {
+		flex: 2,
+		width: 50,
+		height: 50,
 	},
 	title: {
 		fontSize: 32,
