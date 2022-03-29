@@ -10,11 +10,12 @@ import {
 	Pressable,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-
+import { getCurrentRestaurant } from "../../store/actions/restaurants";
 import Colors from "../../constants/Colors";
 
 const FavoriteScreen = (props) => {
 	//Data for the section list.
+	const dispatch = useDispatch();
 	const starred = useSelector((state) => state.users.userStarred);
 	const favs = [
 		{ title: "A", data: [] },
@@ -69,8 +70,7 @@ const FavoriteScreen = (props) => {
 		//console.log(sectionsFilled)
 		setFavsState(sectionsFilled);
 	};
-
-	//write a function that check if favs.data is empty
+	//check if favs.data is empty
 	const isEmpty = (favs) => {
 		for (let i = 0; i < favs.length; i++) {
 			if (favs[i].data.length > 0) {
@@ -98,7 +98,8 @@ const FavoriteScreen = (props) => {
 					renderItem={({ item }) => (
 						<Pressable
 							onPress={() => {
-								console.log("PRESSED");
+								dispatch(getCurrentRestaurant(item));
+								props.navigation.navigate("Details");
 							}}
 						>
 							<View style={styles.itemContainer}>
