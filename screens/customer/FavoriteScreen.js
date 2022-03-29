@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { useNavigation } from "@react-navigation/native";
+
 import {
 	View,
 	Text,
-	FlatList,
-	Button,
 	Image,
 	StyleSheet,
 	SectionList,
@@ -12,6 +12,39 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentRestaurant } from "../../store/actions/restaurants";
 import Colors from "../../constants/Colors";
+
+const Item = ({ item }) => {
+	const dispatch = useDispatch();
+	const navigation = useNavigation();
+
+	function findImage(name) {
+		return useSelector(
+			(state) =>
+				state.restaurants.restaurantsState.find(
+					(restaurant) => restaurant.name === name
+				).imageUrl
+		);
+	}
+
+	return (
+		<Pressable
+			onPress={() => {
+				dispatch(getCurrentRestaurant(item));
+				navigation.navigate("Details");
+			}}
+		>
+			<View style={styles.itemContainer}>
+				<Image
+					style={styles.tinyLogo}
+					source={{
+						uri: findImage(item),
+					}}
+				/>
+				<Text style={styles.item}>{item}</Text>
+			</View>
+		</Pressable>
+	);
+};
 
 const FavoriteScreen = (props) => {
 	//Data for the section list.
@@ -95,24 +128,9 @@ const FavoriteScreen = (props) => {
 				<SectionList
 					style={styles.sectionContainer}
 					sections={favsState}
-					renderItem={({ item }) => (
-						<Pressable
-							onPress={() => {
-								dispatch(getCurrentRestaurant(item));
-								props.navigation.navigate("Details");
-							}}
-						>
-							<View style={styles.itemContainer}>
-								<Image
-									style={styles.tinyLogo}
-									source={{
-										uri: "https://www.collinsdictionary.com/images/full/restaurant_135621509.jpg",
-									}}
-								/>
-								<Text style={styles.item}>{item}</Text>
-							</View>
-						</Pressable>
-					)}
+					renderItem={({ item }) => {
+						return <Item item={item} />;
+					}}
 					renderSectionHeader={({ section }) => (
 						<Text style={styles.sectionHeader}>{section.title}</Text>
 					)}
