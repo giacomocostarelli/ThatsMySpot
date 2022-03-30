@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { View, Image } from "react-native";
 import { Icon } from "react-native-elements";
@@ -15,14 +15,18 @@ import SearchScreen from "../screens/customer/SearchScreen";
 import Colors from "../constants/Colors";
 import RestaurantDetailsScreen from "../screens/customer/RestaurantDetailsScreen";
 import { logout } from "../store/actions/auth";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
 const AppNavigator = (props) => {
-	const [isFavorite, setIsFavorite] = useState(false);
+	const dispatch = useDispatch();
 
+	/*useEffect(() => {
+		console.log(currentRestaurant.name in isStarred);
+	}, [currentRestaurant]);
+*/
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
@@ -59,28 +63,6 @@ const AppNavigator = (props) => {
 						headerTintColor: "white",
 						headerTitleStyle: {
 							fontFamily: "roboto-font",
-						},
-						headerRight: () => {
-							let star = isFavorite ? (
-								<FontAwesome
-									name="star"
-									size={24}
-									color="white"
-									onPress={() => {
-										setIsFavorite(!isFavorite);
-									}}
-								/>
-							) : (
-								<FontAwesome
-									name="star-o"
-									size={24}
-									color="white"
-									onPress={() => {
-										setIsFavorite(!isFavorite);
-									}}
-								/>
-							);
-							return star;
 						},
 					}}
 				/>
@@ -158,7 +140,6 @@ const TabNavigator = ({ navigation }) => {
 			/>
 			<Tab.Screen
 				name="Cerca"
-				//TO BE CHANGED WITH 'SearchScreen'
 				component={SearchScreen}
 				options={{
 					tabBarLabel: "Cerca",

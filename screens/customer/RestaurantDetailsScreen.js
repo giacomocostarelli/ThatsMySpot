@@ -9,12 +9,13 @@ import {
 	Image,
 	Modal,
 } from "react-native";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Divider } from "react-native-elements/dist/divider/Divider";
+import { removeFromFav } from "../../store/actions/users";
 
 const FavoriteRow = (props) => {
 	return (
@@ -38,8 +39,16 @@ const FavoriteRow = (props) => {
 };
 
 const ProfileTab = () => {
+	const dispatch = useDispatch();
 	const current = useSelector((state) => state.restaurants.currentRestaurant);
-
+	const currentRestaurant = useSelector(
+		(state) => state.restaurants.currentRestaurant
+	);
+	const isStarred = useSelector((state) => state.users.userStarred);
+	const [isFavorite, setIsFavorite] = useState(
+		currentRestaurant.name in isStarred
+	);
+	// mettere currentRestaurant.name nei parametri della dispatch
 	return (
 		<View style={styles.body}>
 			<ImageBackground
@@ -50,6 +59,27 @@ const ProfileTab = () => {
 			>
 				<View style={styles.bodyTitleContainer}>
 					<Text style={styles.bodyTitle}>{current.name}</Text>
+					{isFavorite ? (
+						<FontAwesome
+							name="star"
+							size={28}
+							color="white"
+							onPress={() => {
+								dispatch(removeFromFav(currentRestaurant.name));
+								console.log("rimuovo");
+								setIsFavorite(!isFavorite);
+							}}
+						/>
+					) : (
+						<FontAwesome
+							name="star-o"
+							size={28}
+							color="white"
+							onPress={() => {
+								setIsFavorite(!isFavorite);
+							}}
+						/>
+					)}
 				</View>
 			</ImageBackground>
 			<View style={styles.descriptionContainer}>
@@ -447,9 +477,11 @@ const styles = StyleSheet.create({
 	},
 
 	bodyTitleContainer: {
+		flexDirection: "row",
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "space-evenly",
 		backgroundColor: "rgba(52, 52, 52, 0.5)",
+		paddingVertical: "1%",
 	},
 
 	bodyTitle: {
