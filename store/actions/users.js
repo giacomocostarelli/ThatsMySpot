@@ -30,32 +30,40 @@ export const getStarred = () => {
 	};
 };
 
-export const addToFav = () => {
+export const addToFav = (name) => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
 		const userId = getState().auth.userId;
-		console.log("user Id: " + userId);
+		const toAdd = `${name} : {
+            "starts" : ${name[0]} 
+        }`;
+		/* 
+        "Fast Food 1": Object {
+            "starts": "F",
+         },
+        {
+           
+        }
+         */
 
 		const response = await fetch(
 			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred.json?auth=${token}`,
 			{
-				method: "PUT",
+				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
-				body: JSON.stringify({
-					restaurant,
-				}),
+				body: JSON.stringify(toAdd),
 			}
 		);
 
-		console.log("CREATE_RESTAURANT Request.");
+		console.log("ADD_TO_FAV Request.");
 		const resData = await response.json();
-		console.log("CREATE_RESTAURANT Response.");
+		console.log("ADD_TO_FAV Response.");
 
 		dispatch({
-			type: CREATE_RESTAURANT,
-			restaurantData: resData,
+			type: ADD_TO_FAV,
+			toAddAction: toAdd,
 		});
 	};
 };
