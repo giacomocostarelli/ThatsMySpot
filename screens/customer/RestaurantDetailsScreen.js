@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	Text,
@@ -15,7 +15,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Divider } from "react-native-elements/dist/divider/Divider";
-import { removeFromFav } from "../../store/actions/users";
+import { removeFromFav, addToFav } from "../../store/actions/users";
 
 const FavoriteRow = (props) => {
 	return (
@@ -41,13 +41,18 @@ const FavoriteRow = (props) => {
 const ProfileTab = () => {
 	const dispatch = useDispatch();
 	const current = useSelector((state) => state.restaurants.currentRestaurant);
-	const currentRestaurant = useSelector(
-		(state) => state.restaurants.currentRestaurant
-	);
-	const isStarred = useSelector((state) => state.users.userStarred);
-	const [isFavorite, setIsFavorite] = useState(
-		currentRestaurant.name in isStarred
-	);
+	const userStarredState = useSelector((state) => state.users.userStarred);
+	const [isFavorite, setIsFavorite] = useState(false);
+	useEffect(() => {
+		if (userStarredState == null) {
+			setIsFavorite(false);
+		} else if (current.name in userStarredState) {
+			setIsFavorite(true);
+		} else {
+			setIsFavorite(false);
+		}
+	}, [current]);
+
 	// mettere currentRestaurant.name nei parametri della dispatch
 	return (
 		<View style={styles.body}>
@@ -65,9 +70,9 @@ const ProfileTab = () => {
 							size={28}
 							color="white"
 							onPress={() => {
-								dispatch(removeFromFav(currentRestaurant.name));
-								console.log("rimuovo");
-								setIsFavorite(!isFavorite);
+								dispatch(removeFromFav(current.name));
+								console.log("Rimuovo dai preferiti");
+								setIsFavorite(false);
 							}}
 						/>
 					) : (
@@ -76,7 +81,9 @@ const ProfileTab = () => {
 							size={28}
 							color="white"
 							onPress={() => {
-								setIsFavorite(!isFavorite);
+								dispatch(addToFav(current.name));
+								console.log("Aggiungo ai preferiti");
+								setIsFavorite(true);
 							}}
 						/>
 					)}
@@ -417,13 +424,6 @@ const TakeawayTab = () => {
 		</View>
 	);
 };
-/*
-const renderScene = SceneMap({
-	profile: ProfileTab,
-	booking: BookingTab,
-	takeaway: TakeawayTab,
-}); 
-*/
 
 const renderScene = SceneMap({
 	profile: ProfileTab,

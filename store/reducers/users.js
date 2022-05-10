@@ -22,7 +22,7 @@ export default (state = initialState, action) => {
 			console.log(action.toRemove);
 			console.log(" -- REMOVE_FROM_FAV store reducer ended -- ");
 			const userStarredUpdated = state.userStarred.filter(
-				(restaurant) => restaurant !== action.remove
+				(restaurant) => restaurant !== action.toRemove
 			);
 			return {
 				...state,

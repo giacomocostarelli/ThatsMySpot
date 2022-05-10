@@ -4,7 +4,6 @@ export const CREATE_RESTAURANT = "CREATE_RESTAURANTS";
 export const DELETE_RESTAURANT = "DELETE_RESTAURANTS";
 export const FETCH_RESTAURANTS = "FETCH_RESTAURANTS";
 export const GET_CURRENT_RESTAURANT = "GET_CURRENT_RESTAURANT";
-
 export const fetchRestaurants = () => {
 	return async (dispatch) => {
 		console.log("fetchRestaurants REQUEST");
