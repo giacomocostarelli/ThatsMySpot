@@ -6,7 +6,6 @@ import {
 	useWindowDimensions,
 	ImageBackground,
 	Pressable,
-	Image,
 	Modal,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
@@ -15,7 +14,7 @@ import { FontAwesome } from "@expo/vector-icons";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Divider } from "react-native-elements/dist/divider/Divider";
-import { removeFromFav, addToFav } from "../../store/actions/users";
+import { removeFromFav, addToFav, getStarred } from "../../store/actions/users";
 
 const FavoriteRow = (props) => {
 	return (
@@ -72,6 +71,7 @@ const ProfileTab = () => {
 							onPress={() => {
 								dispatch(removeFromFav(current.name));
 								console.log("Rimuovo dai preferiti");
+								dispatch(getStarred());
 								setIsFavorite(false);
 							}}
 						/>
@@ -83,6 +83,7 @@ const ProfileTab = () => {
 							onPress={() => {
 								dispatch(addToFav(current.name));
 								console.log("Aggiungo ai preferiti");
+								dispatch(getStarred());
 								setIsFavorite(true);
 							}}
 						/>

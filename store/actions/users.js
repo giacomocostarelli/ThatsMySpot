@@ -42,6 +42,8 @@ export const addToFav = (name) => {
             },
          */
 
+		console.log("ADD_TO_FAV Request.");
+
 		const response = await fetch(
 			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred/${name}/starts.json?auth=${token}`,
 			{
@@ -53,12 +55,11 @@ export const addToFav = (name) => {
 			}
 		);
 
-		console.log("ADD_TO_FAV Request.");
 		console.log("ADD_TO_FAV Response.");
 
 		dispatch({
 			type: ADD_TO_FAV,
-			toAddAction: toAdd,
+			toAddAction: name,
 		});
 	};
 };

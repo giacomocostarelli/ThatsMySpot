@@ -17,27 +17,25 @@ export default (state = initialState, action) => {
 				...state,
 				userStarred: action.userStarredAct,
 			};
+
 		case REMOVE_FROM_FAV:
 			console.log(" -- REMOVE_FROM_FAV store reducer started -- ");
 			console.log(action.toRemove);
 			console.log(" -- REMOVE_FROM_FAV store reducer ended -- ");
-			const userStarredUpdated = state.userStarred.filter(
+			let userStarredRemoved = state.userStarred.filter(
 				(restaurant) => restaurant !== action.toRemove
 			);
 			return {
 				...state,
-				userStarred: userStarredUpdated,
+				userStarred: userStarredRemoved,
 			};
+
 		case ADD_TO_FAV:
 			console.log(" -- ADD_TO_FAV store reducer started -- ");
 			console.log(action.toAddAction);
 			console.log(" -- ADD_TO_FAV store reducer ended -- ");
-			/*const userStarredUpdated = state.userStarred.filter(
-				(restaurant) => restaurant !== action.remove
-			); */
 			return {
 				...state,
-				//userStarred: userStarredUpdated,
 			};
 
 		default:
