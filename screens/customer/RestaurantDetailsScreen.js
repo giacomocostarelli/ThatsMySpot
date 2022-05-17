@@ -53,68 +53,74 @@ const ProfileTab = () => {
 	}, [current]);
 
 	// mettere currentRestaurant.name nei parametri della dispatch
-	return (
-		<View style={styles.body}>
-			<ImageBackground
-				style={styles.imageContainer}
-				source={{
-					uri: current.imageUrl,
-				}}
-			>
-				<View style={styles.bodyTitleContainer}>
-					<Text style={styles.bodyTitle}>{current.name}</Text>
-					{isFavorite ? (
-						<FontAwesome
-							name="star"
-							size={28}
-							color="white"
-							onPress={() => {
-								dispatch(removeFromFav(current.name));
-								console.log("Rimuovo dai preferiti");
-								dispatch(getStarred());
-								setIsFavorite(false);
-							}}
-						/>
-					) : (
-						<FontAwesome
-							name="star-o"
-							size={28}
-							color="white"
-							onPress={() => {
-								dispatch(addToFav(current.name));
-								console.log("Aggiungo ai preferiti");
-								dispatch(getStarred());
-								setIsFavorite(true);
-							}}
-						/>
-					)}
-				</View>
-			</ImageBackground>
-			<View style={styles.descriptionContainer}>
-				<Text style={styles.descriptionText}>{current.description}</Text>
-				<View
-					style={{
-						flex: 1.5,
-						flexDirection: "column",
-						alignItems: "flex-start",
-						justifyContent: "center",
+	if (current != null) {
+		return (
+			<View style={styles.body}>
+				<ImageBackground
+					style={styles.imageContainer}
+					source={{
+						uri: current.imageUrl,
 					}}
 				>
-					<Text
-						style={{ fontWeight: "bold", fontSize: 22, color: Colors.accent }}
+					<View style={styles.bodyTitleContainer}>
+						<Text style={styles.bodyTitle}>{current.name}</Text>
+						{isFavorite ? (
+							<FontAwesome
+								name="star"
+								size={28}
+								color="white"
+								onPress={() => {
+									dispatch(removeFromFav(current.name));
+									console.log("Rimuovo dai preferiti");
+									setIsFavorite(false);
+									setTimeout(() => {
+										dispatch(getStarred());
+									}, 500);
+								}}
+							/>
+						) : (
+							<FontAwesome
+								name="star-o"
+								size={28}
+								color="white"
+								onPress={() => {
+									dispatch(addToFav(current.name));
+									console.log("Aggiungo ai preferiti");
+									setIsFavorite(true);
+									setTimeout(() => {
+										dispatch(getStarred());
+									}, 500);
+								}}
+							/>
+						)}
+					</View>
+				</ImageBackground>
+				<View style={styles.descriptionContainer}>
+					<Text style={styles.descriptionText}>{current.description}</Text>
+					<View
+						style={{
+							flex: 1.5,
+							flexDirection: "column",
+							alignItems: "flex-start",
+							justifyContent: "center",
+						}}
 					>
-						Informazioni
+						<Text
+							style={{ fontWeight: "bold", fontSize: 22, color: Colors.accent }}
+						>
+							Informazioni
+						</Text>
+						<FavoriteRow iconname={"star"}>{current.stars} / 5</FavoriteRow>
+						<FavoriteRow iconname={"map-marker"}>{current.address}</FavoriteRow>
+						<FavoriteRow iconname={"phone"}>{current.phoneNumber}</FavoriteRow>
+					</View>
+					<Text style={{ color: Colors.secondary }}>
+						Fai swipe a destra per prenotare un tavolo.{" "}
 					</Text>
-					<FavoriteRow iconname={"star"}>{current.stars} / 5</FavoriteRow>
-					<FavoriteRow iconname={"map-marker"}>{current.address}</FavoriteRow>
-					<FavoriteRow iconname={"phone"}>{current.phoneNumber}</FavoriteRow>
 				</View>
-				<Text style={{ color: Colors.secondary }}>
-					Fai swipe a destra per prenotare un tavolo.{" "}
-				</Text>
 			</View>
-		</View>
-	);
+		);
+	}
 };
 const BookingTab = () => {
 	const [date, setDate] = useState(new Date());

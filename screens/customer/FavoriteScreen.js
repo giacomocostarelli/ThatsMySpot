@@ -18,12 +18,14 @@ const Item = ({ item }) => {
 	const navigation = useNavigation();
 
 	function findImage(name) {
-		return useSelector(
-			(state) =>
-				state.restaurants.restaurantsState.find(
-					(restaurant) => restaurant.name === name
-				).imageUrl
-		);
+		let restList = useSelector((state) => state.restaurants.restaurantsState);
+
+		if (restList != undefined) {
+			let restByName = restList.find((restaurant) => restaurant.name === name);
+			return restByName.imageUrl;
+		} else {
+			return "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG7RvJ7v3Lt6FoaOxZeeS1qxLf4OPgAvXd5A&usqp=CAU";
+		}
 	}
 
 	return (

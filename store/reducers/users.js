@@ -10,30 +10,25 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_STARRED:
-			console.log(" -- GET_STARRED store reducer started -- ");
+			console.log(" -- GET_STARRED store REDUCER -- ");
 			console.log(action.userStarredAct);
-			console.log(" -- GET_STARRED store reducer ended -- ");
 			return {
 				...state,
 				userStarred: action.userStarredAct,
 			};
 
 		case REMOVE_FROM_FAV:
-			console.log(" -- REMOVE_FROM_FAV store reducer started -- ");
+			console.log(" -- REMOVE_FROM_FAV store REDUCER -- ");
 			console.log(action.toRemove);
-			console.log(" -- REMOVE_FROM_FAV store reducer ended -- ");
-			let userStarredRemoved = state.userStarred.filter(
-				(restaurant) => restaurant !== action.toRemove
-			);
+
 			return {
 				...state,
-				userStarred: userStarredRemoved,
 			};
 
 		case ADD_TO_FAV:
-			console.log(" -- ADD_TO_FAV store reducer started -- ");
+			console.log(" -- ADD_TO_FAV store REDUCER -- ");
 			console.log(action.toAddAction);
-			console.log(" -- ADD_TO_FAV store reducer ended -- ");
+
 			return {
 				...state,
 			};
