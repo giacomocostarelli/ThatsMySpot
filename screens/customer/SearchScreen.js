@@ -73,21 +73,20 @@ const SearchScreen = (props) => {
 	//Component.
 	return (
 		<View style={styles.container}>
-			<Button
+			{/*<Button
 				title="FETCH"
 				onPress={() => {
 					dispatch(fetchRestaurants());
 					console.log("FETCH");
 				}}
 			/>
-
 			<Button
 				title="STARRED"
 				onPress={() => {
 					console.log(searchResult);
 				}}
 			/>
-
+            */}
 			<SearchBar
 				platform="android"
 				containerStyle={styles.containerStyle}

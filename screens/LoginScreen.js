@@ -90,7 +90,8 @@ const LoginScreen = (props) => {
 		try {
 			await dispatch(action);
 			dispatch(getStarred());
-			props.navigation.replace("Homepage");
+			//props.navigation.replace("Homepage");
+			props.navigation.replace("HomepageMerchant");
 		} catch (err) {
 			setError(err.message);
 			setIsLoading(false);

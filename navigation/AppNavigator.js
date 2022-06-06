@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-import { View, Image } from "react-native";
-import { Icon } from "react-native-elements";
-import { FontAwesome } from "@expo/vector-icons";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { View } from "react-native";
+import { Icon } from "react-native-elements";
+import Colors from "../constants/Colors";
 
 import LoginScreen from "../screens/LoginScreen";
 import WelcomeScreen from "../screens/WelcomeScreen";
@@ -12,21 +12,19 @@ import ExplorerScreen from "../screens/customer/ExplorerScreen";
 import FavoriteScreen from "../screens/customer/FavoriteScreen";
 import MapScreen from "../screens/customer/MapScreen";
 import SearchScreen from "../screens/customer/SearchScreen";
-import Colors from "../constants/Colors";
 import RestaurantDetailsScreen from "../screens/customer/RestaurantDetailsScreen";
+import ReservationScreen from "../screens/merchant/ReservationScreen";
+
 import { logout } from "../store/actions/auth";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
+const TabMerchant = createBottomTabNavigator();
 
 const AppNavigator = (props) => {
 	const dispatch = useDispatch();
 
-	/*useEffect(() => {
-		console.log(currentRestaurant.name in isStarred);
-	}, [currentRestaurant]);
-*/
 	return (
 		<NavigationContainer>
 			<Stack.Navigator>
@@ -52,6 +50,13 @@ const AppNavigator = (props) => {
 					}}
 				/>
 				<Stack.Screen
+					name="HomepageMerchant"
+					component={TabNavigatorMerchant}
+					options={{
+						headerShown: false,
+					}}
+				/>
+				<Stack.Screen
 					name="Details"
 					component={RestaurantDetailsScreen}
 					options={{
@@ -70,6 +75,8 @@ const AppNavigator = (props) => {
 		</NavigationContainer>
 	);
 };
+
+// CUSTOMER
 const TabNavigator = ({ navigation }) => {
 	const dispatch = useDispatch();
 	const logoutHandler = () => {
@@ -199,6 +206,119 @@ const TabNavigator = ({ navigation }) => {
 				}}
 			/>
 		</Tab.Navigator>
+	);
+};
+
+// MERCHANT
+const TabNavigatorMerchant = ({ navigation }) => {
+	const dispatch = useDispatch();
+	const logoutHandler = () => {
+		dispatch(logout());
+	};
+
+	return (
+		<TabMerchant.Navigator
+			screenOptions={{
+				headerStyle: {
+					backgroundColor: Colors.accent,
+				},
+				headerTintColor: "white",
+				headerTitleAlign: "center",
+				headerTitleStyle: {
+					fontFamily: "roboto-font",
+					fontSize: 30,
+				},
+				tabBarActiveTintColor: "white",
+				tabBarInactiveTintColor: "white",
+				tabBarStyle: {
+					height: "8%",
+					backgroundColor: Colors.accent,
+					shadowColor: "black",
+					shadowOpacity: 0.26,
+					shadowOffset: { width: 0, height: 2 },
+					shadowRadius: 8,
+					elevation: 5,
+				},
+				tabBarActiveBackgroundColor: Colors.secondary,
+				tabBarItemStyle: {},
+				headerRight: (props) => (
+					<View style={{ marginHorizontal: 10 }}>
+						<Icon
+							name="sign-out"
+							color="white"
+							size={25}
+							type="font-awesome"
+							style={{ marginTop: 10 }}
+							onPress={() => {
+								logoutHandler();
+								navigation.replace("Login");
+							}}
+						/>
+					</View>
+				),
+			}}
+		>
+			<TabMerchant.Screen
+				name="Prenotazioni"
+				component={ReservationScreen}
+				options={{
+					tabBarLabel: "Prenotazioni",
+					tabBarLabelStyle: {
+						fontSize: 16,
+						marginBottom: 5,
+					},
+					tabBarIcon: ({ color, size }) => (
+						<Icon
+							name="eye"
+							color={color}
+							size={40}
+							type="evilicon"
+							style={{ marginTop: 10 }}
+						/>
+					),
+				}}
+			/>
+			<TabMerchant.Screen
+				name="Take Away"
+				component={ReservationScreen}
+				options={{
+					tabBarLabel: "Take Away",
+					tabBarLabelStyle: {
+						fontSize: 16,
+						marginBottom: 5,
+					},
+					tabBarIcon: ({ color, size }) => (
+						<Icon
+							name="eye"
+							color={color}
+							size={40}
+							type="evilicon"
+							style={{ marginTop: 10 }}
+						/>
+					),
+				}}
+			/>
+			<TabMerchant.Screen
+				name="Il mio ristorante"
+				component={ReservationScreen}
+				options={{
+					tabBarLabel: "Il mio ristorante",
+					tabBarLabelStyle: {
+						fontSize: 16,
+						marginBottom: 5,
+					},
+					tabBarIcon: ({ color, size }) => (
+						<Icon
+							name="eye"
+							color={color}
+							size={40}
+							type="evilicon"
+							style={{ marginTop: 10 }}
+						/>
+					),
+				}}
+			/>
+		</TabMerchant.Navigator>
 	);
 };
 
