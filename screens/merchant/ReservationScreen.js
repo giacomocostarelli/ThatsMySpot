@@ -1,12 +1,5 @@
-import React, { useState } from "react";
-import {
-	View,
-	Text,
-	FlatList,
-	Button,
-	StyleSheet,
-	ActivityIndicator,
-} from "react-native";
+import React from "react";
+import { View, Text, StyleSheet } from "react-native";
 
 const ReservationScreen = (props) => {
 	return (

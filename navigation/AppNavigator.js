@@ -14,6 +14,8 @@ import MapScreen from "../screens/customer/MapScreen";
 import SearchScreen from "../screens/customer/SearchScreen";
 import RestaurantDetailsScreen from "../screens/customer/RestaurantDetailsScreen";
 import ReservationScreen from "../screens/merchant/ReservationScreen";
+import MyRestaurantScreen from "../screens/merchant/MyRestaurantScreen";
+import TakeAwayScreen from "../screens/merchant/TakeAwayScreen";
 
 import { logout } from "../store/actions/auth";
 import { useDispatch } from "react-redux";
@@ -280,7 +282,7 @@ const TabNavigatorMerchant = ({ navigation }) => {
 			/>
 			<TabMerchant.Screen
 				name="Take Away"
-				component={ReservationScreen}
+				component={TakeAwayScreen}
 				options={{
 					tabBarLabel: "Take Away",
 					tabBarLabelStyle: {
@@ -300,7 +302,7 @@ const TabNavigatorMerchant = ({ navigation }) => {
 			/>
 			<TabMerchant.Screen
 				name="Il mio ristorante"
-				component={ReservationScreen}
+				component={MyRestaurantScreen}
 				options={{
 					tabBarLabel: "Il mio ristorante",
 					tabBarLabelStyle: {
