@@ -3,6 +3,7 @@ import User from "../../models/user";
 export const GET_STARRED = "GET_STARRED";
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
+export const ADD_USER = "ADD_USER";
 
 export const getStarred = () => {
 	return async (dispatch, getState) => {
@@ -72,6 +73,32 @@ export const removeFromFav = (name) => {
 		dispatch({
 			type: REMOVE_FROM_FAV,
 			toRemove: name,
+		});
+	};
+};
+
+export const addUser = (name) => {
+	return async (dispatch, getState) => {
+		const token = getState().auth.token;
+		const userId = getState().auth.userId;
+		const isMerchant = getState().auth.isMerchant;
+
+		var obj = { [userId]: { role: isMerchant } };
+		console.log("ADD_USER Request.");
+
+		const response = await fetch(
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=${token}`,
+			{
+				method: "PUT ",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(obj),
+			}
+		);
+
+		dispatch({
+			type: ADD_USER,
 		});
 	};
 };

@@ -1,4 +1,9 @@
-import { GET_STARRED, REMOVE_FROM_FAV, ADD_TO_FAV } from "../actions/users";
+import {
+	GET_STARRED,
+	REMOVE_FROM_FAV,
+	ADD_TO_FAV,
+	ADD_USER,
+} from "../actions/users";
 
 import User from "../../models/user";
 
@@ -33,6 +38,12 @@ export default (state = initialState, action) => {
 				...state,
 			};
 
+		case ADD_USER:
+			console.log(" -- ADD_USER store REDUCER -- ");
+
+			return {
+				...state,
+			};
 		default:
 			return state;
 	}

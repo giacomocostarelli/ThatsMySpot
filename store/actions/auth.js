@@ -2,7 +2,7 @@ export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 
-export const signup = (email, password) => {
+export const signup = (email, password, merchant) => {
 	return async (dispatch) => {
 		const response = await fetch(
 			"https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyC5lL_FB1PNybXJ94YF85QcVgAsLNzYXFw",
@@ -31,7 +31,12 @@ export const signup = (email, password) => {
 
 		const resData = await response.json();
 		console.log(resData);
-		dispatch({ type: SIGNUP, token: resData.idToken, userId: resData.localId });
+		dispatch({
+			type: SIGNUP,
+			token: resData.idToken,
+			userId: resData.localId,
+			isMerchant: merchant,
+		});
 	};
 };
 

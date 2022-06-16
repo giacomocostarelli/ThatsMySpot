@@ -77,7 +77,8 @@ const LoginScreen = (props) => {
 		if (isSignup) {
 			action = authActions.signup(
 				formState.inputValues.email,
-				formState.inputValues.password
+				formState.inputValues.password,
+				switchValue
 			);
 		} else {
 			action = authActions.login(

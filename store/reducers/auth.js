@@ -3,6 +3,7 @@ import { LOGIN, SIGNUP, LOGOUT } from "../actions/auth";
 const initialState = {
 	token: null,
 	userId: null,
+	isMerchant: null,
 };
 
 export default (state = initialState, action) => {
@@ -16,6 +17,7 @@ export default (state = initialState, action) => {
 			return {
 				token: action.token,
 				userId: action.userId,
+				isMerchant: action.isMerchant,
 			};
 		case LOGOUT:
 			return {
