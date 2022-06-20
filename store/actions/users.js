@@ -77,17 +77,17 @@ export const removeFromFav = (name) => {
 	};
 };
 
-export const addUser = (name) => {
+export const addUser = () => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
 		const userId = getState().auth.userId;
 		const isMerchant = getState().auth.isMerchant;
 
-		var obj = { [userId]: { role: isMerchant } };
+		var obj = { role: isMerchant ? "merchant" : "customer" };
 		console.log("ADD_USER Request.");
 
 		const response = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users.json?auth=${token}`,
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=${token}`,
 			{
 				method: "PUT ",
 				headers: {
