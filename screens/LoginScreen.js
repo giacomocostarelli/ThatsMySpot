@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useReducer, useCallback } from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
 	View,
 	Text,
-	FlatList,
 	StyleSheet,
 	Pressable,
 	ActivityIndicator,
@@ -10,13 +10,14 @@ import {
 } from "react-native";
 import { Icon } from "react-native-elements";
 import Card from "../components/Card";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { Switch } from "react-native-elements";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
 import { fetchRestaurants } from "../store/actions/restaurants";
 import { getStarred, addUser } from "../store/actions/users";
+
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
 const formReducer = (state, action) => {
@@ -43,12 +44,11 @@ const formReducer = (state, action) => {
 };
 
 const LoginScreen = (props) => {
+	const dispatch = useDispatch();
 	const [isLoading, setIsLoading] = useState(false);
 	const [error, setError] = useState();
 	const [switchValue, setSwitchValue] = useState(false);
 	const [isSignup, setIsSignup] = useState(false);
-	const dispatch = useDispatch();
-
 	const [formState, dispatchFormState] = useReducer(formReducer, {
 		inputValues: {
 			email: "",
@@ -60,6 +60,7 @@ const LoginScreen = (props) => {
 		},
 		formIsValid: false,
 	});
+
 	useEffect(() => {
 		dispatch(fetchRestaurants());
 	}, [dispatch]);
@@ -71,6 +72,17 @@ const LoginScreen = (props) => {
 			]);
 		}
 	}, [error]);
+
+	const getUserRole = async () => {
+		try {
+			const value = await AsyncStorage.getItem("@role");
+			if (value !== null) {
+				return value;
+			}
+		} catch (e) {
+			console.log(e);
+		}
+	};
 
 	const authHandler = async () => {
 		let action;
@@ -90,13 +102,24 @@ const LoginScreen = (props) => {
 		setIsLoading(true);
 		try {
 			await dispatch(action);
-			await dispatch(getStarred());
-			await dispatch(addUser());
-			switchValue
-				? props.navigation.replace("HomepageMerchant")
-				: props.navigation.replace("Homepage");
+			if (isSignup) {
+				dispatch(addUser());
+				switchValue
+					? props.navigation.replace("HomepageMerchant")
+					: props.navigation.replace("Homepage");
+			} else {
+				await dispatch(authActions.getUser());
+				await dispatch(getStarred());
+				let userRole = await getUserRole();
+				if (userRole === "merchant") {
+					props.navigation.replace("HomepageMerchant");
+				} else {
+					props.navigation.replace("Homepage");
+				}
+			}
 		} catch (err) {
 			setError(err.message);
+
 			setIsLoading(false);
 		}
 	};
@@ -410,5 +433,11 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 });
-
+/*
+const mapStateToProps = (state) => {
+	const { auth } = state;
+	console.log(auth.isMerchant);
+	return { isMerchant: auth.isMerchant };
+};
+*/
 export default LoginScreen;

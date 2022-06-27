@@ -1,6 +1,9 @@
+import AsyncStorage from "@react-native-async-storage/async-storage";
+
 export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
+export const GET_USER = "GET_USER";
 
 export const signup = (email, password, merchant) => {
 	return async (dispatch) => {
@@ -77,7 +80,47 @@ export const login = (email, password) => {
 	};
 };
 
-// crea an action to delete the token and userId from the store
+export const getUser = () => {
+	return async (dispatch, getState) => {
+		const userId = getState().auth.userId;
+
+		try {
+			const response = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/role.json`
+			);
+			if (!response.ok) {
+				throw new Error("Something went wrong!");
+			}
+
+			const resData = await response.json();
+			console.log(" -- GET_USER Request -- " + resData);
+			storeData(resData);
+			dispatch({
+				type: GET_USER,
+				role: resData,
+			});
+		} catch (err) {
+			throw err;
+		}
+	};
+};
+
+const storeData = async (value) => {
+	try {
+		await AsyncStorage.setItem("@role", value);
+	} catch (e) {
+		console.log(e);
+	}
+};
+
+//create an action to delete the token and userId from the store
 export const logout = () => {
+	async () => {
+		try {
+			await AsyncStorage.clear();
+		} catch (e) {
+			console.log("Clear dell' AsyncStorage fallito.");
+		}
+	};
 	return { type: LOGOUT };
 };

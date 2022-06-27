@@ -52,7 +52,6 @@ const ProfileTab = () => {
 		}
 	}, [current]);
 
-	// mettere currentRestaurant.name nei parametri della dispatch
 	if (current != null) {
 		return (
 			<View style={styles.body}>

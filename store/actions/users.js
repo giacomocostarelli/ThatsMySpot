@@ -8,7 +8,7 @@ export const ADD_USER = "ADD_USER";
 export const getStarred = () => {
 	return async (dispatch, getState) => {
 		const userId = getState().auth.userId;
-		console.log(" -- GET_STARRED Request -- ");
+		console.log(" -- GET_STARRED Request -- " + userId);
 		try {
 			const response = await fetch(
 				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred.json`

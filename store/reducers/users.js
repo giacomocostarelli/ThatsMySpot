@@ -16,7 +16,6 @@ export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_STARRED:
 			console.log(" -- GET_STARRED store REDUCER -- ");
-			console.log(action.userStarredAct);
 			return {
 				...state,
 				userStarred: action.userStarredAct,
@@ -24,23 +23,18 @@ export default (state = initialState, action) => {
 
 		case REMOVE_FROM_FAV:
 			console.log(" -- REMOVE_FROM_FAV store REDUCER -- ");
-			console.log(action.toRemove);
-
 			return {
 				...state,
 			};
 
 		case ADD_TO_FAV:
 			console.log(" -- ADD_TO_FAV store REDUCER -- ");
-			console.log(action.toAddAction);
-
 			return {
 				...state,
 			};
 
 		case ADD_USER:
 			console.log(" -- ADD_USER store REDUCER -- ");
-
 			return {
 				...state,
 			};
