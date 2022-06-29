@@ -15,35 +15,19 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case CREATE_RESTAURANT:
-			const newRestaurant = new Restaurant(
-				action.restaurantData.name,
-				action.restaurantData.ownerId,
-				action.restaurantData.imageUrl,
-				action.restaurantData.description,
-				action.restaurantData.category,
-				action.restaurantData.stars,
-				action.restaurantData.phoneNumber,
-				action.restaurantData.address,
-				action.restaurantData.city,
-				action.restaurantData.latitude,
-				action.restaurantData.longitude,
-				action.restaurantData.openingTime,
-				action.restaurantData.closingTime,
-				action.restaurantData.menu,
-				action.restaurantData.prenotations,
-				action.restaurantData.takeaways
-			);
 			return {
 				...state,
-				restaurantsState: state.restaurants.concat(newRestaurant),
 			};
+
 		case FETCH_RESTAURANTS:
 			return {
 				...state,
 				restaurantsState: action.restaurantsData,
 			};
+
 		case DELETE_RESTAURANT:
 			return state;
+
 		case GET_CURRENT_RESTAURANT:
 			const currentRestaurantObj = state.restaurantsState.find(
 				(restaurant) => restaurant.name === action.currentRestName
@@ -52,6 +36,7 @@ export default (state = initialState, action) => {
 				...state,
 				currentRestaurant: currentRestaurantObj,
 			};
+
 		default:
 			return state;
 	}

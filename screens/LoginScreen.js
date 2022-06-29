@@ -15,7 +15,10 @@ import { Switch } from "react-native-elements";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
-import { fetchRestaurants } from "../store/actions/restaurants";
+import {
+	createRestaurant,
+	fetchRestaurants,
+} from "../store/actions/restaurants";
 import { getStarred, addUser } from "../store/actions/users";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
@@ -102,24 +105,40 @@ const LoginScreen = (props) => {
 		setIsLoading(true);
 		try {
 			await dispatch(action);
+
+			//Registrazione.
 			if (isSignup) {
 				dispatch(addUser());
-				switchValue
-					? props.navigation.replace("HomepageMerchant")
-					: props.navigation.replace("Homepage");
+
+				// Ristoratore.
+				if (switchValue) {
+					props.navigation.replace("HomepageMerchant", {
+						params: { isNew: true },
+					});
+
+					// Cliente.
+				} else {
+					props.navigation.replace("Homepage");
+				}
+
+				// Login.
 			} else {
 				await dispatch(authActions.getUser());
 				await dispatch(getStarred());
 				let userRole = await getUserRole();
+
+				// Ristoratore.
 				if (userRole === "merchant") {
-					props.navigation.replace("HomepageMerchant");
+					props.navigation.replace("HomepageMerchant", {
+						params: { isNew: true },
+					});
+					// Cliente.
 				} else {
 					props.navigation.replace("Homepage");
 				}
 			}
 		} catch (err) {
 			setError(err.message);
-
 			setIsLoading(false);
 		}
 	};
