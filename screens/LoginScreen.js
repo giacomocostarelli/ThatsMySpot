@@ -21,7 +21,7 @@ import {
 	createRestaurant,
 	fetchRestaurants,
 } from "../store/actions/restaurants";
-import { getStarred, addUser } from "../store/actions/users";
+import { getStarred, addUser, isUserNew } from "../store/actions/users";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -114,30 +114,27 @@ const LoginScreen = (props) => {
 
 				// Ristoratore.
 				if (switchValue) {
-					navigation.navigate("HomepageMerchant", {
-						screen: "Prenotazioni",
-						params: { isNew: true },
-					});
+					dispatch(isUserNew(true));
+					props.navigation.replace("HomepageMerchant");
 
 					// Cliente.
 				} else {
+					await dispatch(getStarred());
 					props.navigation.replace("Homepage");
 				}
 
 				// Login.
 			} else {
 				await dispatch(authActions.getUser());
-				await dispatch(getStarred());
 				let userRole = await getUserRole();
 
 				// Ristoratore.
 				if (userRole === "merchant") {
-					props.navigation.navigate("HomepageMerchant", {
-						screen: "Prenotazioni",
-						params: { isNew: true },
-					});
+					dispatch(isUserNew(false));
+					props.navigation.replace("HomepageMerchant");
 					// Cliente.
 				} else {
+					await dispatch(getStarred());
 					props.navigation.replace("Homepage");
 				}
 			}

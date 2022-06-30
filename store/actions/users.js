@@ -4,6 +4,7 @@ export const GET_STARRED = "GET_STARRED";
 export const ADD_TO_FAV = "ADD_TO_FAV";
 export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
 export const ADD_USER = "ADD_USER";
+export const IS_USER_NEW = "IS_USER_NEW";
 
 export const getStarred = () => {
 	return async (dispatch, getState) => {
@@ -99,6 +100,15 @@ export const addUser = () => {
 
 		dispatch({
 			type: ADD_USER,
+		});
+	};
+};
+
+export const isUserNew = (isNew) => {
+	return async (dispatch) => {
+		dispatch({
+			type: IS_USER_NEW,
+			isNewAction: isNew,
 		});
 	};
 };

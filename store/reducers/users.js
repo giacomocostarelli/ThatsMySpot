@@ -3,6 +3,7 @@ import {
 	REMOVE_FROM_FAV,
 	ADD_TO_FAV,
 	ADD_USER,
+	IS_USER_NEW,
 } from "../actions/users";
 
 import User from "../../models/user";
@@ -10,6 +11,7 @@ import User from "../../models/user";
 const initialState = {
 	usersState: [],
 	userStarred: [],
+	isNewState: null,
 };
 
 export default (state = initialState, action) => {
@@ -37,6 +39,13 @@ export default (state = initialState, action) => {
 			console.log(" -- ADD_USER store REDUCER -- ");
 			return {
 				...state,
+			};
+
+		case IS_USER_NEW:
+			console.log("-- IS_NEW_USER store REDUCER: " + action.isNewAction);
+			return {
+				...state,
+				isNewState: action.isNewAction,
 			};
 		default:
 			return state;
