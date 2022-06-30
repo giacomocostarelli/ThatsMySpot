@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useReducer, useCallback } from "react";
+
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
 	View,
@@ -15,6 +16,7 @@ import { Switch } from "react-native-elements";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
+import { StackActions } from "@react-navigation/native";
 import {
 	createRestaurant,
 	fetchRestaurants,
@@ -112,7 +114,8 @@ const LoginScreen = (props) => {
 
 				// Ristoratore.
 				if (switchValue) {
-					props.navigation.replace("HomepageMerchant", {
+					navigation.navigate("HomepageMerchant", {
+						screen: "Prenotazioni",
 						params: { isNew: true },
 					});
 
@@ -129,7 +132,8 @@ const LoginScreen = (props) => {
 
 				// Ristoratore.
 				if (userRole === "merchant") {
-					props.navigation.replace("HomepageMerchant", {
+					props.navigation.navigate("HomepageMerchant", {
+						screen: "Prenotazioni",
 						params: { isNew: true },
 					});
 					// Cliente.

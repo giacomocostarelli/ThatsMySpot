@@ -8,7 +8,7 @@ const ReservationScreen = ({ route, navigation }) => {
 	//const dispatch = useDispatch();
 	const { isNew } = route.params;
 	console.log("E NUOVOOOOO????? " + isNew);
-	return <View>{isNew && <RestaurantNameModal />}</View>;
+	return <View>{/*isNew && <RestaurantNameModal />*/}</View>;
 };
 
 const RestaurantNameModal = (props) => {
