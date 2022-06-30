@@ -8,6 +8,7 @@ import {
 	Pressable,
 	ActivityIndicator,
 	Alert,
+	Button,
 } from "react-native";
 import { Icon } from "react-native-elements";
 import Card from "../components/Card";
@@ -16,7 +17,6 @@ import { Switch } from "react-native-elements";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
-import { StackActions } from "@react-navigation/native";
 import {
 	createRestaurant,
 	fetchRestaurants,

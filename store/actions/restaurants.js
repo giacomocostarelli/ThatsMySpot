@@ -62,54 +62,56 @@ export const getCurrentRestaurant = (name) => {
 };
 
 // Restaurant is the object from the model.
-export const createRestaurant = (restaurant) => {
+export const createRestaurant = (restaurantName) => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
-		const userId = getState().auth.userId;
-
-		console.log("user Id: " + userId);
-		restaurant.ownerId = userId;
+		const ownerId = getState().auth.userId;
 
 		let restaurantToAdd = new Restaurant(
 			restaurantName,
-			resData[restaurantName].ownerId,
-			resData[restaurantName].imageUrl,
-			resData[restaurantName].description,
-			resData[restaurantName].category,
-			resData[restaurantName].stars,
-			resData[restaurantName].phoneNumber,
-			resData[restaurantName].address,
-			resData[restaurantName].city,
-			resData[restaurantName].latitude,
-			resData[restaurantName].longitude,
-			resData[restaurantName].openingTime,
-			resData[restaurantName].closingTime,
+			ownerId,
+			"empty", //resData[restaurantName].imageUrl,
+			"empty", //resData[restaurantName].description,
+			"empty", //resData[restaurantName].category,
+			"empty", //resData[restaurantName].stars,
+			"empty", //resData[restaurantName].phoneNumber,
+			"empty", //resData[restaurantName].address,
+			"empty", //resData[restaurantName].city,
+			"empty", //resData[restaurantName].latitude,
+			"empty", //resData[restaurantName].longitude,
+			"empty", //resData[restaurantName].openingTime,
+			"empty", //resData[restaurantName].closingTime,
 			"empty", //resData[restaurantName].menu,
 			"empty", //resData[restaurantName].prenotations,
 			"empty" //resData[restaurantName].takeaways
 		);
-
-		console.log("CREATE_RESTAURANT Request.");
-		const response = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/restaurants/${restaurant.name}.json?auth=${token}`,
-			{
-				method: "PUT",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					restaurant,
-				}),
+		try {
+			console.log("CREATE_RESTAURANT Request.");
+			const response = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/restaurants/${restaurantName}.json?auth=${token}`,
+				{
+					method: "PUT",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						restaurantToAdd,
+					}),
+				}
+			);
+			if (!response.ok) {
+				throw new Error("Something went wrong!");
 			}
-		);
 
-		console.log("CREATE_RESTAURANT Request.");
-		const resData = await response.json();
-		console.log("CREATE_RESTAURANT Response.");
+			console.log("CREATE_RESTAURANT Request.");
+			const resData = await response.json();
 
-		dispatch({
-			type: CREATE_RESTAURANT,
-			restaurantData: resData,
-		});
+			dispatch({
+				type: CREATE_RESTAURANT,
+				restaurantData: restaurantToAdd,
+			});
+		} catch (err) {
+			throw err;
+		}
 	};
 };

@@ -3,12 +3,15 @@ import { View, Text, StyleSheet, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Dialog from "react-native-dialog";
 import Colors from "../../constants/Colors";
+import { createRestaurant } from "../../store/actions/restaurants";
 
 const RestaurantNameModal = (props) => {
+	const dispatch = useDispatch();
 	const [visible, setVisible] = useState(true);
 	const [restaurantName, onChangeRestaurantName] = useState("");
 
 	const handleCancel = () => {
+		//dispatch(createRestaurant(restaurantName));
 		setVisible(false);
 	};
 
@@ -43,7 +46,16 @@ const RestaurantNameModal = (props) => {
 
 const ReservationScreen = () => {
 	const isNew = useSelector((state) => state.users.isNewState);
-	return <View>{isNew && <RestaurantNameModal />}</View>;
+	const dispatch = useDispatch();
+	return (
+		<View style={styles.container}>
+			{isNew && <RestaurantNameModal />}
+			<Button
+				title="Crea restorante"
+				onPress={dispatch(createRestaurant("Call me Giorgio"))}
+			/>
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
