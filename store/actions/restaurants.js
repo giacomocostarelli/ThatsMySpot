@@ -6,7 +6,8 @@ export const CREATE_RESTAURANT = "CREATE_RESTAURANT";
 
 export const fetchRestaurants = () => {
 	return async (dispatch) => {
-		console.log("fetchRestaurants REQUEST");
+		console.log("-------------------------");
+		console.log("FETCH_RESTAURANTS Request.");
 		try {
 			const response = await fetch(
 				"https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/restaurants.json"
@@ -16,7 +17,8 @@ export const fetchRestaurants = () => {
 			}
 
 			const resData = await response.json();
-			console.log("fetchRestaurants RESPONSE");
+			console.log("FETCH_RESTAURANTS Response.");
+			console.log("-------------------------");
 			//console.log(resData);
 
 			const loadedRestaurants = [];
@@ -103,7 +105,9 @@ export const createRestaurant = (restaurantName) => {
 				throw new Error("Something went wrong!");
 			}
 
-			console.log("CREATE_RESTAURANT Request.");
+			console.log("CREATE_RESTAURANT Response.");
+			console.log("-------------------------");
+
 			const resData = await response.json();
 
 			dispatch({

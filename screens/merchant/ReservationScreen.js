@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { View, Text, StyleSheet, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
-import Dialog from "react-native-dialog";
+import Dialog from "react-native-dialog"; // PACKAGE
 import Colors from "../../constants/Colors";
 import { createRestaurant } from "../../store/actions/restaurants";
 

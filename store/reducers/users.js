@@ -17,32 +17,43 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_STARRED:
-			console.log(" -- GET_STARRED store REDUCER -- ");
+			console.log("GET_STARRED Reducer.");
+			console.log("-------------------------");
+
 			return {
 				...state,
 				userStarred: action.userStarredAct,
 			};
 
 		case REMOVE_FROM_FAV:
-			console.log(" -- REMOVE_FROM_FAV store REDUCER -- ");
+			console.log("REMOVE_FROM_FAV Reducer.");
+			console.log("-------------------------");
+
 			return {
 				...state,
 			};
 
 		case ADD_TO_FAV:
-			console.log(" -- ADD_TO_FAV store REDUCER -- ");
+			console.log("ADD_TO_FAV Reducer.");
+			console.log("-------------------------");
+
 			return {
 				...state,
 			};
 
 		case ADD_USER:
-			console.log(" -- ADD_USER store REDUCER -- ");
+			console.log("ADD_USER Reducer.");
+			console.log("-------------------------");
+
 			return {
 				...state,
 			};
 
 		case IS_USER_NEW:
-			console.log("-- IS_NEW_USER store REDUCER: " + action.isNewAction);
+			// + action.isNewAction
+			console.log("IS_NEW_USER Reducer.");
+			console.log("Is User new : " + action.isNewAction ? "Yes" : "No");
+			console.log("-------------------------");
 			return {
 				...state,
 				isNewState: action.isNewAction,

@@ -26,7 +26,8 @@ export default (state = initialState, action) => {
 				isMerchant: null,
 			};
 		case GET_USER:
-			console.log(" -- GET_USER store REDUCER --  " + action.role);
+			console.log("GET_USER Reducer.");
+			console.log("-------------------------");
 			return {
 				...state,
 				isMerchant: action.role === "merchant" ? true : false,

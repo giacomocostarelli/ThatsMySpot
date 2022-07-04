@@ -74,8 +74,10 @@ export const login = (email, password) => {
 		}
 
 		const resData = await response.json();
-
-		console.log(resData);
+		console.log("LOGIN Request.");
+		console.log("Email : " + resData.email);
+		console.log("UserId : " + resData.localId);
+		console.log("-------------------------");
 		dispatch({ type: LOGIN, token: resData.idToken, userId: resData.localId });
 	};
 };
@@ -93,8 +95,12 @@ export const getUser = () => {
 			}
 
 			const resData = await response.json();
-			console.log(" -- GET_USER Request -- " + resData);
+			console.log("GET_USER Request.");
+			console.log("Role : " + resData);
+
+			//Async save role
 			storeData(resData);
+
 			dispatch({
 				type: GET_USER,
 				role: resData,
