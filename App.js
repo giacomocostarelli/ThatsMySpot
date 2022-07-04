@@ -27,6 +27,10 @@ export default function App() {
 
 	useEffect(() => {
 		async function prepare() {
+			console.log("\n************************************************");
+			console.log("***************** THATS MY SPOT! ***************");
+			console.log("************************************************\n");
+
 			try {
 				// Keep the splash screen visible while we fetch resources
 				await SplashScreen.preventAutoHideAsync();

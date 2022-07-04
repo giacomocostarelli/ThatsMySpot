@@ -20,6 +20,8 @@ export default (state = initialState, action) => {
 				isMerchant: action.isMerchant,
 			};
 		case LOGOUT:
+			console.log("LOGOUT successful.");
+			console.log("-------------------------");
 			return {
 				token: null,
 				userId: null,

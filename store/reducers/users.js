@@ -50,9 +50,8 @@ export default (state = initialState, action) => {
 			};
 
 		case IS_USER_NEW:
-			// + action.isNewAction
 			console.log("IS_NEW_USER Reducer.");
-			console.log("Is User new : " + action.isNewAction ? "Yes" : "No");
+			console.log("Is User new : " + action.isNewAction);
 			console.log("-------------------------");
 			return {
 				...state,
