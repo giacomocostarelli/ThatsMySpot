@@ -17,10 +17,7 @@ import { Switch } from "react-native-elements";
 import Input from "../components/Input";
 import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
-import {
-	createRestaurant,
-	fetchRestaurants,
-} from "../store/actions/restaurants";
+import { fetchRestaurants } from "../store/actions/restaurants";
 import { getStarred, addUser, isUserNew } from "../store/actions/users";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";

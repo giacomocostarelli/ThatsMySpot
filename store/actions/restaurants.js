@@ -96,9 +96,7 @@ export const createRestaurant = (restaurantName) => {
 					headers: {
 						"Content-Type": "application/json",
 					},
-					body: JSON.stringify({
-						restaurantToAdd,
-					}),
+					body: JSON.stringify(restaurantToAdd),
 				}
 			);
 			if (!response.ok) {
