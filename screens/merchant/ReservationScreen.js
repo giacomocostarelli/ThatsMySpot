@@ -1,18 +1,16 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Dialog from "react-native-dialog"; // PACKAGE
 import Colors from "../../constants/Colors";
 import { createRestaurant } from "../../store/actions/restaurants";
 
 const RestaurantNameModal = (props) => {
-	const dispatch = useDispatch();
-	const [visible, setVisible] = useState(true);
-	const [restaurantName, onChangeRestaurantName] = useState("");
+	const isNew = useSelector((state) => state.users.isNewState);
+	const [visible, setVisible] = useState(isNew);
 
-	const handleCancel = () => {
-		//dispatch(createRestaurant(restaurantName));
-		setVisible(false);
+	const childToParent = (isVisible) => {
+		setVisible(isVisible);
 	};
 
 	return (
@@ -26,34 +24,44 @@ const RestaurantNameModal = (props) => {
 				<Dialog.Description style={{ fontSize: 18 }}>
 					Prima di cominciare inserisci il nome del tuo ristorante.
 				</Dialog.Description>
-				<Dialog.Input
-					placeholder="Nome ristorante..."
-					style={{ fontSize: 16 }}
-					value={restaurantName}
-					onChangeText={onChangeRestaurantName}
-					underlineColorAndroid={Colors.primary}
-				></Dialog.Input>
-				<Dialog.Button
-					disabled={restaurantName === "" ? true : false}
-					color={restaurantName === "" ? "grey" : Colors.secondary}
-					label="Conferma"
-					onPress={handleCancel}
-				/>
+				<RestaurantNameInput childToParent={childToParent} />
 			</Dialog.Container>
 		</View>
 	);
 };
 
-const ReservationScreen = () => {
-	const isNew = useSelector((state) => state.users.isNewState);
+const RestaurantNameInput = ({ childToParent }) => {
 	const dispatch = useDispatch();
+	const [restaurantName, onChangeRestaurantName] = useState("");
+	let visibleChild = null;
+
+	return (
+		<View>
+			<Dialog.Input
+				style={styles.modalInput}
+				placeholder="Nome ristorante..."
+				value={restaurantName}
+				onChangeText={onChangeRestaurantName}
+				underlineColorAndroid={Colors.primary}
+			></Dialog.Input>
+			<Button
+				disabled={restaurantName === "" ? true : false}
+				color={restaurantName === "" ? "grey" : Colors.secondary}
+				title="Conferma"
+				onPress={() => {
+					visibleChild = false;
+					childToParent(visibleChild);
+					dispatch(createRestaurant(restaurantName));
+				}}
+			/>
+		</View>
+	);
+};
+
+const ReservationScreen = () => {
 	return (
 		<View style={styles.container}>
-			{isNew && <RestaurantNameModal />}
-			<Button
-				title="Crea restorante"
-				onPress={dispatch(createRestaurant("Call me Giorgio"))}
-			/>
+			<RestaurantNameModal style={styles.modal} />
 		</View>
 	);
 };
@@ -62,6 +70,15 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		backgroundColor: "#fff",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+
+	modal: {
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	modalInput: {
 		alignItems: "center",
 		justifyContent: "center",
 	},

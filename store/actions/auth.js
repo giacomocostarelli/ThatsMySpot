@@ -33,7 +33,10 @@ export const signup = (email, password, merchant) => {
 		}
 
 		const resData = await response.json();
-		console.log(resData);
+		console.log("SIGNUP Request.");
+		console.log("Email : " + resData.email);
+		console.log("UserId : " + resData.localId);
+		console.log("-------------------------");
 		dispatch({
 			type: SIGNUP,
 			token: resData.idToken,

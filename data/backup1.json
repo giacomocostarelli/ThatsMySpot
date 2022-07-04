@@ -1,0 +1,132 @@
+{
+  "restaurants": {
+    "address": "empty",
+    "category": "empty",
+    "city": "empty",
+    "closingTime": "empty",
+    "description": "empty",
+    "imageUrl": "empty",
+    "latitude": "empty",
+    "longitude": "empty",
+    "menu": "empty",
+    "name": "",
+    "openingTime": "empty",
+    "ownerId": "DBbHynITkfNPJemhzut3DIRWNuQ2",
+    "phoneNumber": "empty",
+    "prenotations": "empty",
+    "stars": "empty",
+    "takeaways": "empty"
+  },
+  "users": {
+    "144grhjFtNaxo8Da82rEYEyptBE2": {
+      "role": "merchant"
+    },
+    "2JyD4cjZAEfGp3tI0ejejhJ88lu2": {
+      "role": "customer"
+    },
+    "2LyU0OD30waqOFyr8dmFPvdnV353": {
+      "role": "customer",
+      "starred": {
+        "Fast Food 2": {
+          "starts": "F"
+        },
+        "Tavola Calda 1": {
+          "starts": "T"
+        }
+      }
+    },
+    "3IYTIQyNBBN0xWWbztzAv0cU2cx1": {
+      "role": "merchant"
+    },
+    "5InIKo7599REXs0w9Y3YLqQaRDN2": {
+      "role": "merchant"
+    },
+    "6aRBAdDJRZhf0l75nkMWnAz63bq1": {
+      "role": "merchant"
+    },
+    "792FYTkdDrVAgEAopg90SqW1SGE3": {
+      "role": "merchant"
+    },
+    "8t5UGHeoEBe4v0tAqP1Sc8Mg3yh1": {
+      "role": "merchant"
+    },
+    "AVxQVan5xbVvPkijjM06bkRqpCF3": {
+      "role": "merchant"
+    },
+    "DBbHynITkfNPJemhzut3DIRWNuQ2": {
+      "role": "merchant"
+    },
+    "ELQdBR087gR21I1uzhC9m0hdxtB3": {
+      "role": "merchant"
+    },
+    "FyjFuTRG97cQQy7uLRFmN38KH9I3": {
+      "role": "merchant"
+    },
+    "H4FLJsu4jrf3xHXe7hZL0t6qY1E3": {
+      "role": "merchant"
+    },
+    "MRrL5zWGfYXZNIlL5qrgTGlUv6u2": {
+      "role": "merchant"
+    },
+    "MiSFdAx98YNUBPecPV4UntVFocT2": {
+      "role": "merchant"
+    },
+    "OXZBJRda2zfmUUH8ckTVSilzMok2": {
+      "role": "merchant"
+    },
+    "PG7wiMvWjKftlBN8EkkAZyzctnx2": {
+      "role": "merchant"
+    },
+    "QAgWQrffgeaggVT37i58DKadh4g2": {
+      "role": "merchant"
+    },
+    "SBVsrLsrBpcdpngT4F35G5BcJSP2": {
+      "role": "merchant"
+    },
+    "VF28xpbxyEQGCeZS1vBfm9iHSUP2": {
+      "role": "merchant"
+    },
+    "X2fpHZ1sIcNywdPkx5mcTOTPnA93": {
+      "role": "merchant"
+    },
+    "X43lRgqeKeZnviLyvdgJbYHKcAS2": {
+      "role": "merchant"
+    },
+    "Y9EQinl0iAVYtKeT8EydlfuRmX22": {
+      "role": "merchant"
+    },
+    "fCNs6aVlNUeu80Ovoj77LJsN3Fl2": {
+      "role": "merchant"
+    },
+    "gBGVyuzQ5rY0omH3h2q7acG222F2": {
+      "role": "merchant"
+    },
+    "iK7l4g36AUQ6jnFsPZusycgPaN62": {
+      "role": "merchant"
+    },
+    "mpZoSlrCziQsVXOvWPiRK8e1Jm02": {
+      "role": "merchant"
+    },
+    "oPLYdx9yqMV2KseIbd3dzHQ9DKB2": {
+      "role": "merchant"
+    },
+    "u8CRxYToHXa6uOV3oPNgfs64xED2": {
+      "role": "merchant"
+    },
+    "uSFAsUIm3ibJGHYSe4tlbLtssDt2": {
+      "role": "merchant"
+    },
+    "ugvyD23RSlQ7pk5SUabBLEVKf7B2": {
+      "role": "merchant"
+    },
+    "xOSRQCQjfibpMeb3NnKfdKZ7LUO2": {
+      "role": "merchant"
+    },
+    "xUSCH0YJiVTxnFu8IMtZhgz7xNV2": {
+      "role": "merchant"
+    },
+    "xVxY9V5AWEP7TObCoUjUEaTwoXI3": {
+      "role": "merchant"
+    }
+  }
+}

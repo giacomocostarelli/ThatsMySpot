@@ -69,24 +69,25 @@ export const createRestaurant = (restaurantName) => {
 		const token = getState().auth.token;
 		const ownerId = getState().auth.userId;
 
-		let restaurantToAdd = new Restaurant(
-			restaurantName,
-			ownerId,
-			"empty", //resData[restaurantName].imageUrl,
-			"empty", //resData[restaurantName].description,
-			"empty", //resData[restaurantName].category,
-			"empty", //resData[restaurantName].stars,
-			"empty", //resData[restaurantName].phoneNumber,
-			"empty", //resData[restaurantName].address,
-			"empty", //resData[restaurantName].city,
-			"empty", //resData[restaurantName].latitude,
-			"empty", //resData[restaurantName].longitude,
-			"empty", //resData[restaurantName].openingTime,
-			"empty", //resData[restaurantName].closingTime,
-			"empty", //resData[restaurantName].menu,
-			"empty", //resData[restaurantName].prenotations,
-			"empty" //resData[restaurantName].takeaways
-		);
+		let restaurantToAdd = {
+			name: restaurantName,
+			ownerId: ownerId,
+			imageUrl: "empty",
+			description: "empty",
+			category: "empty",
+			stars: "empty",
+			phoneNumber: "empty",
+			address: "empty",
+			city: "empty",
+			latitude: "empty",
+			longitude: "empty",
+			openingTime: "empty",
+			closingTime: "empty",
+			menu: "empty",
+			prenotations: "empty",
+			takeaway: "empty",
+		};
+
 		try {
 			console.log("CREATE_RESTAURANT Request.");
 			const response = await fetch(
@@ -99,6 +100,7 @@ export const createRestaurant = (restaurantName) => {
 					body: JSON.stringify(restaurantToAdd),
 				}
 			);
+
 			if (!response.ok) {
 				throw new Error("Something went wrong!");
 			}

@@ -15,12 +15,12 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case CREATE_RESTAURANT:
-			let restaurantsStateTmp = state.restaurantsState.concat(
+			/*let restaurantsStateTmp = state.restaurantsState.concat(
 				action.restaurantToAdd
-			);
+			);*/
 			return {
 				...state,
-				restaurantsState: restaurantsStateTmp,
+				//	restaurantsState: restaurantsStateTmp,
 			};
 		case FETCH_RESTAURANTS:
 			return {
