@@ -1,9 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useCallback, useEffect, useState } from "react";
+import { View } from "react-native";
+import * as SplashScreen from "expo-splash-screen";
+
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
 import ReduxThunk from "redux-thunk";
 
-import AppLoading from "expo-app-loading";
 import * as Font from "expo-font";
 
 import authReducer from "./store/reducers/auth";
@@ -20,41 +22,58 @@ const rootReducer = combineReducers({
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 
-const fetchFonts = async () => {
-	return Font.loadAsync({
-		"open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
-		"open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
-		"open-sans-italic": require("./assets/fonts/OpenSans-Italic.ttf"),
-		"open-sans-semi-bold-italic": require("./assets/fonts/OpenSans-SemiBoldItalic.ttf"),
-		"rooster-font": require("./assets/fonts/RoosterPersonalUse-3z8d8.ttf"),
-		"metropolis-font": require("./assets/fonts/MetropolisPersonalUseRegular-nR5LY.ttf"),
-		"backslash-font": require("./assets/fonts/Backslash-RpJol.otf"),
-		"youthtouch-font": require("./assets/fonts/YouthTouchDemoRegular-4VwY.ttf"),
-		"standlist-font": require("./assets/fonts/Standlist-qZ6rq.ttf"),
-		"roboto-font": require("./assets/fonts/Roboto-Regular.ttf"),
-	});
-};
-
 export default function App() {
-	const [fontLoaded, setFontLoaded] = useState(false);
+	const [appIsReady, setAppIsReady] = useState(false);
 
-	if (!fontLoaded) {
-		return (
-			<AppLoading
-				startAsync={fetchFonts}
-				onFinish={() => {
-					setFontLoaded(true);
-				}}
-				onError={(error) => {
-					console.log(error);
-				}}
-			/>
-		);
+	useEffect(() => {
+		async function prepare() {
+			try {
+				// Keep the splash screen visible while we fetch resources
+				await SplashScreen.preventAutoHideAsync();
+				// Pre-load fonts, make any API calls you need to do here
+				await Font.loadAsync({
+					"open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
+					"open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
+					"open-sans-italic": require("./assets/fonts/OpenSans-Italic.ttf"),
+					"open-sans-semi-bold-italic": require("./assets/fonts/OpenSans-SemiBoldItalic.ttf"),
+					"rooster-font": require("./assets/fonts/RoosterPersonalUse-3z8d8.ttf"),
+					"metropolis-font": require("./assets/fonts/MetropolisPersonalUseRegular-nR5LY.ttf"),
+					"backslash-font": require("./assets/fonts/Backslash-RpJol.otf"),
+					"youthtouch-font": require("./assets/fonts/YouthTouchDemoRegular-4VwY.ttf"),
+					"standlist-font": require("./assets/fonts/Standlist-qZ6rq.ttf"),
+					"roboto-font": require("./assets/fonts/Roboto-Regular.ttf"),
+				});
+			} catch (e) {
+				console.warn(e);
+			} finally {
+				// Tell the application to render
+				setAppIsReady(true);
+			}
+		}
+
+		prepare();
+	}, []);
+
+	const onLayoutRootView = useCallback(async () => {
+		if (appIsReady) {
+			// This tells the splash screen to hide immediately! If we call this after
+			// `setAppIsReady`, then we may see a blank screen while the app is
+			// loading its initial state and rendering its first pixels. So instead,
+			// we hide the splash screen once we know the root view has already
+			// performed layout.
+			await SplashScreen.hideAsync();
+		}
+	}, [appIsReady]);
+
+	if (!appIsReady) {
+		return null;
 	}
 
 	return (
-		<Provider store={store}>
-			<AppNavigator />
-		</Provider>
+		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>
+			<Provider store={store}>
+				<AppNavigator />
+			</Provider>
+		</View>
 	);
 }
