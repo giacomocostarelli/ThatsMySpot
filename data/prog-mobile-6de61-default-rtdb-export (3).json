@@ -1,0 +1,569 @@
+{
+  "restaurants": {
+    "Fast Food 1": {
+      "address": "Via del Veloce 1",
+      "category": "Fast Food",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Fast food di prima classe per i più piccoli e per i più grandi",
+      "imageUrl": "https://www.bresciaatavola.it/wp-content/uploads/bresciaatavola.it/2016/05/Fast-food-e1556273549545.jpg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Fast Food 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Fast Food 2": {
+      "address": "Via del Veloce 2",
+      "category": "Fast Food",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Fast food di prima classe per i più piccoli e per i più grandi",
+      "imageUrl": "data:image/jpeg;base64,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",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Fast Food 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Fast Food 3": {
+      "address": "Via del Veloce 3",
+      "category": "Fast Food",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Fast food di prima classe per i più piccoli e per i più grandi",
+      "imageUrl": "https://diegocortes.it/wp-content/uploads/2021/11/Ristorazione-rapida-900x550.png",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Fast Food 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 5
+    },
+    "Greco 1": {
+      "address": "Via della Grecia 1",
+      "category": "Greco",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di cucina greca con un ambiente rustico e una cucina di prima qualità.",
+      "imageUrl": "http://blog.clubmed.it/wp-content/uploads/2016/11/gyros-pita-piatto-tipico-greco.jpg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Greco 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Greco 2": {
+      "address": "Via della Grecia 2",
+      "category": "Greco",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di cucina greca con un ambiente rustico e una cucina di prima qualità.",
+      "imageUrl": "https://www.archetravel.com/wp-content/uploads/2020/03/grecia-cucina-03_gyros.jpg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Greco 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 4
+    },
+    "Greco 3": {
+      "address": "Via della Grecia 3",
+      "category": "Greco",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di cucina greca con un ambiente rustico e una cucina di prima qualità.",
+      "imageUrl": "http://blog.clubmed.it/wp-content/uploads/2016/11/souvlaki-piatto-tipico-greco.jpg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Greco 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 1
+    },
+    "Ham & Cheese": {
+      "address": "Via delle palme",
+      "category": "Fast Food",
+      "city": "Torino",
+      "closingTime": "23:00",
+      "description": "Pizza e panini",
+      "imageUrl": "https://hips.hearstapps.com/hmg-prod.s3.amazonaws.com/images/190319-ham-and-cheese-416-1553791878.jpg",
+      "latitude": 45.4,
+      "longitude": 45.4,
+      "name": "Ham & Cheese",
+      "openingTime": "12:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": "123456789",
+      "stars": 4
+    },
+    "Hamburgeria 1": {
+      "address": "Via dell'hamburgheria",
+      "category": "Hamburger",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Hamburger di prima qualità e con una buona carne di maiale, una buona salsa di pomodoro e basilico.",
+      "imageUrl": "https://wips.plug.it/cips/supereva/cms/2020/09/hamburger.jpg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Hamburgeria 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Hamburgeria 2": {
+      "address": "Via dell'hamburgheria 2",
+      "category": "Hamburger",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Hamburger di prima qualità e con una buona carne di maiale, una buona salsa di pomodoro e basilico.",
+      "imageUrl": "https://www.mrdoyle.it/wp-content/uploads/2019/01/AdobeStock_209775207-scaled-e1575394210352.jpeg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Hamburgeria 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 5
+    },
+    "Hamburgeria 3": {
+      "address": "Via dell'hamburgheria 3",
+      "category": "Hamburger",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Hamburger di prima qualità e con una buona carne di maiale, una buona salsa di pomodoro e basilico.",
+      "imageUrl": "https://img.freepik.com/premium-photo/beef-burger-hamburger-barbecue-flame-grill_273651-13.jpg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Hamburgeria 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 1
+    },
+    "La buona pizza": {
+      "address": "Via perduta",
+      "category": "Pizza",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Pizza con carne di pollo",
+      "imageUrl": "https://www.buttalapasta.it/wp-content/uploads/2017/11/pizza-margherita.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "La buona pizza",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": "123456789",
+      "stars": 4
+    },
+    "Messicano 1": {
+      "address": "Via del Messico 1",
+      "category": "Messicano",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante messicano con un buon menu e una buona bevanda",
+      "imageUrl": "https://wips.plug.it/cips/buonissimo.org/cms/2013/04/messico.jpg?w=713&a=c&h=407",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Messicano 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Messicano 2": {
+      "address": "Via del Messico 2",
+      "category": "Messicano",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante messicano con un buon menu e una buona bevanda",
+      "imageUrl": "https://www.ilportaledimonzabrianza.it/wp-content/uploads/2019/11/6045301_dtlet8152-1024x768.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Messicano 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 4
+    },
+    "Messicano 3": {
+      "address": "Via del Messico 3",
+      "category": "Messicano",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante messicano con un buon menu e una buona bevanda",
+      "imageUrl": "https://www.italiaweb.net/wp-content/uploads/mexican-food.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Messicano 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 5
+    },
+    "Pizzeria 1": {
+      "address": "Via perduta",
+      "category": "Pizza",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Pizza al mattone o al tegamino, anche per celiaci, in un locale rustico con ampie vetrate e mattoni a vista.",
+      "imageUrl": "https://www.finedininglovers.it/sites/g/files/xknfdk1106/files/styles/recipes_1200_800_fallback/public/fdl_content_import_it/margherita-50kalo.jpg?itok=v9nHxNMS",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Pizzeria 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 2
+    },
+    "Pizzeria 2": {
+      "address": "Via dell'Arco",
+      "category": "Pizza",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Pizza al mattone o al tegamino, anche per celiaci, in un locale rustico con ampie vetrate e mattoni a vista.",
+      "imageUrl": "https://wips.plug.it/cips/initalia.virgilio.it/cms/2022/07/pizza-teglia.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Pizzeria 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Pizzeria Italia": {
+      "address": "Via delle Pizze",
+      "category": "Pizza",
+      "city": "Torino",
+      "closingTime": "23:00",
+      "description": "Pizza al mattone o al tegamino, anche per celiaci, in un locale rustico con ampie vetrate e mattoni a vista.",
+      "imageUrl": "https://www.pizzanapoletana.org/struttura/pagine_bicolor/mobile/disciplinare_avpn_2.jpg",
+      "latitude": 45.9,
+      "longitude": 45.9,
+      "name": "Pizzeria Italia",
+      "openingTime": "12:00",
+      "ownerId": " ",
+      "phoneNumber": 3334455666,
+      "stars": 3
+    },
+    "Pizzeria Romana": {
+      "address": "Via delle Rome",
+      "category": "Pizza",
+      "city": "Torino",
+      "closingTime": "23:00",
+      "description": "Pizza croccante e sfiziosa con una tradizione dal tempo.",
+      "imageUrl": "https://www.scattidigusto.it/wp-content/uploads/2022/02/Crazy-Pizza-Flavio-Briatore-pizze-1280x853.jpg",
+      "latitude": "45.2",
+      "longitude": "45.2",
+      "name": "Pizzeria Romana",
+      "openingTime": "12:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": "123456789",
+      "stars": 5
+    },
+    "Ristorante Carne 1": {
+      "address": "Via della Carne 1",
+      "category": "Carne",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di carne con una ricetta originale e una sfiziosa cucina italiana",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG7RvJ7v3Lt6FoaOxZeeS1qxLf4OPgAvXd5A&usqp=CAU",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Ristorante Carne 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Ristorante Carne 2": {
+      "address": "Via della Carne 2",
+      "category": "Carne",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di carne con una ricetta originale e una sfiziosa cucina italiana",
+      "imageUrl": "https://www.ristorantibergamo.com/wp-content/uploads/2018/08/Enoteca-Zanini-ristoranti-bergamo-evidenza.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Ristorante Carne 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Ristorante Carne 3": {
+      "address": "Via della Carne 3",
+      "category": "Carne",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di carne con una ricetta originale e una sfiziosa cucina italiana",
+      "imageUrl": "https://blog.italotreno.it/wp-content/uploads/2018/10/Ristoranti-particolari-Brescia-Areadocks-4-1140x660.jpg",
+      "latitude": 39.2343,
+      "longitude": 12.3456,
+      "name": "Ristorante Carne 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Ristorante Pesce 1": {
+      "address": "Via del Pesce 1",
+      "category": "Pesce",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di Pesce per tutti i gusti e per tutte le occasioni",
+      "imageUrl": "https://www.ristorantibergamo.com/wp-content/uploads/2018/08/Enoteca-Zanini-ristoranti-bergamo-evidenza.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Ristorante Pesce 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 1
+    },
+    "Ristorante Pesce 2": {
+      "address": "Via del Pesce 2",
+      "category": "Pesce",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di pesce e vino con una decina di cucina italiana e una decina di cucina americana.",
+      "imageUrl": "https://blog.italotreno.it/wp-content/uploads/2018/10/Ristoranti-particolari-Brescia-Areadocks-4-1140x660.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Ristorante Pesce 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 5
+    },
+    "Ristorante Pesce 3": {
+      "address": "Via del Pesce 3",
+      "category": "Pesce",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Ristorante di pesce e vino con una deliziosa cucina italiana",
+      "imageUrl": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTG7RvJ7v3Lt6FoaOxZeeS1qxLf4OPgAvXd5A&usqp=CAU",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Ristorante Pesce 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 4
+    },
+    "Sushi 1": {
+      "address": "Via del Sushi 1",
+      "category": "Sushi",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Sushi di prima qualità e con una ricetta di qualità e una cucina di prima classe",
+      "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/6/60/Sushi_platter.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Sushi 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 4
+    },
+    "Sushi 2": {
+      "address": "Via del Sushi 2",
+      "category": "Sushi",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Sushi di prima qualità e con una ricetta di qualità e una cucina di prima classe",
+      "imageUrl": "https://wips.plug.it/cips/buonissimo.org/cms/2018/05/riso-sushi.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Sushi 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 2
+    },
+    "Sushi 3": {
+      "address": "Via del Sushi 3",
+      "category": "Sushi",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Sushi di prima qualità e con una ricetta di qualità e una cucina di prima classe",
+      "imageUrl": "https://sweetest.it/wp-content/uploads/2021/06/sushi-01.jpeg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Sushi 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 3
+    },
+    "Tavola Calda 1": {
+      "address": "Via del Caldo 1",
+      "category": "Tavola Calda",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Tavola calda con una bella vista sulla città di Torino",
+      "imageUrl": "https://www.napolitoday.it/~media/horizontal-hi/46320364798278/tavola-calda-2.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Tavola Calda 1",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 1
+    },
+    "Tavola Calda 2": {
+      "address": "Via del Caldo 2",
+      "category": "Tavola Calda",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Tavola calda con una buona pizza e una bella birra",
+      "imageUrl": "https://media-cdn.tripadvisor.com/media/photo-s/18/f4/ec/2d/nocciolo-tavola-calda.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Tavola Calda 2",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 4
+    },
+    "Tavola Calda 3": {
+      "address": "Via del Caldo 5",
+      "category": "Tavola Calda",
+      "city": "Torino",
+      "closingTime": "22:00",
+      "description": "Tavola Calda per mangiare in famiglia",
+      "imageUrl": "https://www.notiziecatania.it/wp-content/uploads/2021/06/tavolacalda.jpg",
+      "latitude": "39.2343",
+      "longitude": "12.3456",
+      "name": "Tavola Calda 3",
+      "openingTime": "08:00",
+      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "phoneNumber": 123456789,
+      "stars": 5
+    }
+  },
+  "users": {
+    "144grhjFtNaxo8Da82rEYEyptBE2": {
+      "role": "merchant"
+    },
+    "2JyD4cjZAEfGp3tI0ejejhJ88lu2": {
+      "role": "customer"
+    },
+    "2LyU0OD30waqOFyr8dmFPvdnV353": {
+      "role": "customer",
+      "starred": {
+        "Fast Food 2": {
+          "starts": "F"
+        },
+        "Tavola Calda 1": {
+          "starts": "T"
+        }
+      }
+    },
+    "3IYTIQyNBBN0xWWbztzAv0cU2cx1": {
+      "role": "merchant"
+    },
+    "5InIKo7599REXs0w9Y3YLqQaRDN2": {
+      "role": "merchant"
+    },
+    "6aRBAdDJRZhf0l75nkMWnAz63bq1": {
+      "role": "merchant"
+    },
+    "792FYTkdDrVAgEAopg90SqW1SGE3": {
+      "role": "merchant"
+    },
+    "8t5UGHeoEBe4v0tAqP1Sc8Mg3yh1": {
+      "role": "merchant"
+    },
+    "AVxQVan5xbVvPkijjM06bkRqpCF3": {
+      "role": "merchant"
+    },
+    "DBbHynITkfNPJemhzut3DIRWNuQ2": {
+      "role": "merchant"
+    },
+    "ELQdBR087gR21I1uzhC9m0hdxtB3": {
+      "role": "merchant"
+    },
+    "FyjFuTRG97cQQy7uLRFmN38KH9I3": {
+      "role": "merchant"
+    },
+    "H4FLJsu4jrf3xHXe7hZL0t6qY1E3": {
+      "role": "merchant"
+    },
+    "HIIv4s7184hboFq65bj6vm8t6WE2": {
+      "role": "customer"
+    },
+    "MRrL5zWGfYXZNIlL5qrgTGlUv6u2": {
+      "role": "merchant"
+    },
+    "MiSFdAx98YNUBPecPV4UntVFocT2": {
+      "role": "merchant"
+    },
+    "OXZBJRda2zfmUUH8ckTVSilzMok2": {
+      "role": "merchant"
+    },
+    "PG7wiMvWjKftlBN8EkkAZyzctnx2": {
+      "role": "merchant"
+    },
+    "QAgWQrffgeaggVT37i58DKadh4g2": {
+      "role": "merchant"
+    },
+    "SBVsrLsrBpcdpngT4F35G5BcJSP2": {
+      "role": "merchant"
+    },
+    "VF28xpbxyEQGCeZS1vBfm9iHSUP2": {
+      "role": "merchant"
+    },
+    "X2fpHZ1sIcNywdPkx5mcTOTPnA93": {
+      "role": "merchant"
+    },
+    "X43lRgqeKeZnviLyvdgJbYHKcAS2": {
+      "role": "merchant"
+    },
+    "Y9EQinl0iAVYtKeT8EydlfuRmX22": {
+      "role": "merchant"
+    },
+    "fCNs6aVlNUeu80Ovoj77LJsN3Fl2": {
+      "role": "merchant"
+    },
+    "gBGVyuzQ5rY0omH3h2q7acG222F2": {
+      "role": "merchant"
+    },
+    "iK7l4g36AUQ6jnFsPZusycgPaN62": {
+      "role": "merchant"
+    },
+    "mpZoSlrCziQsVXOvWPiRK8e1Jm02": {
+      "role": "merchant"
+    },
+    "oPLYdx9yqMV2KseIbd3dzHQ9DKB2": {
+      "role": "merchant"
+    },
+    "u8CRxYToHXa6uOV3oPNgfs64xED2": {
+      "role": "merchant"
+    },
+    "uSFAsUIm3ibJGHYSe4tlbLtssDt2": {
+      "role": "merchant"
+    },
+    "ugvyD23RSlQ7pk5SUabBLEVKf7B2": {
+      "role": "merchant"
+    },
+    "xOSRQCQjfibpMeb3NnKfdKZ7LUO2": {
+      "role": "merchant"
+    },
+    "xUSCH0YJiVTxnFu8IMtZhgz7xNV2": {
+      "role": "merchant"
+    },
+    "xVxY9V5AWEP7TObCoUjUEaTwoXI3": {
+      "role": "merchant"
+    }
+  }
+}

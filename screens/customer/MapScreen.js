@@ -7,11 +7,11 @@ import { WebView } from "react-native-webview";
 import { useDispatch, useSelector } from "react-redux";
 import { getCurrentRestaurant } from "../../store/actions/restaurants";
 
-/*// generate random coords around x0 and y0.
+// generate random coords around x0 and y0.
 function generateCoordinate() {
-	var r = 200 / 111300, // = 100 meters
-		y0 = 45.1239837,
-		x0 = 7.6243529,
+	var r = 1000 / 111300, // = 100 meters
+		y0 = 45.089838,
+		x0 = 7.659031,
 		u = Math.random(),
 		v = Math.random(),
 		w = r * Math.sqrt(u),
@@ -24,7 +24,7 @@ function generateCoordinate() {
 	let newX = x0 + x1;
 	return { latitude: newY, longitude: newX };
 }
-*/
+
 /* // given a list of restaus returns their coordinates.
 function findCoordinates(state) {
 	let markers = [];
@@ -91,10 +91,7 @@ const MapScreen = (props) => {
 						return (
 							<Marker
 								onPress={(e) => console.log(e.nativeEvent)}
-								coordinate={{
-									latitude: object.latitude,
-									longitude: object.longitude,
-								}}
+								coordinate={generateCoordinate()}
 								key={i}
 							>
 								<Callout

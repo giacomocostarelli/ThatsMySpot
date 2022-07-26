@@ -19,7 +19,6 @@ export const fetchRestaurants = () => {
 			const resData = await response.json();
 			console.log("FETCH_RESTAURANTS Response.");
 			console.log("-------------------------");
-			//console.log(resData);
 
 			const loadedRestaurants = [];
 			for (let restaurantName in resData) {
