@@ -1,9 +1,30 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Button } from "react-native";
+import { View, StyleSheet, Button, Text } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Dialog from "react-native-dialog"; // PACKAGE
 import Colors from "../../constants/Colors";
+import Card from "../../components/Card";
 import { createRestaurant } from "../../store/actions/restaurants";
+
+import { Ionicons } from "@expo/vector-icons";
+
+const ReservationRow = () => {
+	return (
+		<View style={styles.reservationRowContainer}>
+			<Card>
+				<Text style={styles.text}>Ciao</Text>
+			</Card>
+		</View>
+	);
+};
+
+const ReservationList = () => {
+	return (
+		<View style={styles.reservationListContainer}>
+			<ReservationRow></ReservationRow>
+		</View>
+	);
+};
 
 const RestaurantNameModal = (props) => {
 	const isNew = useSelector((state) => state.users.isNewState);
@@ -14,18 +35,21 @@ const RestaurantNameModal = (props) => {
 	};
 
 	return (
-		<View style={styles.container}>
-			<Dialog.Container visible={visible}>
-				<Dialog.Title
-					style={{ fontSize: 25, color: Colors.primary, fontWeight: "bold" }}
-				>
-					Nome Attività
-				</Dialog.Title>
-				<Dialog.Description style={{ fontSize: 18 }}>
-					Prima di cominciare inserisci il nome del tuo ristorante.
-				</Dialog.Description>
-				<RestaurantNameInput childToParent={childToParent} />
-			</Dialog.Container>
+		<View style={styles.containerModal}>
+			{isNew && (
+				<Dialog.Container visible={visible}>
+					<Dialog.Title
+						style={{ fontSize: 25, color: Colors.primary, fontWeight: "bold" }}
+					>
+						Nome Attività
+					</Dialog.Title>
+					<Dialog.Description style={{ fontSize: 18 }}>
+						Prima di cominciare inserisci il nome del tuo ristorante.
+					</Dialog.Description>
+					<RestaurantNameInput childToParent={childToParent} />
+				</Dialog.Container>
+			)}
+			<ReservationList></ReservationList>
 		</View>
 	);
 };
@@ -59,17 +83,23 @@ const RestaurantNameInput = ({ childToParent }) => {
 };
 
 const ReservationScreen = () => {
-	return (
-		<View style={styles.container}>
-			<RestaurantNameModal style={styles.modal} />
-		</View>
-	);
+	return <RestaurantNameModal style={styles.modal} />;
 };
 
 const styles = StyleSheet.create({
-	container: {
+	containerModal: {
 		flex: 1,
 		backgroundColor: "#fff",
+		alignItems: "center",
+		justifyContent: "center",
+	},
+	reservationRowContainer: {},
+
+	reservationListContainer: {
+		flex: 1,
+		backgroundColor: "#fff",
+		borderColor: "black",
+		borderWidth: 1,
 		alignItems: "center",
 		justifyContent: "center",
 	},
@@ -81,6 +111,9 @@ const styles = StyleSheet.create({
 	modalInput: {
 		alignItems: "center",
 		justifyContent: "center",
+	},
+	text: {
+		fontSize: 20,
 	},
 });
 
