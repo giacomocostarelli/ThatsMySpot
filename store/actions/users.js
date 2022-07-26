@@ -9,7 +9,7 @@ export const IS_USER_NEW = "IS_USER_NEW";
 export const getStarred = () => {
 	return async (dispatch, getState) => {
 		const userId = getState().auth.userId;
-		console.log(" -- GET_STARRED Request -- " + userId);
+		console.log("GET_STARRED Request for user: " + userId);
 		try {
 			const response = await fetch(
 				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred.json`
