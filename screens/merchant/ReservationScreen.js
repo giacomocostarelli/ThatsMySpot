@@ -5,6 +5,7 @@ import {
 	Button,
 	Text,
 	TouchableWithoutFeedback,
+	ScrollView,
 } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import Dialog from "react-native-dialog"; // PACKAGE
@@ -14,85 +15,169 @@ import Colors from "../../constants/Colors";
 import Card from "../../components/Card";
 import { createRestaurant } from "../../store/actions/restaurants";
 
-const ReservationRow = () => {
-	const [isCollapsed, setIsCollapsed] = useState(false);
-
-	// RED BORDER
+const ReservationRow = (props) => {
+	// BLACK BORDER
 	return (
 		<View style={styles.reservationRowContainer}>
-			<TouchableWithoutFeedback
-				onPress={() => {
-					setIsCollapsed(!isCollapsed);
+			<View
+				style={{
+					width: "100%",
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "space-around",
 				}}
 			>
-				<View style={{ flex: 1 }}>
-					<View
-						style={{
-							flex: 1,
-							borderWidth: 0,
-							minWidth: "80%",
-							maxWidth: "80%",
-							borderColor: "green",
-							flexDirection: "row",
-							alignItems: "center",
-							justifyContent: "space-between",
-						}}
-					>
-						<Text style={styles.text}>Nome Persona</Text>
-
-						{
-							// Confirm and cancel icons group
-						}
-
-						<View style={{ flexDirection: "row", alignItems: "center" }}>
-							<Icon
-								name="account"
-								color={Colors.primary}
-								size={25}
-								type="material-community"
-							/>
-							<Text style={styles.text}>10</Text>
-						</View>
-
-						{
-							// Confirm and cancel icons group
-						}
-						<View style={{ flexDirection: "row" }}>
-							<Icon
-								name="checksquareo"
-								color={Colors.secondary}
-								size={40}
-								type="antdesign"
-								onPress={() => {}}
-							/>
-							<Icon
-								name="closesquareo"
-								color={Colors.primary}
-								size={40}
-								type="antdesign"
-								onPress={() => {}}
-							/>
-						</View>
-					</View>
-					<Collapsible collapsed={isCollapsed}>
-						<Text style={styles.text}>Data</Text>
-						<Text style={styles.text}>Ora</Text>
-					</Collapsible>
+				<View
+					style={{
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "flex-start",
+					}}
+				>
+					<Icon
+						name="pencil"
+						color={Colors.primary}
+						size={25}
+						type="foundation"
+					/>
+					<Text style={styles.text}>Giacomo</Text>
 				</View>
-			</TouchableWithoutFeedback>
+
+				{
+					// Confirm and cancel icons group
+				}
+				<View style={{ flexDirection: "row" }}>
+					<Icon
+						name="checksquareo"
+						color={Colors.secondary}
+						size={40}
+						type="antdesign"
+						onPress={() => {}}
+					/>
+					<Icon
+						name="closesquareo"
+						color={Colors.primary}
+						size={40}
+						type="antdesign"
+						onPress={() => {}}
+					/>
+				</View>
+			</View>
+			<View
+				style={{
+					flex: 1,
+					borderColor: "green",
+					borderWidth: 0,
+					width: "80%",
+					flexDirection: "column",
+					alignItems: "flex-start",
+					justifyContent: "center",
+				}}
+			>
+				<View
+					style={{
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "flex-start",
+						borderColor: "green",
+						borderWidth: 0,
+					}}
+				>
+					<Icon
+						name="calendar"
+						color={Colors.primary}
+						size={25}
+						type="material-community"
+					/>
+					<Text style={styles.text}>22/10/2022</Text>
+				</View>
+				<View
+					style={{
+						flex: 1,
+						flexDirection: "row",
+						alignItems: "center",
+						justifyContent: "flex-start",
+					}}
+				>
+					<Icon name="clock" color={Colors.primary} size={25} type="feather" />
+					<Text style={styles.text}>18:45</Text>
+				</View>
+
+				{
+					// Confirm and cancel icons group
+				}
+
+				<View style={{ flexDirection: "row", alignItems: "center" }}>
+					<Icon
+						name="account"
+						color={Colors.primary}
+						size={25}
+						type="material-community"
+					/>
+					<Text style={styles.text}>10</Text>
+				</View>
+			</View>
 		</View>
 	);
 };
 
 const ReservationList = () => {
-	// BLACK BORDER
+	// RED BORDER
+	//number is the id of reservation TODO
+	const [isPendingExpanded, setIsPendingExpanded] = useState(true);
+
 	return (
-		<View style={styles.reservationListContainer}>
-			<ReservationRow></ReservationRow>
-			<ReservationRow></ReservationRow>
-			<ReservationRow></ReservationRow>
-			<ReservationRow></ReservationRow>
-			<ReservationRow></ReservationRow>
+		<View
+			style={{
+				flex: 1,
+				alignItems: "center",
+				justifyContent: "flex-start",
+			}}
+		>
+			<TouchableWithoutFeedback
+				onPress={() => {
+					setIsPendingExpanded(!isPendingExpanded);
+				}}
+			>
+				<View style={styles.pendingTextView}>
+					<Text style={styles.pendingText}> In attesa </Text>
+					{isPendingExpanded ? (
+						<Icon
+							name="expand-less"
+							color="white"
+							size={30}
+							type="material-icons"
+						/>
+					) : (
+						<Icon
+							name="expand-more"
+							color="white"
+							size={30}
+							type="material-icons"
+						/>
+					)}
+				</View>
+			</TouchableWithoutFeedback>
+			<ScrollView style={styles.pendingListContainer}>
+				<Collapsible collapsed={!isPendingExpanded}>
+					<ReservationRow number="" />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+				</Collapsible>
+			</ScrollView>
 		</View>
 	);
 };
@@ -120,7 +205,6 @@ const RestaurantNameModal = (props) => {
 					<RestaurantNameInput childToParent={childToParent} />
 				</Dialog.Container>
 			)}
-			<ReservationList></ReservationList>
 		</View>
 	);
 };
@@ -154,34 +238,39 @@ const RestaurantNameInput = ({ childToParent }) => {
 };
 
 const ReservationScreen = () => {
-	return <RestaurantNameModal style={styles.modal} />;
+	return (
+		<View style={{ flex: 1 }}>
+			{
+				//<RestaurantNameModal style={styles.modal} />
+			}
+			<ReservationList></ReservationList>
+		</View>
+	);
 };
 
 const styles = StyleSheet.create({
 	containerModal: {
 		flex: 1,
-
 		alignItems: "center",
 		justifyContent: "center",
+		borderColor: "blue",
+		borderWidth: 0,
 	},
 
 	reservationRowContainer: {
 		flex: 1,
-		minWidth: "90%",
+		marginBottom: 10,
 		alignItems: "center",
 		justifyContent: "center",
-		borderColor: "red",
-		borderWidth: 0,
+		borderColor: "grey",
+		borderBottomWidth: 1,
 	},
 
-	reservationListContainer: {
-		flex: 1,
-		minWidth: "95%",
-
-		borderColor: "black",
+	pendingListContainer: {
+		width: "100%",
+		flexDirection: "column",
+		borderColor: "red",
 		borderWidth: 0,
-		alignItems: "center",
-		justifyContent: "center",
 	},
 
 	modal: {
@@ -189,6 +278,8 @@ const styles = StyleSheet.create({
 		minWidth: "100%",
 		alignItems: "center",
 		justifyContent: "center",
+		borderColor: "blue",
+		borderWidth: 0,
 	},
 	modalInput: {
 		alignItems: "center",
@@ -196,6 +287,26 @@ const styles = StyleSheet.create({
 	},
 	text: {
 		fontSize: 20,
+		margin: 10,
+	},
+
+	pendingTextView: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "flex-start",
+		width: "100%",
+		padding: 10,
+		marginBottom: 10,
+
+		backgroundColor: Colors.secondary,
+		borderBottomColor: Colors.secondary,
+		borderBottomWidth: 0,
+	},
+	pendingText: {
+		textAlign: "center",
+		fontSize: 20,
+		fontFamily: "roboto-font",
+		color: "white",
 	},
 });
 
