@@ -25,6 +25,7 @@ const ReservationRow = (props) => {
 					flexDirection: "row",
 					alignItems: "center",
 					justifyContent: "space-around",
+					backgroundColor: "#E8E8E8",
 				}}
 			>
 				<View
@@ -34,13 +35,11 @@ const ReservationRow = (props) => {
 						justifyContent: "flex-start",
 					}}
 				>
-					<Icon
-						name="pencil"
-						color={Colors.primary}
-						size={25}
-						type="foundation"
-					/>
-					<Text style={styles.text}>Giacomo</Text>
+					<Text
+						style={{ textTransform: "uppercase", fontSize: 20, margin: 10 }}
+					>
+						Giacomo
+					</Text>
 				</View>
 
 				{
@@ -122,7 +121,7 @@ const ReservationRow = (props) => {
 	);
 };
 
-const ReservationList = () => {
+const PendingReservationList = () => {
 	// RED BORDER
 	//number is the id of reservation TODO
 	const [isPendingExpanded, setIsPendingExpanded] = useState(true);
@@ -130,7 +129,6 @@ const ReservationList = () => {
 	return (
 		<View
 			style={{
-				flex: 1,
 				alignItems: "center",
 				justifyContent: "flex-start",
 			}}
@@ -142,6 +140,64 @@ const ReservationList = () => {
 			>
 				<View style={styles.pendingTextView}>
 					<Text style={styles.pendingText}> In attesa </Text>
+					{isPendingExpanded ? (
+						<Icon
+							name="expand-less"
+							color="white"
+							size={30}
+							type="material-icons"
+						/>
+					) : (
+						<Icon
+							name="expand-more"
+							color="white"
+							size={30}
+							type="material-icons"
+						/>
+					)}
+				</View>
+			</TouchableWithoutFeedback>
+			<ScrollView style={styles.pendingListContainer}>
+				<Collapsible collapsed={!isPendingExpanded}>
+					<ReservationRow number="" />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+					<ReservationRow />
+				</Collapsible>
+			</ScrollView>
+		</View>
+	);
+};
+
+const CurrentReservationList = () => {
+	//number is the id of reservation TODO
+	const [isPendingExpanded, setIsPendingExpanded] = useState(true);
+
+	return (
+		<View
+			style={{
+				alignItems: "center",
+				justifyContent: "flex-start",
+			}}
+		>
+			<TouchableWithoutFeedback
+				onPress={() => {
+					setIsPendingExpanded(!isPendingExpanded);
+				}}
+			>
+				<View style={styles.pendingTextView}>
+					<Text style={styles.pendingText}> Attive </Text>
 					{isPendingExpanded ? (
 						<Icon
 							name="expand-less"
@@ -243,7 +299,19 @@ const ReservationScreen = () => {
 			{
 				//<RestaurantNameModal style={styles.modal} />
 			}
-			<ReservationList></ReservationList>
+			<PendingReservationList></PendingReservationList>
+			<CurrentReservationList></CurrentReservationList>
+			<View
+				style={{
+					flex: 1,
+					maxHeight: "50%",
+					alignItems: "center",
+					justifyContent: "center",
+				}}
+			>
+				<Icon name="corner-left-up" color="black" size={30} type="feather" />
+				<Text style={styles.text}>Controlla le tue prenotazioni.</Text>
+			</View>
 		</View>
 	);
 };
@@ -259,7 +327,7 @@ const styles = StyleSheet.create({
 
 	reservationRowContainer: {
 		flex: 1,
-		marginBottom: 10,
+
 		alignItems: "center",
 		justifyContent: "center",
 		borderColor: "grey",
@@ -296,11 +364,10 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-start",
 		width: "100%",
 		padding: 10,
-		marginBottom: 10,
 
 		backgroundColor: Colors.secondary,
-		borderBottomColor: Colors.secondary,
-		borderBottomWidth: 0,
+		borderTopColor: "white",
+		borderTopWidth: 2,
 	},
 	pendingText: {
 		textAlign: "center",
