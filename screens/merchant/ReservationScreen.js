@@ -288,7 +288,7 @@ const RestaurantNameInput = ({ childToParent }) => {
 					visibleChild = false;
 					childToParent(visibleChild);
 					dispatch(createRestaurant(restaurantName));
-					dispatch(ownerOf(restaurantName));
+					//dispatch(ownerOf(restaurantName));
 				}}
 			/>
 		</View>

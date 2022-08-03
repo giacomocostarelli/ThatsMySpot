@@ -5,23 +5,23 @@ import { useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 
 const MyRestaurantScreen = (props) => {
-	/*const currentRestaurants = useSelector(
-		(state) => state.restaurants.restaurantsState
+	const userId = useSelector((state) => state.auth.userId);
+	const restaurantOwned = useSelector((state) =>
+		state.restaurants.restaurantsState.find(
+			(restaurant) => restaurant.ownerId === userId
+		)
 	);
-	const currentRestaurantObj = currentRestaurants.find(
-		(restaurant) => restaurant.name
-	);
-*/
-	const [category, onChangeCategory] = useState("Pizza");
-	const [address, onChangeAddress] = useState("Via delle Pizze 21");
+
+	const [category, onChangeCategory] = useState(restaurantOwned.category);
+	const [address, onChangeAddress] = useState(restaurantOwned.address);
 	const [description, onChangeDescription] = useState(
-		"La pizza più buona dell egitto"
+		restaurantOwned.description
 	);
-	const [openingTime, onChangeTime] = useState("8:00 - 20:00");
-	const [phoneNumber, onChangePhone] = useState("392 098 7652");
-	const [imageUrl, onChangeImage] = useState(
-		"https://www.studioallievi.com/wp-content/uploads/2017/07/Aprire-un-fast-food.jpg"
+	const [openingTime, onChangeTime] = useState(
+		`${restaurantOwned.openingTime} - ${restaurantOwned.closingTime}`
 	);
+	const [phoneNumber, onChangePhone] = useState(restaurantOwned.phoneNumber);
+	const [imageUrl, onChangeImage] = useState(restaurantOwned.imageUrl);
 
 	return (
 		<View style={styles.centered}>
@@ -86,7 +86,7 @@ const MyRestaurantScreen = (props) => {
 					size={35}
 					type="font-awesome"
 					onPress={() => {
-						console.log("bella");
+						console.log(restaurantOwned);
 					}}
 				/>
 			</View>
