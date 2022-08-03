@@ -4,6 +4,7 @@ import {
 	ADD_TO_FAV,
 	ADD_USER,
 	IS_USER_NEW,
+	OWNER_OF,
 } from "../actions/users";
 
 import User from "../../models/user";
@@ -35,6 +36,13 @@ export default (state = initialState, action) => {
 
 		case ADD_TO_FAV:
 			console.log("ADD_TO_FAV Reducer.");
+			console.log("-------------------------");
+
+			return {
+				...state,
+			};
+		case OWNER_OF:
+			console.log("OWNER_OF Reducer.");
 			console.log("-------------------------");
 
 			return {

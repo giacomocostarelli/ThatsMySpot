@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
+import { LogBox } from "react-native";
 
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -34,7 +35,7 @@ export default function App() {
 			try {
 				// Keep the splash screen visible while we fetch resources
 				await SplashScreen.preventAutoHideAsync();
-				// Pre-load fonts, make any API calls you need to do here
+				// Pre-load fonts
 				await Font.loadAsync({
 					"open-sans": require("./assets/fonts/OpenSans-Regular.ttf"),
 					"open-sans-bold": require("./assets/fonts/OpenSans-Bold.ttf"),
@@ -72,6 +73,8 @@ export default function App() {
 	if (!appIsReady) {
 		return null;
 	}
+
+	LogBox.ignoreLogs(["EventEmitter.removeListener"]);
 
 	return (
 		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>

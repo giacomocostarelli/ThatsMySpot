@@ -5,6 +5,7 @@ export const ADD_TO_FAV = "ADD_TO_FAV";
 export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
 export const ADD_USER = "ADD_USER";
 export const IS_USER_NEW = "IS_USER_NEW";
+export const OWNER_OF = "OWNER_OF";
 
 export const getStarred = () => {
 	return async (dispatch, getState) => {
@@ -100,6 +101,31 @@ export const addUser = () => {
 
 		dispatch({
 			type: ADD_USER,
+		});
+	};
+};
+
+export const ownerOf = (restaurantName) => {
+	return async (dispatch, getState) => {
+		const token = getState().auth.token;
+		const userId = getState().auth.userId;
+
+		var obj = { ownerOf: restaurantName };
+		console.log("OWNER_OF Request.");
+
+		const response = await fetch(
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=${token}`,
+			{
+				method: "PATCH ",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify(obj),
+			}
+		);
+
+		dispatch({
+			type: OWNER_OF,
 		});
 	};
 };

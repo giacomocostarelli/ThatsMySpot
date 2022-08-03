@@ -14,6 +14,7 @@ import { Icon } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import Card from "../../components/Card";
 import { createRestaurant } from "../../store/actions/restaurants";
+import { ownerOf } from "../../store/actions/users";
 
 const ReservationRow = (props) => {
 	// BLACK BORDER
@@ -287,6 +288,7 @@ const RestaurantNameInput = ({ childToParent }) => {
 					visibleChild = false;
 					childToParent(visibleChild);
 					dispatch(createRestaurant(restaurantName));
+					dispatch(ownerOf(restaurantName));
 				}}
 			/>
 		</View>
@@ -296,9 +298,8 @@ const RestaurantNameInput = ({ childToParent }) => {
 const ReservationScreen = () => {
 	return (
 		<View style={{ flex: 1 }}>
-			{
-				//<RestaurantNameModal style={styles.modal} />
-			}
+			<RestaurantNameModal style={styles.modal} />
+
 			<PendingReservationList></PendingReservationList>
 			<CurrentReservationList></CurrentReservationList>
 			<View
@@ -318,7 +319,6 @@ const ReservationScreen = () => {
 
 const styles = StyleSheet.create({
 	containerModal: {
-		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
 		borderColor: "blue",
@@ -342,7 +342,6 @@ const styles = StyleSheet.create({
 	},
 
 	modal: {
-		flex: 1,
 		minWidth: "100%",
 		alignItems: "center",
 		justifyContent: "center",

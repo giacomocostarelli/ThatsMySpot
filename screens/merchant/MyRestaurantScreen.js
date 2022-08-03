@@ -1,10 +1,18 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { Icon, Input } from "react-native-elements";
+import { useSelector } from "react-redux";
 import Colors from "../../constants/Colors";
 
 const MyRestaurantScreen = (props) => {
-	const [name, onChangeName] = useState("La pizzeria");
+	/*const currentRestaurants = useSelector(
+		(state) => state.restaurants.restaurantsState
+	);
+	const currentRestaurantObj = currentRestaurants.find(
+		(restaurant) => restaurant.name
+	);
+*/
+	const [category, onChangeCategory] = useState("Pizza");
 	const [address, onChangeAddress] = useState("Via delle Pizze 21");
 	const [description, onChangeDescription] = useState(
 		"La pizza più buona dell egitto"
@@ -19,15 +27,6 @@ const MyRestaurantScreen = (props) => {
 		<View style={styles.centered}>
 			<View style={styles.cardBody}>
 				<Input
-					label="Nome del ristorante"
-					labelStyle={{ color: Colors.secondary }}
-					keyboardType="default"
-					required
-					autoCapitalize="none"
-					value={name}
-					onChangeText={onChangeName}
-				/>
-				<Input
 					labelStyle={{ color: Colors.secondary }}
 					label="Indirizzo"
 					keyboardType="default"
@@ -35,6 +34,15 @@ const MyRestaurantScreen = (props) => {
 					autoCapitalize="none"
 					value={address}
 					onChangeText={onChangeAddress}
+				/>
+				<Input
+					labelStyle={{ color: Colors.secondary }}
+					label="Categoria"
+					keyboardType="default"
+					required
+					autoCapitalize="none"
+					value={category}
+					onChangeText={onChangeCategory}
 				/>
 				<Input
 					labelStyle={{ color: Colors.secondary }}

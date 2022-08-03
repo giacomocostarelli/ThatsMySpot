@@ -11,7 +11,7 @@
       "longitude": 12.3456,
       "name": "Fast Food 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "144grhjFtNaxo8Da82rEYEyptBE2",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -26,7 +26,7 @@
       "longitude": 12.3456,
       "name": "Fast Food 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "3IYTIQyNBBN0xWWbztzAv0cU2cx1",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -41,7 +41,7 @@
       "longitude": 12.3456,
       "name": "Fast Food 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "5InIKo7599REXs0w9Y3YLqQaRDN2",
       "phoneNumber": 123456789,
       "stars": 5
     },
@@ -56,7 +56,7 @@
       "longitude": 12.3456,
       "name": "Greco 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "6aRBAdDJRZhf0l75nkMWnAz63bq1",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -71,7 +71,7 @@
       "longitude": 12.3456,
       "name": "Greco 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "792FYTkdDrVAgEAopg90SqW1SGE3",
       "phoneNumber": 123456789,
       "stars": 4
     },
@@ -86,7 +86,7 @@
       "longitude": 12.3456,
       "name": "Greco 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "8t5UGHeoEBe4v0tAqP1Sc8Mg3yh1",
       "phoneNumber": 123456789,
       "stars": 1
     },
@@ -101,7 +101,7 @@
       "longitude": 45.4,
       "name": "Ham & Cheese",
       "openingTime": "12:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "AVxQVan5xbVvPkijjM06bkRqpCF3",
       "phoneNumber": "123456789",
       "stars": 4
     },
@@ -116,7 +116,7 @@
       "longitude": 12.3456,
       "name": "Hamburgeria 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "DBbHynITkfNPJemhzut3DIRWNuQ2",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -131,7 +131,7 @@
       "longitude": 12.3456,
       "name": "Hamburgeria 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "ELQdBR087gR21I1uzhC9m0hdxtB3",
       "phoneNumber": 123456789,
       "stars": 5
     },
@@ -146,7 +146,7 @@
       "longitude": 12.3456,
       "name": "Hamburgeria 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "FyjFuTRG97cQQy7uLRFmN38KH9I3",
       "phoneNumber": 123456789,
       "stars": 1
     },
@@ -161,7 +161,7 @@
       "longitude": "12.3456",
       "name": "La buona pizza",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "H4FLJsu4jrf3xHXe7hZL0t6qY1E3",
       "phoneNumber": "123456789",
       "stars": 4
     },
@@ -176,7 +176,7 @@
       "longitude": "12.3456",
       "name": "Messicano 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "HIIv4s7184hboFq65bj6vm8t6WE2",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -191,7 +191,7 @@
       "longitude": "12.3456",
       "name": "Messicano 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "MRrL5zWGfYXZNIlL5qrgTGlUv6u2",
       "phoneNumber": 123456789,
       "stars": 4
     },
@@ -206,7 +206,7 @@
       "longitude": "12.3456",
       "name": "Messicano 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "MiSFdAx98YNUBPecPV4UntVFocT2",
       "phoneNumber": 123456789,
       "stars": 5
     },
@@ -221,7 +221,7 @@
       "longitude": "12.3456",
       "name": "Pizzeria 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "OXZBJRda2zfmUUH8ckTVSilzMok2",
       "phoneNumber": 123456789,
       "stars": 2
     },
@@ -236,7 +236,7 @@
       "longitude": "12.3456",
       "name": "Pizzeria 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "PG7wiMvWjKftlBN8EkkAZyzctnx2",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -251,7 +251,7 @@
       "longitude": 45.9,
       "name": "Pizzeria Italia",
       "openingTime": "12:00",
-      "ownerId": " ",
+      "ownerId": " QAgWQrffgeaggVT37i58DKadh4g2",
       "phoneNumber": 3334455666,
       "stars": 3
     },
@@ -266,7 +266,7 @@
       "longitude": "45.2",
       "name": "Pizzeria Romana",
       "openingTime": "12:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "SBVsrLsrBpcdpngT4F35G5BcJSP2",
       "phoneNumber": "123456789",
       "stars": 5
     },
@@ -281,7 +281,7 @@
       "longitude": "12.3456",
       "name": "Ristorante Carne 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "VF28xpbxyEQGCeZS1vBfm9iHSUP2",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -296,7 +296,7 @@
       "longitude": "12.3456",
       "name": "Ristorante Carne 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "X2fpHZ1sIcNywdPkx5mcTOTPnA93",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -311,7 +311,7 @@
       "longitude": 12.3456,
       "name": "Ristorante Carne 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "X43lRgqeKeZnviLyvdgJbYHKcAS2",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -326,7 +326,7 @@
       "longitude": "12.3456",
       "name": "Ristorante Pesce 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "Y9EQinl0iAVYtKeT8EydlfuRmX22",
       "phoneNumber": 123456789,
       "stars": 1
     },
@@ -341,7 +341,7 @@
       "longitude": "12.3456",
       "name": "Ristorante Pesce 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "fCNs6aVlNUeu80Ovoj77LJsN3Fl2",
       "phoneNumber": 123456789,
       "stars": 5
     },
@@ -356,7 +356,7 @@
       "longitude": "12.3456",
       "name": "Ristorante Pesce 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "gBGVyuzQ5rY0omH3h2q7acG222F2",
       "phoneNumber": 123456789,
       "stars": 4
     },
@@ -371,7 +371,7 @@
       "longitude": "12.3456",
       "name": "Sushi 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "iK7l4g36AUQ6jnFsPZusycgPaN62",
       "phoneNumber": 123456789,
       "stars": 4
     },
@@ -386,7 +386,7 @@
       "longitude": "12.3456",
       "name": "Sushi 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "mpZoSlrCziQsVXOvWPiRK8e1Jm02",
       "phoneNumber": 123456789,
       "stars": 2
     },
@@ -401,7 +401,7 @@
       "longitude": "12.3456",
       "name": "Sushi 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "oPLYdx9yqMV2KseIbd3dzHQ9DKB2",
       "phoneNumber": 123456789,
       "stars": 3
     },
@@ -416,7 +416,7 @@
       "longitude": "12.3456",
       "name": "Tavola Calda 1",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "u8CRxYToHXa6uOV3oPNgfs64xED2",
       "phoneNumber": 123456789,
       "stars": 1
     },
@@ -431,7 +431,7 @@
       "longitude": "12.3456",
       "name": "Tavola Calda 2",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "uSFAsUIm3ibJGHYSe4tlbLtssDt2",
       "phoneNumber": 123456789,
       "stars": 4
     },
@@ -446,7 +446,7 @@
       "longitude": "12.3456",
       "name": "Tavola Calda 3",
       "openingTime": "08:00",
-      "ownerId": "TBNeU79swbTSzwNGplg2Kkkr0RI3",
+      "ownerId": "ugvyD23RSlQ7pk5SUabBLEVKf7B2",
       "phoneNumber": 123456789,
       "stars": 5
     }
@@ -557,12 +557,6 @@
       "role": "merchant"
     },
     "xOSRQCQjfibpMeb3NnKfdKZ7LUO2": {
-      "role": "merchant"
-    },
-    "xUSCH0YJiVTxnFu8IMtZhgz7xNV2": {
-      "role": "merchant"
-    },
-    "xVxY9V5AWEP7TObCoUjUEaTwoXI3": {
       "role": "merchant"
     }
   }
