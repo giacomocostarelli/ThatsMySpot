@@ -45,6 +45,19 @@
       "phoneNumber": "123456789",
       "stars": 5
     },
+    "Gigio cibo": {
+      "address": "empty",
+      "category": "empty",
+      "city": "Torino",
+      "closingTime": "24:00",
+      "description": "empty",
+      "imageUrl": "https://www.ristoilpozzo.it/wp-content/uploads/2020/05/DSC_8911-2000x1335.jpg",
+      "name": "Gigio cibo",
+      "openingTime": "19:00",
+      "ownerId": "IQC6vjURScc2w7VrTaYpooz0n3L2",
+      "phoneNumber": "empty",
+      "stars": "0"
+    },
     "Greco 1": {
       "address": "Via della Grecia 1",
       "category": "Greco",
@@ -502,6 +515,9 @@
     "HIIv4s7184hboFq65bj6vm8t6WE2": {
       "role": "customer"
     },
+    "IQC6vjURScc2w7VrTaYpooz0n3L2": {
+      "role": "merchant"
+    },
     "MRrL5zWGfYXZNIlL5qrgTGlUv6u2": {
       "role": "merchant"
     },
@@ -540,6 +556,14 @@
     },
     "iK7l4g36AUQ6jnFsPZusycgPaN62": {
       "role": "merchant"
+    },
+    "jMFfjvjHgwPTkIJTMteKFzrTuoA2": {
+      "role": "customer",
+      "starred": {
+        "Pesce megabuono": {
+          "starts": "P"
+        }
+      }
     },
     "mpZoSlrCziQsVXOvWPiRK8e1Jm02": {
       "role": "merchant"
