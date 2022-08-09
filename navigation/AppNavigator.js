@@ -271,9 +271,9 @@ const TabNavigatorMerchant = ({ navigation }) => {
 					},
 					tabBarIcon: ({ color, size }) => (
 						<Icon
-							name="eye"
+							name="calendar"
 							color={color}
-							size={40}
+							size={30}
 							type="evilicon"
 							style={{ marginTop: 10 }}
 						/>
@@ -291,10 +291,10 @@ const TabNavigatorMerchant = ({ navigation }) => {
 					},
 					tabBarIcon: ({ color, size }) => (
 						<Icon
-							name="eye"
+							name="food-outline"
 							color={color}
-							size={40}
-							type="evilicon"
+							size={20}
+							type="material-community"
 							style={{ marginTop: 10 }}
 						/>
 					),
@@ -311,10 +311,10 @@ const TabNavigatorMerchant = ({ navigation }) => {
 					},
 					tabBarIcon: ({ color, size }) => (
 						<Icon
-							name="eye"
+							name="house"
 							color={color}
-							size={40}
-							type="evilicon"
+							size={25}
+							type="material-icons"
 							style={{ marginTop: 10 }}
 						/>
 					),

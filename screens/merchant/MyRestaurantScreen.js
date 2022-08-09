@@ -1,13 +1,16 @@
 import React, { useState } from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { Icon, Input } from "react-native-elements";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import Colors from "../../constants/Colors";
+import { updateRestaurant } from "../../store/actions/restaurants";
 
 const MyRestaurantScreen = (props) => {
+	const dispatch = useDispatch();
 	const userId = useSelector((state) => state.auth.userId);
+
 	const restaurantOwned = useSelector((state) =>
 		state.restaurants.restaurantsState.find(
 			(restaurant) => restaurant.ownerId === userId
@@ -36,6 +39,20 @@ const MyRestaurantScreen = (props) => {
 	);
 	const [phoneNumber, onChangePhone] = useState(restaurantOwned.phoneNumber);
 	const [imageUrl, onChangeImage] = useState(restaurantOwned.imageUrl);
+
+	const submit = () => {
+		let restaurantProps = {
+			name: restaurantOwned.name,
+			category: category,
+			address: address,
+			description: description,
+			openingTime: restaurantOwned.openingTime,
+			closingTime: restaurantOwned.closingTime,
+			phoneNumber: phoneNumber,
+			imageUrl: imageUrl,
+		};
+		dispatch(updateRestaurant(restaurantProps));
+	};
 
 	return (
 		<View style={styles.centered}>
@@ -83,7 +100,7 @@ const MyRestaurantScreen = (props) => {
 				<Input
 					labelStyle={{ color: Colors.secondary }}
 					label="Telefono"
-					keyboardType="number-pad"
+					keyboardType="default"
 					required
 					autoCapitalize="none"
 					value={phoneNumber}
@@ -103,9 +120,7 @@ const MyRestaurantScreen = (props) => {
 					color={Colors.secondary}
 					size={35}
 					type="font-awesome"
-					onPress={() => {
-						console.log(restaurantOwned);
-					}}
+					onPress={submit}
 				/>
 			</View>
 		</View>

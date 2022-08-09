@@ -4,6 +4,7 @@ export const FETCH_RESTAURANTS = "FETCH_RESTAURANTS";
 export const GET_CURRENT_RESTAURANT = "GET_CURRENT_RESTAURANT";
 export const CREATE_RESTAURANT = "CREATE_RESTAURANT";
 export const GET_REST_BY_NAME = "GET_REST_BY_NAME";
+export const UPDATE_RESTAURANT = "UPDATE_RESTAURANT";
 
 export const fetchRestaurants = () => {
 	return async (dispatch) => {
@@ -161,6 +162,42 @@ export const createRestaurant = (restaurantName) => {
 			dispatch({
 				type: CREATE_RESTAURANT,
 				restaurantData: restaurantToAdd,
+			});
+		} catch (err) {
+			throw err;
+		}
+	};
+};
+
+export const updateRestaurant = (restaurantProps) => {
+	return async (dispatch, getState) => {
+		const token = getState().auth.token;
+
+		try {
+			console.log("UPDATE_RESTAURANT Request.");
+			const response = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/restaurants/${restaurantProps.name}.json?auth=${token}`,
+				{
+					method: "PATCH",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify(restaurantProps),
+				}
+			);
+
+			if (!response.ok) {
+				throw new Error("Something went wrong!");
+			}
+
+			console.log("UPDATE_RESTAURANT Response.");
+			console.log("-------------------------");
+
+			const resData = await response.json();
+
+			dispatch({
+				type: UPDATE_RESTAURANT,
+				restaurantData: restaurantProps,
 			});
 		} catch (err) {
 			throw err;
