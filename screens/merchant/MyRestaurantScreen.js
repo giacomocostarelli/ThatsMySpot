@@ -44,11 +44,11 @@ const MyRestaurantScreen = (props) => {
 		let restaurantProps = {
 			name: restaurantOwned.name,
 			category: category,
-			address: address,
-			description: description,
+			address: address === "" ? "empty" : address,
+			description: description === "" ? "empty" : description,
 			openingTime: restaurantOwned.openingTime,
 			closingTime: restaurantOwned.closingTime,
-			phoneNumber: phoneNumber,
+			phoneNumber: phoneNumber === "" ? "empty" : phoneNumber,
 			imageUrl: imageUrl,
 		};
 		dispatch(updateRestaurant(restaurantProps));
@@ -63,6 +63,7 @@ const MyRestaurantScreen = (props) => {
 						open={open}
 						value={category}
 						items={items}
+						placeholder="Scegli la categoria del ristorante."
 						setOpen={setOpen}
 						setValue={onChangeCategory}
 						setItems={setItems}
@@ -75,7 +76,8 @@ const MyRestaurantScreen = (props) => {
 					keyboardType="default"
 					required
 					autoCapitalize="none"
-					value={address}
+					value={address === "empty" ? "" : address}
+					placeholder="Inserisci l'indirizzo."
 					onChangeText={onChangeAddress}
 				/>
 
@@ -85,7 +87,8 @@ const MyRestaurantScreen = (props) => {
 					keyboardType="default"
 					required
 					autoCapitalize="none"
-					value={description}
+					value={description === "empty" ? "" : description}
+					placeholder="Inserisci una descrizione."
 					onChangeText={onChangeDescription}
 				/>
 				<Input
@@ -103,7 +106,8 @@ const MyRestaurantScreen = (props) => {
 					keyboardType="default"
 					required
 					autoCapitalize="none"
-					value={phoneNumber}
+					value={phoneNumber === "empty" ? "" : phoneNumber}
+					placeholder="Inserisci il tuo numero di telefono."
 					onChangeText={onChangePhone}
 				/>
 				<Input
@@ -112,7 +116,7 @@ const MyRestaurantScreen = (props) => {
 					keyboardType="default"
 					required
 					autoCapitalize="none"
-					value={imageUrl}
+					value={imageUrl === "empty" ? "" : imageUrl}
 					onChangeText={onChangeImage}
 				/>
 				<Icon
