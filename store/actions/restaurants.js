@@ -121,20 +121,16 @@ export const createRestaurant = (restaurantName) => {
 		let restaurantToAdd = {
 			name: restaurantName,
 			ownerId: ownerId,
-			imageUrl: "empty",
+			imageUrl:
+				"https://www.ristoilpozzo.it/wp-content/uploads/2020/05/DSC_8911-2000x1335.jpg",
 			description: "empty",
 			category: "empty",
-			stars: "empty",
+			stars: "0",
 			phoneNumber: "empty",
 			address: "empty",
-			city: "empty",
-			latitude: "empty",
-			longitude: "empty",
-			openingTime: "empty",
-			closingTime: "empty",
-			menu: "empty",
-			prenotations: "empty",
-			takeaway: "empty",
+			city: "Torino",
+			openingTime: "19:00",
+			closingTime: "24:00",
 		};
 
 		try {

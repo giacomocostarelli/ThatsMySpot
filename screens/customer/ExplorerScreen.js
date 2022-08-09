@@ -13,7 +13,17 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStarred } from "../../store/actions/users";
 import { getCurrentRestaurant } from "../../store/actions/restaurants";
 import Colors from "../../constants/Colors";
-
+/* 
+            imageUrl: "empty",
+			description: "empty",
+			category: "empty",
+			stars: "empty",
+			phoneNumber: "empty",
+			address: "empty",
+			city: "empty",
+			openingTime: "empty",
+			closingTime: "empty",
+*/
 const Row = (props) => {
 	const userId = useSelector((state) => state.auth.userId);
 	const token = useSelector((state) => state.auth.token);
@@ -21,7 +31,11 @@ const Row = (props) => {
 	const dispatch = useDispatch();
 	const navigation = useNavigation();
 	const { category } = props;
-	const restsWithCategory = rests.filter((rest) => rest.category === category);
+	const restsWithCategory = rests.filter(
+		(rest) =>
+			rest.category === category &&
+			Object.values(rest).every((property) => property !== "empty")
+	);
 	return (
 		<View style={styles.rowContainer}>
 			<View style={styles.tipology}>

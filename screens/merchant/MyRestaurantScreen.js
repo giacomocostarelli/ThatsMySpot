@@ -9,8 +9,8 @@ import { updateRestaurant } from "../../store/actions/restaurants";
 
 const MyRestaurantScreen = (props) => {
 	const dispatch = useDispatch();
-	const userId = useSelector((state) => state.auth.userId);
 
+	const userId = useSelector((state) => state.auth.userId);
 	const restaurantOwned = useSelector((state) =>
 		state.restaurants.restaurantsState.find(
 			(restaurant) => restaurant.ownerId === userId
