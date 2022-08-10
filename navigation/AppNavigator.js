@@ -16,6 +16,7 @@ import RestaurantDetailsScreen from "../screens/customer/RestaurantDetailsScreen
 import ReservationScreen from "../screens/merchant/ReservationScreen";
 import MyRestaurantScreen from "../screens/merchant/MyRestaurantScreen";
 import TakeAwayScreen from "../screens/merchant/TakeAwayScreen";
+import ProfileScreen from "../screens/customer/ProfileScreen";
 
 import { logout } from "../store/actions/auth";
 import { useDispatch } from "react-redux";
@@ -52,6 +53,21 @@ const AppNavigator = (props) => {
 					}}
 				/>
 				<Stack.Screen
+					name="Profile"
+					component={ProfileScreen}
+					options={{
+						title: "Torna",
+						headerStyle: {
+							backgroundColor: Colors.accent,
+						},
+						headerTitleAlign: "left",
+						headerTintColor: "white",
+						headerTitleStyle: {
+							fontFamily: "roboto-font",
+						},
+					}}
+				/>
+				<Stack.Screen
 					name="HomepageMerchant"
 					component={TabNavigatorMerchant}
 					options={{
@@ -62,7 +78,7 @@ const AppNavigator = (props) => {
 					name="Details"
 					component={RestaurantDetailsScreen}
 					options={{
-						title: "Torna a Mappa",
+						title: "Torna",
 						headerStyle: {
 							backgroundColor: Colors.accent,
 						},
@@ -111,16 +127,30 @@ const TabNavigator = ({ navigation }) => {
 				tabBarActiveBackgroundColor: Colors.secondary,
 				tabBarItemStyle: {},
 				headerRight: (props) => (
-					<View style={{ marginHorizontal: 10 }}>
+					<View style={{ marginHorizontal: 20 }}>
 						<Icon
-							name="sign-out"
+							name="logout"
 							color="white"
 							size={25}
-							type="font-awesome"
+							type="material-community"
 							style={{ marginTop: 10 }}
 							onPress={() => {
 								logoutHandler();
 								navigation.replace("Login");
+							}}
+						/>
+					</View>
+				),
+				headerLeft: (props) => (
+					<View style={{ marginHorizontal: 20 }}>
+						<Icon
+							name="account-outline"
+							color="white"
+							size={25}
+							type="material-community"
+							style={{ marginTop: 10 }}
+							onPress={() => {
+								navigation.navigate("Profile");
 							}}
 						/>
 					</View>
