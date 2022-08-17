@@ -6,6 +6,55 @@ export const REMOVE_FROM_FAV = "REMOVE_FROM_FAV";
 export const ADD_USER = "ADD_USER";
 export const IS_USER_NEW = "IS_USER_NEW";
 export const OWNER_OF = "OWNER_OF";
+export const DELETE_CUSTOMER = "DELETE_CUSTOMER";
+export const DELETE_MERCHANT = "DELETE_MERCHANT";
+
+export const deleteCustomer = () => {
+	return async (dispatch, getState) => {
+		const userId = getState().auth.userId;
+		const token = getState().auth.token;
+		console.log(" DELETE_CUSTOMER Request.");
+		console.log("-------------------------");
+
+		const response = await fetch(
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=${token}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		const resData = await response.json();
+		dispatch({
+			type: DELETE_CUSTOMER,
+			toRemove: userId,
+		});
+	};
+};
+
+export const deleteMerchant = (name) => {
+	return async (dispatch, getState) => {
+		const userId = getState().auth.userId;
+		const token = getState().auth.token;
+		console.log(" -- DELETE_MERCHANT Request -- ");
+
+		const response = await fetch(
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=${token}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		const resData = await response.json();
+		dispatch({
+			type: DELETE_MERCHANT,
+			toRemove: userId,
+		});
+	};
+};
 
 export const getStarred = () => {
 	return async (dispatch, getState) => {

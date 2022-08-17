@@ -18,6 +18,7 @@ import {
 	getCurrentRestaurant,
 } from "../../store/actions/restaurants";
 import { getStarred } from "../../store/actions/users";
+import Colors from "../../constants/Colors";
 
 const Item = ({ item }) => {
 	const dispatch = useDispatch();
@@ -94,6 +95,20 @@ const SearchScreen = (props) => {
 				onChangeText={updateSearch}
 				value={searchText}
 			/>
+			{searchText === "" && (
+				<View
+					style={{
+						alignItems: "center",
+						justifyContent: "flex-start",
+					}}
+				>
+					<Text
+						style={{ fontSize: 18, color: Colors.accent, textAlign: "center" }}
+					>
+						Ricordi il nome del ristorante? {"\n"}Prenota subito!
+					</Text>
+				</View>
+			)}
 			<FlatList
 				style={styles.flatlist}
 				data={searchResult}

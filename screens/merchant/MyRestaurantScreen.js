@@ -41,13 +41,16 @@ const MyRestaurantScreen = (props) => {
 	const [imageUrl, onChangeImage] = useState(restaurantOwned.imageUrl);
 
 	const submit = () => {
+		const times = openingTime.split("-");
+		let opening = times[0];
+		let closing = times[1];
 		let restaurantProps = {
 			name: restaurantOwned.name,
 			category: category,
 			address: address === "" ? "empty" : address,
 			description: description === "" ? "empty" : description,
-			openingTime: restaurantOwned.openingTime,
-			closingTime: restaurantOwned.closingTime,
+			openingTime: opening,
+			closingTime: closing,
 			phoneNumber: phoneNumber === "" ? "empty" : phoneNumber,
 			imageUrl: imageUrl,
 		};

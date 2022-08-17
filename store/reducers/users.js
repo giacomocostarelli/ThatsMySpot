@@ -5,9 +5,9 @@ import {
 	ADD_USER,
 	IS_USER_NEW,
 	OWNER_OF,
+	DELETE_CUSTOMER,
+	DELETE_MERCHANT,
 } from "../actions/users";
-
-import User from "../../models/user";
 
 const initialState = {
 	usersState: [],
@@ -65,6 +65,15 @@ export default (state = initialState, action) => {
 				...state,
 				isNewState: action.isNewAction,
 			};
+		case DELETE_CUSTOMER:
+			return {
+				...state,
+			};
+		case DELETE_MERCHANT:
+			return {
+				...state,
+			};
+
 		default:
 			return state;
 	}

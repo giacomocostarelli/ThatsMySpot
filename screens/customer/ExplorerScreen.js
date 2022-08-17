@@ -13,17 +13,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { getStarred } from "../../store/actions/users";
 import { getCurrentRestaurant } from "../../store/actions/restaurants";
 import Colors from "../../constants/Colors";
-/* 
-            imageUrl: "empty",
-			description: "empty",
-			category: "empty",
-			stars: "empty",
-			phoneNumber: "empty",
-			address: "empty",
-			city: "empty",
-			openingTime: "empty",
-			closingTime: "empty",
-*/
+
 const Row = (props) => {
 	const userId = useSelector((state) => state.auth.userId);
 	const token = useSelector((state) => state.auth.token);

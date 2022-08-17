@@ -4,6 +4,7 @@ export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
 export const GET_USER = "GET_USER";
+export const DELETE_FIREBASE_USER = "DELETE_FIREBASE_USER";
 
 export const signup = (email, password, merchant) => {
 	return async (dispatch) => {
@@ -36,11 +37,13 @@ export const signup = (email, password, merchant) => {
 		console.log("SIGNUP Request.");
 		console.log("Email : " + resData.email);
 		console.log("UserId : " + resData.localId);
+
 		console.log("-------------------------");
 		dispatch({
 			type: SIGNUP,
 			token: resData.idToken,
 			userId: resData.localId,
+
 			isMerchant: merchant,
 		});
 	};
@@ -80,8 +83,13 @@ export const login = (email, password) => {
 		console.log("LOGIN Request.");
 		console.log("Email : " + resData.email);
 		console.log("UserId : " + resData.localId);
+
 		console.log("-------------------------");
-		dispatch({ type: LOGIN, token: resData.idToken, userId: resData.localId });
+		dispatch({
+			type: LOGIN,
+			token: resData.idToken,
+			userId: resData.localId,
+		});
 	};
 };
 
@@ -132,4 +140,33 @@ export const logout = () => {
 		}
 	};
 	return { type: LOGOUT };
+};
+
+export const deleteFirebaseUser = () => {
+	return async (dispatch, getState) => {
+		const token = getState().auth.token;
+		const response = await fetch(
+			"https://identitytoolkit.googleapis.com/v1/accounts:delete?key=AIzaSyC5lL_FB1PNybXJ94YF85QcVgAsLNzYXFw",
+			{
+				method: "POST",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					idToken: token,
+				}),
+			}
+		);
+
+		if (!response.ok) {
+			const errorResData = await response.json();
+			const errorId = errorResData.error.message;
+			console.log(errorId);
+			let message = "Delete Firebase User error";
+
+			throw new Error(message);
+		}
+
+		dispatch({ type: DELETE_FIREBASE_USER });
+	};
 };
