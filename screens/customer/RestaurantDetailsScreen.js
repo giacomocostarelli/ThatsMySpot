@@ -11,31 +11,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
+import Counter from "react-native-counters";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Divider } from "react-native-elements/dist/divider/Divider";
+import { Icon } from "react-native-elements";
 import { removeFromFav, addToFav, getStarred } from "../../store/actions/users";
-
-const FavoriteRow = (props) => {
-	return (
-		<View
-			style={{
-				marginVertical: "5%",
-				alignItems: "center",
-				justifyContent: "center",
-				flexDirection: "row",
-			}}
-		>
-			<FontAwesome
-				name={props.iconname}
-				size={30}
-				color={Colors.secondary}
-				style={{ marginRight: "10%" }}
-			/>
-			<Text style={{ fontSize: 18 }}>{props.children}</Text>
-		</View>
-	);
-};
 
 const ProfileTab = () => {
 	const dispatch = useDispatch();
@@ -129,6 +110,14 @@ const BookingTab = () => {
 	const [timeFormat, setTimeFormat] = useState("");
 	const [modalVisible, setModalVisible] = useState(false);
 	const [isPressable, setIsPressable] = useState(false);
+	const [numberOfPeople, setNumberOfPeople] = useState(0);
+
+	const increment = () => {
+		setNumberOfPeople(numberOfPeople + 1);
+	};
+	const decrement = () => {
+		setNumberOfPeople(numberOfPeople - 1);
+	};
 
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate || date;
@@ -197,7 +186,7 @@ const BookingTab = () => {
 					PRENOTA IL TUO TAVOLO.
 				</Text>
 				<Text style={{ fontSize: 18, marginVertical: "5%" }}>
-					Seleziona il giorno, l'orario e conferma la tua prenotazione.
+					Seleziona il giorno, l'orario, il numero di persone e conferma.
 				</Text>
 			</View>
 
@@ -208,10 +197,15 @@ const BookingTab = () => {
 				<Pressable style={styles.button} onPress={showTimepicker}>
 					<Text style={{ color: "white" }}>Scegli un orario.</Text>
 				</Pressable>
+				<PeoplePicker
+					onPressPlus={increment}
+					onPressMinus={decrement}
+					numberOfPeople={numberOfPeople}
+				/>
 				<Divider
 					width={1}
 					color={Colors.accent}
-					style={{ margin: "10%", width: "98%" }}
+					style={{ margin: "5%", width: "98%" }}
 				/>
 				<Pressable
 					style={styles.buttonConfirm}
@@ -431,23 +425,6 @@ const TakeawayTab = () => {
 	);
 };
 
-const renderScene = SceneMap({
-	profile: ProfileTab,
-	booking: BookingTab,
-	takeaway: TakeawayTab,
-});
-
-const renderTabBar = (props) => {
-	return (
-		<TabBar
-			{...props}
-			indicatorStyle={{ backgroundColor: Colors.accent }}
-			labelStyle={{ color: Colors.accent, fontWeight: "bold" }}
-			style={{ backgroundColor: "white" }}
-		/>
-	);
-};
-
 const RestaurantDetailsScreen = () => {
 	const layout = useWindowDimensions();
 
@@ -472,7 +449,100 @@ const RestaurantDetailsScreen = () => {
 	);
 };
 
+const FavoriteRow = (props) => {
+	return (
+		<View
+			style={{
+				marginVertical: "5%",
+				alignItems: "center",
+				justifyContent: "center",
+				flexDirection: "row",
+			}}
+		>
+			<FontAwesome
+				name={props.iconname}
+				size={30}
+				color={Colors.secondary}
+				style={{ marginRight: "10%" }}
+			/>
+			<Text style={{ fontSize: 18 }}>{props.children}</Text>
+		</View>
+	);
+};
+
+const PeoplePicker = ({ onPressPlus, onPressMinus, numberOfPeople }) => {
+	return (
+		<View style={styles.personPickerRow}>
+			<View>
+				<Icon
+					disabled={numberOfPeople === 0 ? true : false}
+					name="minus"
+					color={numberOfPeople === 0 ? "lightgrey" : Colors.accent}
+					size={35}
+					type="entypo"
+					style={{}}
+					disabledStyle={{ backgroundColor: Colors.back }}
+					onPress={onPressMinus}
+				/>
+			</View>
+			<View
+				style={{
+					flexDirection: "row",
+					alignItems: "center",
+					justifyContent: "center",
+					marginHorizontal: 10,
+				}}
+			>
+				<Icon
+					disabled
+					name="person"
+					color={Colors.accent}
+					size={35}
+					type="material"
+					disabledStyle={{ backgroundColor: Colors.back }}
+					style={{}}
+				/>
+				<Text style={{ fontSize: 25 }}>{numberOfPeople}</Text>
+			</View>
+			<View>
+				<Icon
+					name="plus"
+					color={Colors.accent}
+					size={35}
+					type="entypo"
+					style={{}}
+					onPress={onPressPlus}
+				/>
+			</View>
+		</View>
+	);
+};
+
+const renderScene = SceneMap({
+	profile: ProfileTab,
+	booking: BookingTab,
+	takeaway: TakeawayTab,
+});
+
+const renderTabBar = (props) => {
+	return (
+		<TabBar
+			{...props}
+			indicatorStyle={{ backgroundColor: Colors.accent }}
+			labelStyle={{ color: Colors.accent, fontWeight: "bold" }}
+			style={{ backgroundColor: "white" }}
+		/>
+	);
+};
+
 const styles = StyleSheet.create({
+	personPickerRow: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		marginTop: 20,
+	},
+
 	container: {
 		flex: 1,
 		backgroundColor: Colors.back,

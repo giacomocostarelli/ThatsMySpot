@@ -74,7 +74,9 @@ export default function App() {
 		return null;
 	}
 
-	LogBox.ignoreLogs(["EventEmitter.removeListener"]);
+	LogBox.ignoreLogs([
+		"EventEmitter.removeListener('keyboardDidHide', ...): Method has been deprecated. Please instead use `remove()` on the subscription returned by `EventEmitter.addListener`.",
+	]);
 
 	return (
 		<View style={{ flex: 1 }} onLayout={onLayoutRootView}>

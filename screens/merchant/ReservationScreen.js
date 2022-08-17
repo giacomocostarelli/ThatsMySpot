@@ -12,9 +12,7 @@ import Dialog from "react-native-dialog"; // PACKAGE
 import Collapsible from "react-native-collapsible"; // PACKAGE
 import { Icon } from "react-native-elements";
 import Colors from "../../constants/Colors";
-import Card from "../../components/Card";
 import { createRestaurant } from "../../store/actions/restaurants";
-import { ownerOf } from "../../store/actions/users";
 
 const ReservationRow = (props) => {
 	// BLACK BORDER
@@ -125,7 +123,7 @@ const ReservationRow = (props) => {
 const PendingReservationList = () => {
 	// RED BORDER
 	//number is the id of reservation TODO
-	const [isPendingExpanded, setIsPendingExpanded] = useState(true);
+	const [isPendingExpanded, setIsPendingExpanded] = useState(false);
 
 	return (
 		<View
@@ -183,7 +181,7 @@ const PendingReservationList = () => {
 
 const CurrentReservationList = () => {
 	//number is the id of reservation TODO
-	const [isPendingExpanded, setIsPendingExpanded] = useState(true);
+	const [isPendingExpanded, setIsPendingExpanded] = useState(false);
 
 	return (
 		<View
@@ -299,7 +297,6 @@ const ReservationScreen = () => {
 	return (
 		<View style={{ flex: 1 }}>
 			<RestaurantNameModal style={styles.modal} />
-
 			<PendingReservationList></PendingReservationList>
 			<CurrentReservationList></CurrentReservationList>
 			<View
