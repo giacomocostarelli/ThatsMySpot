@@ -5,8 +5,6 @@ import {
 	GET_CURRENT_RESTAURANT,
 } from "../actions/restaurants";
 
-import Restaurant from "../../models/restaurant";
-
 const initialState = {
 	restaurantsState: [],
 	currentRestaurant: null,

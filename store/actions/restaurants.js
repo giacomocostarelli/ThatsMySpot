@@ -38,10 +38,7 @@ export const fetchRestaurants = () => {
 						resData[restaurantName].latitude,
 						resData[restaurantName].longitude,
 						resData[restaurantName].openingTime,
-						resData[restaurantName].closingTime,
-						null, //resData[restaurantName].menu,
-						null, //resData[restaurantName].prenotations,
-						null //resData[restaurantName].takeaways
+						resData[restaurantName].closingTime
 					)
 				);
 			}
@@ -86,10 +83,7 @@ export const getRestByName = (name) => {
 						resData[restaurantName].latitude,
 						resData[restaurantName].longitude,
 						resData[restaurantName].openingTime,
-						resData[restaurantName].closingTime,
-						null, //resData[restaurantName].menu,
-						null, //resData[restaurantName].prenotations,
-						null //resData[restaurantName].takeaways
+						resData[restaurantName].closingTime
 					)
 				);
 			}

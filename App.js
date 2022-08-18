@@ -12,6 +12,7 @@ import * as Font from "expo-font";
 import authReducer from "./store/reducers/auth";
 import restaurantsReducer from "./store/reducers/restaurants";
 import usersReducer from "./store/reducers/users";
+import reservationsReducer from "./store/reducers/reservations";
 
 import AppNavigator from "./navigation/AppNavigator";
 
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
 	auth: authReducer,
 	restaurants: restaurantsReducer,
 	users: usersReducer,
+	reservations: reservationsReducer,
 });
 
 const store = createStore(rootReducer, applyMiddleware(ReduxThunk));

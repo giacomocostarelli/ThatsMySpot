@@ -11,12 +11,12 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../constants/Colors";
 import { FontAwesome } from "@expo/vector-icons";
-import Counter from "react-native-counters";
 import { TabView, SceneMap, TabBar } from "react-native-tab-view";
 import DateTimePicker from "@react-native-community/datetimepicker";
 import { Divider } from "react-native-elements/dist/divider/Divider";
 import { Icon } from "react-native-elements";
 import { removeFromFav, addToFav, getStarred } from "../../store/actions/users";
+import { askForReservation } from "../../store/actions/reservations";
 
 const ProfileTab = () => {
 	const dispatch = useDispatch();
@@ -102,7 +102,9 @@ const ProfileTab = () => {
 		);
 	}
 };
-const BookingTab = () => {
+
+const BookingTab = (props) => {
+	const dispatch = useDispatch();
 	const [date, setDate] = useState(new Date());
 	const [mode, setMode] = useState("date");
 	const [show, setShow] = useState(false);
@@ -122,7 +124,7 @@ const BookingTab = () => {
 	const onChange = (event, selectedDate) => {
 		const currentDate = selectedDate || date;
 		setShow(Platform.OS === "ios");
-		currentDate.setHours(currentDate.getHours() + 1);
+		currentDate.setHours(currentDate.getHours() + 2);
 		setDate(currentDate);
 	};
 
@@ -168,6 +170,15 @@ const BookingTab = () => {
 		let json = await response.json();
 	};
 
+	const submit = async () => {
+		let res = {
+			date: dateFormat,
+			time: timeFormat,
+			number: numberOfPeople,
+		};
+		await dispatch(askForReservation(res));
+	};
+
 	return (
 		<View
 			style={{
@@ -207,7 +218,9 @@ const BookingTab = () => {
 					color={Colors.accent}
 					style={{ margin: "5%", width: "98%" }}
 				/>
+
 				<Pressable
+					disabled={numberOfPeople === 0 ? true : false}
 					style={styles.buttonConfirm}
 					onPress={() => {
 						setModalVisible(true);
@@ -243,7 +256,8 @@ const BookingTab = () => {
 							<Pressable
 								style={[styles.buttonModal, styles.buttonClose]}
 								onPress={() => {
-									setModalVisible(!modalVisible), sendEmail();
+									setModalVisible(!modalVisible);
+									submit();
 								}}
 							>
 								<Text style={styles.textStyle}>Conferma</Text>
