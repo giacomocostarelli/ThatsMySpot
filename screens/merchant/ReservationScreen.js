@@ -13,6 +13,7 @@ import Collapsible from "react-native-collapsible"; // PACKAGE
 import { Icon } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { createRestaurant } from "../../store/actions/restaurants";
+import { getCurrentReservations } from "../../store/actions/reservations";
 
 const ReservationRow = (props) => {
 	// BLACK BORDER
@@ -294,6 +295,7 @@ const RestaurantNameInput = ({ childToParent }) => {
 };
 
 const ReservationScreen = () => {
+	const dispatch = useDispatch();
 	return (
 		<View style={{ flex: 1 }}>
 			<RestaurantNameModal style={styles.modal} />
@@ -309,6 +311,12 @@ const ReservationScreen = () => {
 			>
 				<Icon name="corner-left-up" color="black" size={30} type="feather" />
 				<Text style={styles.text}>Controlla le tue prenotazioni.</Text>
+				<Button
+					title=" Fetch reserv"
+					onPress={() => {
+						dispatch(getCurrentReservations());
+					}}
+				/>
 			</View>
 		</View>
 	);

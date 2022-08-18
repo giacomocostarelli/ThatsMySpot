@@ -9,13 +9,11 @@ export const askForReservation = (reservObj) => {
 		const userId = getState().auth.userId;
 		const currentRestaurant = getState().restaurants.currentRestaurant;
 
-		console.log(currentRestaurant);
-
 		console.log("ASK_RESERVATION Request.");
 		console.log("-------------------------");
 
 		const response = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${currentRestaurant.ownerId}/${currentRestaurant.name}/pending.json?auth=${token}`,
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${currentRestaurant.ownerId}/${currentRestaurant.name}/pending/${userId}.json?auth=${token}`,
 			{
 				method: "PUT ",
 				headers: {
@@ -25,7 +23,6 @@ export const askForReservation = (reservObj) => {
 					date: reservObj.date,
 					time: reservObj.time,
 					number: reservObj.number,
-					customerId: userId,
 				}),
 			}
 		);
@@ -37,30 +34,62 @@ export const askForReservation = (reservObj) => {
 	};
 };
 
-//TODO
-export const getCurrentReservations = (merchantId) => {
+export const getCurrentReservations = () => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
 		const userId = getState().auth.userId;
 
-		console.log("GET_RESERVATIONS Request.");
-		/*
-        const response = await fetch(
-            `https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred/${name}/starts.json?auth=${token}`,
-            {
-                method: "PUT ",
-                headers: {
-                    "Content-Type": "application/json",
+		try {
+			// PENDING Reservations
+			const response = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}.json?auth=${token}`
+			);
+			if (!response.ok) {
+				throw new Error("Something went wrong!");
+			}
+			const resData = await response.json();
+
+			let pendingObj = Object.values(resData)[0].pending;
+			let pendingList = [];
+			for (const resObj in pendingObj) {
+				let singleReservation = null;
+				singleReservation = {
+					customerId: resObj,
+					date: pendingObj[resObj].date,
+					time: pendingObj[resObj].time,
+					number: pendingObj[resObj].number,
+				};
+				pendingList.push(singleReservation);
+			}
+
+			console.log("Ecco la lista di pending");
+			console.log(pendingList);
+
+			/*
+            Object {
+                "HIIv4s7184hboFq65bj6vm8t6WE2": Object {
+                    "date": "26/08/2022",
+                    "number": 4,
+                    "time": "19:45",
                 },
-                body: JSON.stringify(toAdd),
+                "lsBoscyWeBbh00eU71CyuzeLcOl1": Object {
+                    "date": "26/08/2022",
+                    "number": 4,
+                    "time": "18:30",
+                },
             }
-        );
-        const resData = await response.json();
-*/
-		dispatch({
-			type: GET_RESERVATIONS,
-			//toAddAction: name,
-		});
+            */
+
+			console.log("GET_RESERVATIONS Request.");
+			console.log("-------------------------");
+
+			dispatch({
+				type: GET_RESERVATIONS,
+				pendingListAction: pendingList,
+			});
+		} catch (err) {
+			throw err;
+		}
 	};
 };
 

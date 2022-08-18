@@ -19,6 +19,7 @@ import Colors from "../constants/Colors";
 import * as authActions from "../store/actions/auth";
 import { fetchRestaurants } from "../store/actions/restaurants";
 import { getStarred, addUser, isUserNew } from "../store/actions/users";
+import { getCurrentReservations } from "../store/actions/reservations";
 
 const FORM_INPUT_UPDATE = "FORM_INPUT_UPDATE";
 
@@ -128,6 +129,7 @@ const LoginScreen = (props) => {
 				// Ristoratore.
 				if (userRole === "merchant") {
 					dispatch(isUserNew(false));
+					dispatch(getCurrentReservations());
 					props.navigation.replace("HomepageMerchant");
 					// Cliente.
 				} else {
