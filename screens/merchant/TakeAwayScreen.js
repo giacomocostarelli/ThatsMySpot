@@ -1,10 +1,15 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet } from "react-native";
+import { View, Text, StyleSheet, Image } from "react-native";
 
 const TakeAwayScreen = (props) => {
 	return (
 		<View style={styles.centered}>
-			<Text>TakeAwayScreen</Text>
+			<Image
+				style={{ width: "50%", height: "30%" }}
+				source={{
+					uri: "https://cdn-icons-png.flaticon.com/512/5578/5578682.png",
+				}}
+			/>
 		</View>
 	);
 };

@@ -159,6 +159,7 @@ const PendingReservationList = () => {
 			);
 		}
 		setRows(rowsTmp);
+		setIsPendingExpanded(false);
 	}, [pendingList]);
 
 	return (
@@ -223,6 +224,7 @@ const ConfirmedReservationList = () => {
 			);
 		}
 		setRows(rowsTmp);
+		setIsConfirmedExpanded(false);
 	}, [confirmedList]);
 
 	return (
@@ -256,7 +258,7 @@ const ConfirmedReservationList = () => {
 					)}
 				</View>
 			</TouchableWithoutFeedback>
-			<ScrollView style={styles.pendingListContainer}>
+			<ScrollView style={styles.confirmedListContainer}>
 				<Collapsible collapsed={!isConfirmedExpanded}>{rows}</Collapsible>
 			</ScrollView>
 		</View>
@@ -320,7 +322,6 @@ const RestaurantNameInput = ({ childToParent }) => {
 };
 
 const ReservationScreen = () => {
-	const dispatch = useDispatch();
 	return (
 		<View style={{ flex: 1 }}>
 			<RestaurantNameModal style={styles.modal} />
@@ -351,7 +352,6 @@ const styles = StyleSheet.create({
 
 	reservationRowContainer: {
 		flex: 1,
-
 		alignItems: "center",
 		justifyContent: "center",
 		borderColor: "grey",
@@ -363,6 +363,13 @@ const styles = StyleSheet.create({
 		flexDirection: "column",
 		borderColor: "red",
 		borderWidth: 0,
+	},
+	confirmedListContainer: {
+		width: "100%",
+		flexDirection: "column",
+		borderColor: "red",
+		borderWidth: 0,
+		marginBottom: 105,
 	},
 
 	modal: {
