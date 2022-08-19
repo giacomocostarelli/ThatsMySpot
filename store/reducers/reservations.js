@@ -13,12 +13,10 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_RESERVATIONS:
-			let pendingTmp = state.confirmedReservations.concat(
-				action.pendingListAction
-			);
 			return {
 				...state,
-				pendingReservations: pendingTmp,
+				pendingReservations: action.pendingListAction,
+				confirmedReservations: action.confirmedListAction,
 			};
 
 		case ASK_RESERVATION:
