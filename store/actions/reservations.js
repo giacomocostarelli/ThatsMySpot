@@ -62,9 +62,6 @@ export const getCurrentReservations = () => {
 				pendingList.push(singleReservation);
 			}
 
-			console.log("Ecco la lista di pending");
-			console.log(pendingList);
-
 			/*
             Object {
                 "HIIv4s7184hboFq65bj6vm8t6WE2": Object {
@@ -78,6 +75,20 @@ export const getCurrentReservations = () => {
                     "time": "18:30",
                 },
             }
+            */
+			/*
+            let confirmedObj = Object.values(resData)[0].confirmed;
+			let confirmedList = [];
+			for (const resObj in confirmedObj) {
+				let singleReservation = null;
+				singleReservation = {
+					customerId: resObj,
+					date: confirmedObj[resObj].date,
+					time: confirmedObj[resObj].time,
+					number: confirmedObj[resObj].number,
+				};
+				confirmedList.push(singleReservation);
+			}
             */
 
 			console.log("GET_RESERVATIONS Request.");

@@ -16,7 +16,6 @@ import { createRestaurant } from "../../store/actions/restaurants";
 import { getCurrentReservations } from "../../store/actions/reservations";
 
 const ReservationRow = (props) => {
-	// BLACK BORDER
 	return (
 		<View style={styles.reservationRowContainer}>
 			<View
@@ -36,9 +35,9 @@ const ReservationRow = (props) => {
 					}}
 				>
 					<Text
-						style={{ textTransform: "uppercase", fontSize: 20, margin: 10 }}
+						style={{ textTransform: "uppercase", fontSize: 18, margin: 10 }}
 					>
-						Giacomo
+						{props.pn + " . " + props.customerId.slice(0, 6)}
 					</Text>
 				</View>
 
@@ -89,7 +88,7 @@ const ReservationRow = (props) => {
 						size={25}
 						type="material-community"
 					/>
-					<Text style={styles.text}>22/10/2022</Text>
+					<Text style={styles.text}>{props.date}</Text>
 				</View>
 				<View
 					style={{
@@ -100,7 +99,7 @@ const ReservationRow = (props) => {
 					}}
 				>
 					<Icon name="clock" color={Colors.primary} size={25} type="feather" />
-					<Text style={styles.text}>18:45</Text>
+					<Text style={styles.text}>{props.time}</Text>
 				</View>
 
 				{
@@ -114,7 +113,7 @@ const ReservationRow = (props) => {
 						size={25}
 						type="material-community"
 					/>
-					<Text style={styles.text}>10</Text>
+					<Text style={styles.text}>{props.number}</Text>
 				</View>
 			</View>
 		</View>
@@ -122,9 +121,26 @@ const ReservationRow = (props) => {
 };
 
 const PendingReservationList = () => {
-	// RED BORDER
 	//number is the id of reservation TODO
 	const [isPendingExpanded, setIsPendingExpanded] = useState(false);
+	const pendingList = useSelector(
+		(state) => state.reservations.pendingReservations
+	);
+
+	//maybe state?
+	const rows = [];
+	for (let i = 0; i < pendingList.length; i++) {
+		rows.push(
+			<ReservationRow
+				customerId={pendingList[i].customerId}
+				date={pendingList[i].date}
+				number={pendingList[i].number}
+				time={pendingList[i].time}
+				pn={i + 1}
+				key={i + 1}
+			/>
+		);
+	}
 
 	return (
 		<View
@@ -158,23 +174,7 @@ const PendingReservationList = () => {
 				</View>
 			</TouchableWithoutFeedback>
 			<ScrollView style={styles.pendingListContainer}>
-				<Collapsible collapsed={!isPendingExpanded}>
-					<ReservationRow number="" />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-				</Collapsible>
+				<Collapsible collapsed={!isPendingExpanded}>{rows}</Collapsible>
 			</ScrollView>
 		</View>
 	);
@@ -182,7 +182,7 @@ const PendingReservationList = () => {
 
 const CurrentReservationList = () => {
 	//number is the id of reservation TODO
-	const [isPendingExpanded, setIsPendingExpanded] = useState(false);
+	const [isCurrentExpanded, setIsCurrentExpanded] = useState(false);
 
 	return (
 		<View
@@ -193,12 +193,12 @@ const CurrentReservationList = () => {
 		>
 			<TouchableWithoutFeedback
 				onPress={() => {
-					setIsPendingExpanded(!isPendingExpanded);
+					setIsCurrentExpanded(!isCurrentExpanded);
 				}}
 			>
 				<View style={styles.pendingTextView}>
 					<Text style={styles.pendingText}> Attive </Text>
-					{isPendingExpanded ? (
+					{isCurrentExpanded ? (
 						<Icon
 							name="expand-less"
 							color="white"
@@ -216,23 +216,7 @@ const CurrentReservationList = () => {
 				</View>
 			</TouchableWithoutFeedback>
 			<ScrollView style={styles.pendingListContainer}>
-				<Collapsible collapsed={!isPendingExpanded}>
-					<ReservationRow number="" />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-					<ReservationRow />
-				</Collapsible>
+				<Collapsible collapsed={!isCurrentExpanded}></Collapsible>
 			</ScrollView>
 		</View>
 	);
@@ -311,12 +295,6 @@ const ReservationScreen = () => {
 			>
 				<Icon name="corner-left-up" color="black" size={30} type="feather" />
 				<Text style={styles.text}>Controlla le tue prenotazioni.</Text>
-				<Button
-					title=" Fetch reserv"
-					onPress={() => {
-						dispatch(getCurrentReservations());
-					}}
-				/>
 			</View>
 		</View>
 	);
