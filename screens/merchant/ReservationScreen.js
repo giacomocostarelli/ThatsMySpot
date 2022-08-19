@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
 	View,
 	StyleSheet,
@@ -13,9 +13,13 @@ import Collapsible from "react-native-collapsible"; // PACKAGE
 import { Icon } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { createRestaurant } from "../../store/actions/restaurants";
-import { getCurrentReservations } from "../../store/actions/reservations";
+import {
+	getCurrentReservations,
+	confirmReservation,
+} from "../../store/actions/reservations";
 
 const ReservationRow = (props) => {
+	const dispatch = useDispatch();
 	return (
 		<View style={styles.reservationRowContainer}>
 			<View
@@ -44,22 +48,34 @@ const ReservationRow = (props) => {
 				{
 					// Confirm and cancel icons group
 				}
-				<View style={{ flexDirection: "row" }}>
-					<Icon
-						name="checksquareo"
-						color={Colors.secondary}
-						size={40}
-						type="antdesign"
-						onPress={() => {}}
-					/>
-					<Icon
-						name="closesquareo"
-						color={Colors.primary}
-						size={40}
-						type="antdesign"
-						onPress={() => {}}
-					/>
-				</View>
+
+				{props.isPendingList === true && (
+					<View style={{ flexDirection: "row" }}>
+						<Icon
+							name="checksquareo"
+							color={Colors.secondary}
+							size={40}
+							type="antdesign"
+							onPress={() => {
+								dispatch(
+									confirmReservation({
+										date: props.date,
+										time: props.time,
+										number: props.number,
+										customerId: props.customerId,
+									})
+								);
+							}}
+						/>
+						<Icon
+							name="closesquareo"
+							color={Colors.primary}
+							size={40}
+							type="antdesign"
+							onPress={() => {}}
+						/>
+					</View>
+				)}
 			</View>
 			<View
 				style={{
@@ -122,25 +138,28 @@ const ReservationRow = (props) => {
 
 const PendingReservationList = () => {
 	//number is the id of reservation TODO
+	const [rows, setRows] = useState([]);
 	const [isPendingExpanded, setIsPendingExpanded] = useState(false);
 	const pendingList = useSelector(
 		(state) => state.reservations.pendingReservations
 	);
-
-	//maybe state?
-	const rows = [];
-	for (let i = 0; i < pendingList.length; i++) {
-		rows.push(
-			<ReservationRow
-				customerId={pendingList[i].customerId}
-				date={pendingList[i].date}
-				number={pendingList[i].number}
-				time={pendingList[i].time}
-				pn={i + 1}
-				key={i + 1}
-			/>
-		);
-	}
+	useEffect(() => {
+		let rowsTmp = [];
+		for (let i = 0; i < pendingList.length; i++) {
+			rowsTmp.push(
+				<ReservationRow
+					customerId={pendingList[i].customerId}
+					date={pendingList[i].date}
+					number={pendingList[i].number}
+					time={pendingList[i].time}
+					pn={i + 1}
+					key={i + 1}
+					isPendingList={true}
+				/>
+			);
+		}
+		setRows(rowsTmp);
+	}, [pendingList]);
 
 	return (
 		<View
@@ -180,9 +199,31 @@ const PendingReservationList = () => {
 	);
 };
 
-const CurrentReservationList = () => {
+const ConfirmedReservationList = () => {
 	//number is the id of reservation TODO
-	const [isCurrentExpanded, setIsCurrentExpanded] = useState(false);
+	const [isConfirmedExpanded, setIsConfirmedExpanded] = useState(false);
+	const [rows, setRows] = useState([]);
+	const confirmedList = useSelector(
+		(state) => state.reservations.confirmedReservations
+	);
+
+	useEffect(() => {
+		let rowsTmp = [];
+		for (let i = 0; i < confirmedList.length; i++) {
+			rowsTmp.push(
+				<ReservationRow
+					customerId={confirmedList[i].customerId}
+					date={confirmedList[i].date}
+					number={confirmedList[i].number}
+					time={confirmedList[i].time}
+					pn={i + 1}
+					key={i + 1}
+					isPendingList={false}
+				/>
+			);
+		}
+		setRows(rowsTmp);
+	}, [confirmedList]);
 
 	return (
 		<View
@@ -193,12 +234,12 @@ const CurrentReservationList = () => {
 		>
 			<TouchableWithoutFeedback
 				onPress={() => {
-					setIsCurrentExpanded(!isCurrentExpanded);
+					setIsConfirmedExpanded(!isConfirmedExpanded);
 				}}
 			>
 				<View style={styles.pendingTextView}>
 					<Text style={styles.pendingText}> Attive </Text>
-					{isCurrentExpanded ? (
+					{isConfirmedExpanded ? (
 						<Icon
 							name="expand-less"
 							color="white"
@@ -216,7 +257,7 @@ const CurrentReservationList = () => {
 				</View>
 			</TouchableWithoutFeedback>
 			<ScrollView style={styles.pendingListContainer}>
-				<Collapsible collapsed={!isCurrentExpanded}></Collapsible>
+				<Collapsible collapsed={!isConfirmedExpanded}>{rows}</Collapsible>
 			</ScrollView>
 		</View>
 	);
@@ -284,7 +325,7 @@ const ReservationScreen = () => {
 		<View style={{ flex: 1 }}>
 			<RestaurantNameModal style={styles.modal} />
 			<PendingReservationList></PendingReservationList>
-			<CurrentReservationList></CurrentReservationList>
+			<ConfirmedReservationList></ConfirmedReservationList>
 			<View
 				style={{
 					flex: 1,

@@ -13,7 +13,6 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_RESERVATIONS:
-			console.log(action.pendingListAction);
 			let pendingTmp = state.confirmedReservations.concat(
 				action.pendingListAction
 			);
@@ -25,6 +24,20 @@ export default (state = initialState, action) => {
 		case ASK_RESERVATION:
 			return {
 				state,
+			};
+
+		case CONFIRM_RESERVATION:
+			let toMoveRes = state.pendingReservations.find(
+				(reservation) => reservation.customerId === action.customerIdAction
+			);
+			let pendingListTmp = state.pendingReservations.filter(
+				(reservation) => reservation.customerId !== toMoveRes.customerId
+			);
+			let confirmedListTmp = state.confirmedReservations.concat(toMoveRes);
+
+			return {
+				pendingReservations: pendingListTmp,
+				confirmedReservations: confirmedListTmp,
 			};
 
 		default:

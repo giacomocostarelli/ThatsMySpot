@@ -62,22 +62,8 @@ export const getCurrentReservations = () => {
 				pendingList.push(singleReservation);
 			}
 
-			/*
-            Object {
-                "HIIv4s7184hboFq65bj6vm8t6WE2": Object {
-                    "date": "26/08/2022",
-                    "number": 4,
-                    "time": "19:45",
-                },
-                "lsBoscyWeBbh00eU71CyuzeLcOl1": Object {
-                    "date": "26/08/2022",
-                    "number": 4,
-                    "time": "18:30",
-                },
-            }
-            */
-			/*
-            let confirmedObj = Object.values(resData)[0].confirmed;
+			// CONFIRMED Reservations
+			let confirmedObj = Object.values(resData)[0].confirmed;
 			let confirmedList = [];
 			for (const resObj in confirmedObj) {
 				let singleReservation = null;
@@ -89,14 +75,15 @@ export const getCurrentReservations = () => {
 				};
 				confirmedList.push(singleReservation);
 			}
-            */
 
 			console.log("GET_RESERVATIONS Request.");
 			console.log("-------------------------");
+			console.log(confirmedList);
 
 			dispatch({
 				type: GET_RESERVATIONS,
 				pendingListAction: pendingList,
+				confirmedListAction: confirmedList,
 			});
 		} catch (err) {
 			throw err;
@@ -104,15 +91,37 @@ export const getCurrentReservations = () => {
 	};
 };
 
-//TODO
-export const denyReservation = (name) => {
+export const confirmReservation = (reservObj) => {
 	return async (dispatch, getState) => {
-		const userId = getState().auth.userId;
 		const token = getState().auth.token;
-		console.log(" -- REMOVE_FROM_FAV Request -- ");
-		/*
-		const response = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred/${name}.json?auth=${token}`,
+		const userId = getState().auth.userId;
+		const restaurant = getState().restaurants.restaurantsState.find(
+			(restaurant) => restaurant.ownerId === userId
+		);
+
+		console.log("CONFIRM_RESERVATION Request.");
+		console.log("-------------------------");
+
+		//Add to confirmed
+		const responseAdd = await fetch(
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}/${restaurant.name}/confirmed/${reservObj.customerId}.json?auth=${token}`,
+			{
+				method: "PUT ",
+				headers: {
+					"Content-Type": "application/json",
+				},
+				body: JSON.stringify({
+					date: reservObj.date,
+					time: reservObj.time,
+					number: reservObj.number,
+				}),
+			}
+		);
+		const resDataAdd = await responseAdd.json();
+
+		//Remove from pending
+		const responseDel = await fetch(
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}/${restaurant.name}/pending/${reservObj.customerId}.json?auth=${token}`,
 			{
 				method: "DELETE",
 				headers: {
@@ -120,17 +129,17 @@ export const denyReservation = (name) => {
 				},
 			}
 		);
-		const resData = await response.json();
+		const resDataDel = await responseDel.json();
+
 		dispatch({
-			type: REMOVE_FROM_FAV,
-			toRemove: name,
+			type: CONFIRM_RESERVATION,
+			customerIdAction: reservObj.customerId,
 		});
-        */
 	};
 };
 
 //TODO
-export const confirmReservation = (name) => {
+export const denyReservation = (name) => {
 	return async (dispatch, getState) => {
 		const userId = getState().auth.userId;
 		const token = getState().auth.token;
