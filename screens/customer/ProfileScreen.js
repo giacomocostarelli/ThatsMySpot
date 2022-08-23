@@ -14,8 +14,8 @@ import {
 import { useDispatch, useSelector } from "react-redux";
 import { Icon, SearchBar } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native";
-import { getUser, logout } from "../../store/actions/auth";
-import { deleteCustomer } from "../../store/actions/users";
+import { getUserRole, logout } from "../../store/actions/auth";
+import { deleteCustomer, deleteMerchant } from "../../store/actions/users";
 import { deleteFirebaseUser } from "../../store/actions/auth";
 import Card from "../../components/Card";
 import Colors from "../../constants/Colors";
@@ -98,7 +98,7 @@ const ProfileScreen = ({ navigation }) => {
 									{
 										text: "OK",
 										onPress: async () => {
-											await dispatch(getUser());
+											await dispatch(getUserRole());
 											const role = await AsyncStorage.getItem("@role");
 											if (role === "customer") {
 												await dispatch(deleteCustomer());

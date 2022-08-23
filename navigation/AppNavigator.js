@@ -288,6 +288,20 @@ const TabNavigatorMerchant = ({ navigation }) => {
 						/>
 					</View>
 				),
+				headerLeft: (props) => (
+					<View style={{ marginHorizontal: 20 }}>
+						<Icon
+							name="account-outline"
+							color="white"
+							size={25}
+							type="material-community"
+							style={{ marginTop: 10 }}
+							onPress={() => {
+								navigation.navigate("Profile");
+							}}
+						/>
+					</View>
+				),
 			}}
 		>
 			<TabMerchant.Screen

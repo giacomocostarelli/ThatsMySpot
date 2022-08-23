@@ -123,7 +123,7 @@ const LoginScreen = (props) => {
 
 				// Login.
 			} else {
-				await dispatch(authActions.getUser());
+				await dispatch(authActions.getUserRole());
 				let userRole = await getUserRole();
 
 				// Ristoratore.
@@ -134,6 +134,7 @@ const LoginScreen = (props) => {
 					// Cliente.
 				} else {
 					await dispatch(getStarred());
+
 					props.navigation.replace("Homepage");
 				}
 			}
@@ -452,11 +453,5 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 	},
 });
-/*
-const mapStateToProps = (state) => {
-	const { auth } = state;
-	console.log(auth.isMerchant);
-	return { isMerchant: auth.isMerchant };
-};
-*/
+
 export default LoginScreen;

@@ -33,13 +33,19 @@ export const deleteCustomer = () => {
 	};
 };
 
-export const deleteMerchant = (name) => {
+export const deleteMerchant = () => {
 	return async (dispatch, getState) => {
 		const userId = getState().auth.userId;
 		const token = getState().auth.token;
-		console.log(" -- DELETE_MERCHANT Request -- ");
+		const restaurantName = getState().restaurants.restaurantsState.find(
+			(restaurant) => restaurant.ownerId === userId
+		).name;
 
-		const response = await fetch(
+		console.log(" -- DELETE_MERCHANT Request -- ");
+		console.log(restaurantName);
+
+		// DELETION of the merchant profile
+		const responseDelUser = await fetch(
 			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}.json?auth=${token}`,
 			{
 				method: "DELETE",
@@ -48,10 +54,29 @@ export const deleteMerchant = (name) => {
 				},
 			}
 		);
-		const resData = await response.json();
+		if (!responseDelUser.ok) {
+			throw new Error("Qualcosa è andato storto (responseDelUser)");
+		}
+		const resDataU = await responseDelUser.json();
+
+		// DELETION of the merchant's restaurant
+		const responseDelRest = await fetch(
+			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/restaurants/${restaurantName}.json?auth=${token}`,
+			{
+				method: "DELETE",
+				headers: {
+					"Content-Type": "application/json",
+				},
+			}
+		);
+		if (!responseDelRest.ok) {
+			throw new Error("Qualcosa è andato storto (responseDelRest)");
+		}
+
+		const resDataR = await responseDelRest.json();
+
 		dispatch({
 			type: DELETE_MERCHANT,
-			toRemove: userId,
 		});
 	};
 };
@@ -59,20 +84,31 @@ export const deleteMerchant = (name) => {
 export const getStarred = () => {
 	return async (dispatch, getState) => {
 		const userId = getState().auth.userId;
+		const restList = getState().restaurants.restaurantsState;
 		console.log("GET_STARRED Request for user: " + userId);
+
 		try {
 			const response = await fetch(
 				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred.json`
 			);
+
 			if (!response.ok) {
-				throw new Error("Something went wrong!");
+				throw new Error("Qualcosa è andato storto (GET_STARRED)");
 			}
 
 			const resData = await response.json();
+
 			dispatch({
 				type: GET_STARRED,
 				userStarredAct: resData,
 			});
+
+			for (const favoriteRest in resData) {
+				if (restList.find((rest) => rest === favoriteRest) === "undefined") {
+					console.log("Starred but to be removed : " + favoriteRest);
+					dispatch(removeFromFav(favoriteRest));
+				}
+			}
 		} catch (err) {
 			throw err;
 		}
@@ -97,6 +133,11 @@ export const addToFav = (name) => {
 				body: JSON.stringify(toAdd),
 			}
 		);
+
+		if (!response.ok) {
+			throw new Error("Qualcosa è andato storto (ADD_TO_FAV)");
+		}
+
 		const resData = await response.json();
 		dispatch({
 			type: ADD_TO_FAV,

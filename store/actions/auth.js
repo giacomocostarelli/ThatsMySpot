@@ -93,7 +93,7 @@ export const login = (email, password) => {
 	};
 };
 
-export const getUser = () => {
+export const getUserRole = () => {
 	return async (dispatch, getState) => {
 		const userId = getState().auth.userId;
 

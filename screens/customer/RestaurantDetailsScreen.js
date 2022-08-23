@@ -7,6 +7,7 @@ import {
 	ImageBackground,
 	Pressable,
 	Modal,
+	Image,
 } from "react-native";
 import { useSelector, useDispatch } from "react-redux";
 import Colors from "../../constants/Colors";
@@ -197,11 +198,14 @@ const BookingTab = (props) => {
 					PRENOTA IL TUO TAVOLO.
 				</Text>
 				<Text style={{ fontSize: 18, marginVertical: "5%" }}>
-					Seleziona il giorno, l'orario, il numero di persone e conferma.
+					Seleziona il giorno, l'orario, il numero di persone e conferma subito
+					la tua prenotazione e trova il tuo nuovo ristorante preferito!
 				</Text>
 			</View>
 
-			<View style={{ flex: 5, width: "100%", alignItems: "center" }}>
+			<View
+				style={{ flex: 2, width: "100%", alignItems: "center", borderWidth: 0 }}
+			>
 				<Pressable style={styles.button} onPress={showDatepicker}>
 					<Text style={{ color: "white" }}>Scegli un giorno.</Text>
 				</Pressable>
@@ -229,6 +233,22 @@ const BookingTab = (props) => {
 				>
 					<Text style={{ color: "white" }}>Prenota.</Text>
 				</Pressable>
+			</View>
+			<View
+				style={{
+					borderWidth: 0.5,
+					flex: 1,
+					width: "100%",
+					alignItems: "center",
+					justifyContent: "center",
+					borderColor: Colors.secondary,
+					borderRadius: 5,
+				}}
+			>
+				<Image
+					style={{ height: 100, width: 220 }}
+					source={require("../../assets/images/logo_large_accent.png")}
+				/>
 			</View>
 
 			<Modal
@@ -326,20 +346,6 @@ const TakeawayTab = () => {
 		setTimeFormat(datanew.toISOString().slice(11, 16));
 	};
 
-	const sendEmail = async () => {
-		let response = await fetch("http://192.168.1.59:3000", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify({
-				date: dateFormat,
-				time: timeFormat,
-			}),
-		});
-		let json = await response.json();
-	};
-
 	return (
 		<View
 			style={{
@@ -387,42 +393,15 @@ const TakeawayTab = () => {
 				>
 					<Text style={{ color: "white" }}>Prenota.</Text>
 				</Pressable>
-			</View>
-
-			<Modal
-				animationType="slide"
-				transparent={true}
-				visible={modalVisible}
-				onRequestClose={() => {
-					Alert.alert("Modal has been closed.");
-					setModalVisible(!modalVisible);
-				}}
-			>
-				<View style={styles.centeredView}>
-					<View style={styles.modalView}>
-						<Text style={styles.modalText}>{dateFormat}</Text>
-						<Text style={styles.modalText}>{timeFormat}</Text>
-						<View style={{ flexDirection: "row" }}>
-							<Pressable
-								style={[styles.buttonModal, styles.buttonClose]}
-								onPress={() => {
-									setModalVisible(!modalVisible);
-								}}
-							>
-								<Text style={styles.textStyle}>Annulla</Text>
-							</Pressable>
-							<Pressable
-								style={[styles.buttonModal, styles.buttonClose]}
-								onPress={() => {
-									setModalVisible(!modalVisible), sendEmail();
-								}}
-							>
-								<Text style={styles.textStyle}>Conferma</Text>
-							</Pressable>
-						</View>
-					</View>
+				<View style={{ borderWidth: 0, marginTop: 10 }}>
+					<Image
+						style={{ height: 150, width: 150 }}
+						source={{
+							uri: "https://cdn-icons-png.flaticon.com/512/5578/5578682.png",
+						}}
+					/>
 				</View>
-			</Modal>
+			</View>
 
 			{show && (
 				<DateTimePicker
