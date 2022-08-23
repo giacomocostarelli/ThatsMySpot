@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { View, StyleSheet, Text } from "react-native";
+import { View, StyleSheet, Text, ImageBackground } from "react-native";
 import { Icon, Input } from "react-native-elements";
 import { useDispatch, useSelector } from "react-redux";
 import DropDownPicker from "react-native-dropdown-picker";
 
 import Colors from "../../constants/Colors";
 import { updateRestaurant } from "../../store/actions/restaurants";
+import Card from "../../components/Card";
 
 const MyRestaurantScreen = (props) => {
 	const dispatch = useDispatch();
@@ -58,8 +59,12 @@ const MyRestaurantScreen = (props) => {
 	};
 
 	return (
-		<View style={styles.centered}>
-			<View style={styles.cardBody}>
+		<ImageBackground
+			source={require("../../assets/images/background-image-blue-pattern.png")}
+			resizeMode="repeat"
+			style={styles.centered}
+		>
+			<Card style={styles.cardBody}>
 				<View style={styles.dropdown}>
 					<Text style={styles.dropdownLabel}> Category </Text>
 					<DropDownPicker
@@ -129,8 +134,8 @@ const MyRestaurantScreen = (props) => {
 					type="font-awesome"
 					onPress={submit}
 				/>
-			</View>
-		</View>
+			</Card>
+		</ImageBackground>
 	);
 };
 
@@ -141,7 +146,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	cardBody: {
-		width: "100%",
+		width: "80%",
 		alignItems: "center",
 		justifyContent: "center",
 		padding: 20,

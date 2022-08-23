@@ -333,7 +333,7 @@ const RestaurantNameInput = ({ childToParent }) => {
 
 const ReservationScreen = () => {
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1, backgroundColor: "white" }}>
 			<RestaurantNameModal style={styles.modal} />
 			<PendingReservationList></PendingReservationList>
 			<ConfirmedReservationList></ConfirmedReservationList>

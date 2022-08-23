@@ -133,8 +133,9 @@ const styles = StyleSheet.create({
 	containerDelete: {
 		flex: 1,
 		margin: 10,
+		paddingBottom: 40,
 		alignItems: "center",
-		justifyContent: "center",
+		justifyContent: "flex-end",
 	},
 	text: {
 		fontSize: 20,

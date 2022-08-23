@@ -1,16 +1,19 @@
 import React, { useState } from "react";
-import { View, Text, StyleSheet, Image } from "react-native";
+import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
 
 const TakeAwayScreen = (props) => {
+	const image = {
+		uri: "https://background-tiles.com/overview/blue/patterns/large/1063.png",
+	};
 	return (
-		<View style={styles.centered}>
+		<ImageBackground source={image} resizeMode="repeat" style={styles.centered}>
 			<Image
-				style={{ width: "50%", height: "30%" }}
+				style={{ width: "70%", height: "45%" }}
 				source={{
 					uri: "https://cdn-icons-png.flaticon.com/512/5578/5578682.png",
 				}}
 			/>
-		</View>
+		</ImageBackground>
 	);
 };
 

@@ -29,7 +29,7 @@ const AppNavigator = (props) => {
 	const dispatch = useDispatch();
 
 	return (
-		<NavigationContainer>
+		<NavigationContainer theme={{ colors: { background: "#3674A1" } }}>
 			<Stack.Navigator>
 				<Stack.Screen
 					name="Login"
@@ -328,6 +328,8 @@ const TabNavigatorMerchant = ({ navigation }) => {
 				name="Take Away"
 				component={TakeAwayScreen}
 				options={{
+					screenBackgroundColor: "red",
+
 					tabBarLabel: "Take Away",
 					tabBarLabelStyle: {
 						fontSize: 16,
@@ -348,6 +350,8 @@ const TabNavigatorMerchant = ({ navigation }) => {
 				name="Il mio ristorante"
 				component={MyRestaurantScreen}
 				options={{
+					screenBackgroundColor: "#f00",
+
 					tabBarLabel: "Il mio ristorante",
 					tabBarLabelStyle: {
 						fontSize: 16,
