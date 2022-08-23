@@ -8,29 +8,32 @@ export const askForReservation = (reservObj) => {
 		const token = getState().auth.token;
 		const userId = getState().auth.userId;
 		const currentRestaurant = getState().restaurants.currentRestaurant;
+		try {
+			console.log("ASK_RESERVATION Request.");
+			console.log("-------------------------");
 
-		console.log("ASK_RESERVATION Request.");
-		console.log("-------------------------");
+			const response = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${currentRestaurant.ownerId}/${currentRestaurant.name}/pending/${userId}.json?auth=${token}`,
+				{
+					method: "PUT ",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						date: reservObj.date,
+						time: reservObj.time,
+						number: reservObj.number,
+					}),
+				}
+			);
+			const resData = await response.json();
 
-		const response = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${currentRestaurant.ownerId}/${currentRestaurant.name}/pending/${userId}.json?auth=${token}`,
-			{
-				method: "PUT ",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					date: reservObj.date,
-					time: reservObj.time,
-					number: reservObj.number,
-				}),
-			}
-		);
-		const resData = await response.json();
-
-		dispatch({
-			type: ASK_RESERVATION,
-		});
+			dispatch({
+				type: ASK_RESERVATION,
+			});
+		} catch (err) {
+			throw err;
+		}
 	};
 };
 
@@ -101,64 +104,75 @@ export const confirmReservation = (reservObj) => {
 
 		console.log("CONFIRM_RESERVATION Request.");
 		console.log("-------------------------");
+		try {
+			//Add to confirmed
+			const responseAdd = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}/${restaurant.name}/confirmed/${reservObj.customerId}.json?auth=${token}`,
+				{
+					method: "PUT ",
+					headers: {
+						"Content-Type": "application/json",
+					},
+					body: JSON.stringify({
+						date: reservObj.date,
+						time: reservObj.time,
+						number: reservObj.number,
+					}),
+				}
+			);
+			const resDataAdd = await responseAdd.json();
 
-		//Add to confirmed
-		const responseAdd = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}/${restaurant.name}/confirmed/${reservObj.customerId}.json?auth=${token}`,
-			{
-				method: "PUT ",
-				headers: {
-					"Content-Type": "application/json",
-				},
-				body: JSON.stringify({
-					date: reservObj.date,
-					time: reservObj.time,
-					number: reservObj.number,
-				}),
-			}
-		);
-		const resDataAdd = await responseAdd.json();
+			//Remove from pending
+			const responseDel = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}/${restaurant.name}/pending/${reservObj.customerId}.json?auth=${token}`,
+				{
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			const resDataDel = await responseDel.json();
 
-		//Remove from pending
-		const responseDel = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}/${restaurant.name}/pending/${reservObj.customerId}.json?auth=${token}`,
-			{
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
-		);
-		const resDataDel = await responseDel.json();
-
-		dispatch({
-			type: CONFIRM_RESERVATION,
-			customerIdAction: reservObj.customerId,
-		});
+			dispatch({
+				type: CONFIRM_RESERVATION,
+				customerIdAction: reservObj.customerId,
+			});
+		} catch (err) {
+			throw err;
+		}
 	};
 };
 
 //TODO
-export const denyReservation = (name) => {
+export const denyReservation = (reservObj) => {
 	return async (dispatch, getState) => {
-		const userId = getState().auth.userId;
 		const token = getState().auth.token;
-		console.log(" -- REMOVE_FROM_FAV Request -- ");
-		/*
-		const response = await fetch(
-			`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${userId}/starred/${name}.json?auth=${token}`,
-			{
-				method: "DELETE",
-				headers: {
-					"Content-Type": "application/json",
-				},
-			}
+		const userId = getState().auth.userId;
+		const restaurant = getState().restaurants.restaurantsState.find(
+			(restaurant) => restaurant.ownerId === userId
 		);
-		const resData = await response.json();
-		dispatch({
-			type: REMOVE_FROM_FAV,
-			toRemove: name,
-		});
-        */
+		try {
+			console.log("DENY_RESERVATION Request.");
+			console.log("-------------------------");
+
+			const responseDel = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}/${restaurant.name}/pending/${reservObj.customerId}.json?auth=${token}`,
+				{
+					method: "DELETE",
+					headers: {
+						"Content-Type": "application/json",
+					},
+				}
+			);
+			const resDataDel = await responseDel.json();
+
+			dispatch({
+				type: DENY_RESERVATION,
+				customerIdAction: reservObj.customerId,
+			});
+		} catch (err) {
+			throw err;
+		}
 	};
 };

@@ -16,6 +16,7 @@ import { createRestaurant } from "../../store/actions/restaurants";
 import {
 	getCurrentReservations,
 	confirmReservation,
+	denyReservation,
 } from "../../store/actions/reservations";
 
 const ReservationRow = (props) => {
@@ -72,7 +73,16 @@ const ReservationRow = (props) => {
 							color={Colors.primary}
 							size={40}
 							type="antdesign"
-							onPress={() => {}}
+							onPress={() => {
+								dispatch(
+									denyReservation({
+										date: props.date,
+										time: props.time,
+										number: props.number,
+										customerId: props.customerId,
+									})
+								);
+							}}
 						/>
 					</View>
 				)}

@@ -38,6 +38,18 @@ export default (state = initialState, action) => {
 				confirmedReservations: confirmedListTmp,
 			};
 
+		case DENY_RESERVATION:
+			let toRemoveRes = state.pendingReservations.find(
+				(reservation) => reservation.customerId === action.customerIdAction
+			);
+			let pendingListTmpDeny = state.pendingReservations.filter(
+				(reservation) => reservation.customerId !== toRemoveRes.customerId
+			);
+			return {
+				...state,
+				pendingReservations: pendingListTmpDeny,
+			};
+
 		default:
 			return state;
 	}
