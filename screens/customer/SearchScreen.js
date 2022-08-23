@@ -74,20 +74,6 @@ const SearchScreen = (props) => {
 	//Component.
 	return (
 		<View style={styles.container}>
-			{/*<Button
-				title="FETCH"
-				onPress={() => {
-					dispatch(fetchRestaurants());
-					console.log("FETCH");
-				}}
-			/>
-			<Button
-				title="STARRED"
-				onPress={() => {
-					console.log(searchResult);
-				}}
-			/>
-            */}
 			<SearchBar
 				platform="android"
 				containerStyle={styles.containerStyle}
@@ -126,12 +112,14 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "flex-start",
 		flexDirection: "column",
+		backgroundColor: "white",
 	},
 	containerStyle: {
 		width: "90%",
 		margin: "5%",
 		borderRadius: 10,
 		elevation: 3,
+		backgroundColor: "#3674A1",
 	},
 	flatlist: {
 		width: "90%",

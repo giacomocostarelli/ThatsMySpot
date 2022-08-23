@@ -90,7 +90,7 @@ const Row = (props) => {
 
 const ExplorerScreen = () => {
 	return (
-		<View style={{ flex: 1 }}>
+		<View style={{ flex: 1, backgroundColor: "white" }}>
 			<ScrollView style={styles.container}>
 				<Row category={"Pizza"} />
 				<Row category={"Hamburger"} />
