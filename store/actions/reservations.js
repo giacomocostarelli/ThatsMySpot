@@ -41,6 +41,8 @@ export const getCurrentReservations = () => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
 		const userId = getState().auth.userId;
+		let confirmedList = [];
+		let pendingList = [];
 
 		try {
 			// PENDING Reservations
@@ -48,41 +50,42 @@ export const getCurrentReservations = () => {
 				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/reservations/${userId}.json?auth=${token}`
 			);
 			if (!response.ok) {
-				throw new Error("Something went wrong!");
+				throw new Error("Qualcosa è andato storto : GET_RESERVATIONS.");
 			}
 			const resData = await response.json();
 
-			let pendingObj = Object.values(resData)[0].pending;
-			let pendingList = [];
-			for (const resObj in pendingObj) {
-				let singleReservation = null;
-				singleReservation = {
-					customerId: resObj,
-					date: pendingObj[resObj].date,
-					time: pendingObj[resObj].time,
-					number: pendingObj[resObj].number,
-				};
-				pendingList.push(singleReservation);
+			if (resData !== "undefined" && resData !== null) {
+				let pendingObj = Object.values(resData)[0].pending;
+
+				for (const resObj in pendingObj) {
+					let singleReservation = null;
+					singleReservation = {
+						customerId: resObj,
+						date: pendingObj[resObj].date,
+						time: pendingObj[resObj].time,
+						number: pendingObj[resObj].number,
+					};
+					pendingList.push(singleReservation);
+				}
+
+				// CONFIRMED Reservations
+				let confirmedObj = Object.values(resData)[0].confirmed;
+
+				for (const resObj in confirmedObj) {
+					let singleReservation = null;
+					singleReservation = {
+						customerId: resObj,
+						date: confirmedObj[resObj].date,
+						time: confirmedObj[resObj].time,
+						number: confirmedObj[resObj].number,
+					};
+					confirmedList.push(singleReservation);
+				}
+
+				console.log("GET_RESERVATIONS Request.");
+				console.log("-------------------------");
+				console.log(confirmedList);
 			}
-
-			// CONFIRMED Reservations
-			let confirmedObj = Object.values(resData)[0].confirmed;
-			let confirmedList = [];
-			for (const resObj in confirmedObj) {
-				let singleReservation = null;
-				singleReservation = {
-					customerId: resObj,
-					date: confirmedObj[resObj].date,
-					time: confirmedObj[resObj].time,
-					number: confirmedObj[resObj].number,
-				};
-				confirmedList.push(singleReservation);
-			}
-
-			console.log("GET_RESERVATIONS Request.");
-			console.log("-------------------------");
-			console.log(confirmedList);
-
 			dispatch({
 				type: GET_RESERVATIONS,
 				pendingListAction: pendingList,
