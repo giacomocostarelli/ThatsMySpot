@@ -157,20 +157,6 @@ const BookingTab = (props) => {
 		setTimeFormat(datanew.toISOString().slice(11, 16));
 	};
 
-	const sendEmail = async () => {
-		let response = await fetch("http://192.168.1.59:3000", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify({
-				date: dateFormat,
-				time: timeFormat,
-			}),
-		});
-		let json = await response.json();
-	};
-
 	const submit = async () => {
 		let res = {
 			date: dateFormat,

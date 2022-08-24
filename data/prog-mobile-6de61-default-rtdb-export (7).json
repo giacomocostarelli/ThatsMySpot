@@ -11,19 +11,27 @@
 				}
 			}
 		},
+		"H4FLJsu4jrf3xHXe7hZL0t6qY1E3": {
+			"La buona pizza": {
+				"pending": {
+					"HIIv4s7184hboFq65bj6vm8t6WE2": {
+						"date": "24/08/2022",
+						"number": 5,
+						"time": "20:18"
+					}
+				}
+			}
+		},
 		"X43lRgqeKeZnviLyvdgJbYHKcAS2": {
 			"Ristorante Carne 3": {
-				"pending": {
+				"confirmed": {
 					"HIIv4s7184hboFq65bj6vm8t6WE2": {
 						"date": "26/08/2022",
 						"number": 4,
 						"time": "19:45"
-					},
-					"Sw2b4RWXTyPR46UNiG5N8TETq7C2": {
-						"date": "31/08/2022",
-						"number": 1,
-						"time": "10:40"
-					},
+					}
+				},
+				"pending": {
 					"lsBoscyWeBbh00eU71CyuzeLcOl1": {
 						"date": "26/08/2022",
 						"number": 4,
@@ -256,6 +264,19 @@
 			"ownerId": "MiSFdAx98YNUBPecPV4UntVFocT2",
 			"phoneNumber": "123456789",
 			"stars": 5
+		},
+		"Paolo sushi": {
+			"address": "empty",
+			"category": "empty",
+			"city": "Torino",
+			"closingTime": "24:00",
+			"description": "empty",
+			"imageUrl": "https://www.ristoilpozzo.it/wp-content/uploads/2020/05/DSC_8911-2000x1335.jpg",
+			"name": "Paolo sushi",
+			"openingTime": "19:00",
+			"ownerId": "CGQmED5TjdZgNozZXuRPFjmJNnl2",
+			"phoneNumber": "empty",
+			"stars": "0"
 		},
 		"Pizzeria 1": {
 			"address": "Via perduta",
@@ -500,90 +521,127 @@
 	},
 	"users": {
 		"144grhjFtNaxo8Da82rEYEyptBE2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "s@s.com"
 		},
 		"3IYTIQyNBBN0xWWbztzAv0cU2cx1": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "j@j.com"
 		},
 		"5InIKo7599REXs0w9Y3YLqQaRDN2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "k@k.com"
 		},
 		"6aRBAdDJRZhf0l75nkMWnAz63bq1": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "r@r.com"
 		},
 		"792FYTkdDrVAgEAopg90SqW1SGE3": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "o@o.com"
 		},
 		"8t5UGHeoEBe4v0tAqP1Sc8Mg3yh1": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "i@i.com"
 		},
 		"AVxQVan5xbVvPkijjM06bkRqpCF3": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "g@g.com"
 		},
-		"DBbHynITkfNPJemhzut3DIRWNuQ2": {
-			"role": "merchant"
+		"CGQmED5TjdZgNozZXuRPFjmJNnl2": {
+			"role": "merchant",
+			"email": "risto@risto.com"
 		},
+
 		"ELQdBR087gR21I1uzhC9m0hdxtB3": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "n@n.com"
 		},
 		"FyjFuTRG97cQQy7uLRFmN38KH9I3": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "a@a.com"
 		},
 		"H4FLJsu4jrf3xHXe7hZL0t6qY1E3": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "z@z.com"
 		},
 		"HIIv4s7184hboFq65bj6vm8t6WE2": {
 			"role": "customer",
 			"starred": {
-				"Fast Food 1": {
+				"Fast Food 2": {
 					"starts": "F"
+				},
+				"Greco 2": {
+					"starts": "G"
+				},
+				"Messicano 2": {
+					"starts": "M"
+				},
+				"Ristorante Pesce 2": {
+					"starts": "R"
+				},
+				"Tavola Calda 1": {
+					"starts": "T"
 				}
-			}
+			},
+			"email": "cliente@c.com"
 		},
 		"IQC6vjURScc2w7VrTaYpooz0n3L2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "gigio@g.com"
 		},
 		"MRrL5zWGfYXZNIlL5qrgTGlUv6u2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "a1@a1.com"
 		},
 		"MiSFdAx98YNUBPecPV4UntVFocT2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "d1@d1.com"
 		},
 		"OXZBJRda2zfmUUH8ckTVSilzMok2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "b1@b1.com"
 		},
 		"PG7wiMvWjKftlBN8EkkAZyzctnx2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "x@x.com"
 		},
 		"QAgWQrffgeaggVT37i58DKadh4g2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "p@p.com"
 		},
 		"SBVsrLsrBpcdpngT4F35G5BcJSP2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "v@v.com"
 		},
 		"Sw2b4RWXTyPR46UNiG5N8TETq7C2": {
-			"role": "customer"
+			"role": "customer",
+			"email": "bonny@b.com"
 		},
 		"VF28xpbxyEQGCeZS1vBfm9iHSUP2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "q@q.com"
 		},
 		"X2fpHZ1sIcNywdPkx5mcTOTPnA93": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "b@b.com"
 		},
 		"X43lRgqeKeZnviLyvdgJbYHKcAS2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "c@c.com"
 		},
 		"Y9EQinl0iAVYtKeT8EydlfuRmX22": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "e@e.com"
 		},
 		"fCNs6aVlNUeu80Ovoj77LJsN3Fl2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "c1@c1.com"
 		},
-		"gBGVyuzQ5rY0omH3h2q7acG222F2": {
-			"role": "merchant"
-		},
+
 		"iK7l4g36AUQ6jnFsPZusycgPaN62": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "y@y.com"
 		},
 		"jMFfjvjHgwPTkIJTMteKFzrTuoA2": {
 			"role": "customer",
@@ -591,28 +649,36 @@
 				"Pesce megabuono": {
 					"starts": "P"
 				}
-			}
+			},
+			"email": "cu@cu.com"
 		},
 		"lsBoscyWeBbh00eU71CyuzeLcOl1": {
-			"role": "customer"
+			"role": "customer",
+			"email": "cli@cli.com"
 		},
 		"mpZoSlrCziQsVXOvWPiRK8e1Jm02": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "d@d.com"
 		},
 		"oPLYdx9yqMV2KseIbd3dzHQ9DKB2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "f@f.com"
 		},
 		"u8CRxYToHXa6uOV3oPNgfs64xED2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "l@l.com"
 		},
 		"uSFAsUIm3ibJGHYSe4tlbLtssDt2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "t@t.com"
 		},
 		"ugvyD23RSlQ7pk5SUabBLEVKf7B2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "h@h.com"
 		},
 		"xOSRQCQjfibpMeb3NnKfdKZ7LUO2": {
-			"role": "merchant"
+			"role": "merchant",
+			"email": "u@u.com"
 		}
 	}
 }

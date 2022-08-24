@@ -109,7 +109,7 @@ const LoginScreen = (props) => {
 
 			//Registrazione.
 			if (isSignup) {
-				dispatch(addUser());
+				dispatch(addUser(formState.inputValues.email));
 
 				// Ristoratore.
 				if (switchValue) {

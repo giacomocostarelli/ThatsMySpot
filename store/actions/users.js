@@ -8,6 +8,31 @@ export const IS_USER_NEW = "IS_USER_NEW";
 export const OWNER_OF = "OWNER_OF";
 export const DELETE_CUSTOMER = "DELETE_CUSTOMER";
 export const DELETE_MERCHANT = "DELETE_MERCHANT";
+export const GET_EMAIL_BY_UID = "GET_EMAIL_BY_UID";
+
+export const getEmailByUid = (uid) => {
+	return async (dispatch, getState) => {
+		try {
+			const response = await fetch(
+				`https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/users/${uid}/email.json`
+			);
+			if (!response.ok) {
+				throw new Error("GET_EMAIL_BY_UID Something went wrong!");
+			}
+
+			const resData = await response.json();
+			console.log("GET_EMAIL_BY_UID Request.");
+			console.log("email : " + resData);
+
+			dispatch({
+				type: GET_EMAIL_BY_UID,
+				email: resData,
+			});
+		} catch (err) {
+			throw err;
+		}
+	};
+};
 
 export const deleteCustomer = () => {
 	return async (dispatch, getState) => {
@@ -169,13 +194,13 @@ export const removeFromFav = (name) => {
 	};
 };
 
-export const addUser = () => {
+export const addUser = (emailPar) => {
 	return async (dispatch, getState) => {
 		const token = getState().auth.token;
 		const userId = getState().auth.userId;
 		const isMerchant = getState().auth.isMerchant;
 
-		var obj = { role: isMerchant ? "merchant" : "customer" };
+		var obj = { role: isMerchant ? "merchant" : "customer", email: emailPar };
 		console.log("ADD_USER Request.");
 
 		const response = await fetch(

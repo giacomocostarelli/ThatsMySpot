@@ -13,6 +13,7 @@ import Collapsible from "react-native-collapsible"; // PACKAGE
 import { Icon } from "react-native-elements";
 import Colors from "../../constants/Colors";
 import { createRestaurant } from "../../store/actions/restaurants";
+import { getEmailByUid } from "../../store/actions/users";
 import {
 	getCurrentReservations,
 	confirmReservation,
@@ -21,6 +22,29 @@ import {
 
 const ReservationRow = (props) => {
 	const dispatch = useDispatch();
+	const emailState = useSelector((state) => state.users.emailToConfirm);
+	const [customerEmail, setCustomerEmail] = useState(emailState);
+
+	useEffect(() => {
+		setCustomerEmail(emailState);
+	}, [emailState]);
+
+	const sendEmail = async () => {
+		let response = await fetch("http://192.168.1.59:3000", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify({
+				date: props.date,
+				time: props.time,
+				number: props.number,
+				email: customerEmail,
+			}),
+		});
+		let json = await response.json();
+	};
+
 	return (
 		<View style={styles.reservationRowContainer}>
 			<View
@@ -66,6 +90,8 @@ const ReservationRow = (props) => {
 										customerId: props.customerId,
 									})
 								);
+								dispatch(getEmailByUid(props.customerId));
+								sendEmail();
 							}}
 						/>
 						<Icon
@@ -150,12 +176,13 @@ const PendingReservationList = () => {
 	//number is the id of reservation TODO
 	const [rows, setRows] = useState([]);
 	const [isPendingExpanded, setIsPendingExpanded] = useState(false);
+
 	const pendingList = useSelector(
 		(state) => state.reservations.pendingReservations
 	);
 	useEffect(() => {
 		let rowsTmp = [];
-		if (pendingList.length !== "undefined") {
+		if (pendingList !== "undefined") {
 			for (let i = 0; i < pendingList.length; i++) {
 				rowsTmp.push(
 					<ReservationRow
@@ -222,7 +249,7 @@ const ConfirmedReservationList = () => {
 
 	useEffect(() => {
 		let rowsTmp = [];
-		if (confirmedList.length !== "undefined") {
+		if (confirmedList !== "undefined") {
 			for (let i = 0; i < confirmedList.length; i++) {
 				rowsTmp.push(
 					<ReservationRow
@@ -328,7 +355,6 @@ const RestaurantNameInput = ({ childToParent }) => {
 					visibleChild = false;
 					childToParent(visibleChild);
 					dispatch(createRestaurant(restaurantName));
-					//dispatch(ownerOf(restaurantName));
 				}}
 			/>
 		</View>
@@ -354,6 +380,20 @@ const ReservationScreen = () => {
 			</View>
 		</View>
 	);
+};
+
+const sendEmail = async () => {
+	let response = await fetch("http://192.168.1.59:3000", {
+		headers: {
+			"Content-Type": "application/json",
+		},
+		method: "POST",
+		body: JSON.stringify({
+			date: dateFormat,
+			time: timeFormat,
+		}),
+	});
+	let json = await response.json();
 };
 
 const styles = StyleSheet.create({

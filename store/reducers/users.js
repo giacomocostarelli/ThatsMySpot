@@ -7,12 +7,14 @@ import {
 	OWNER_OF,
 	DELETE_CUSTOMER,
 	DELETE_MERCHANT,
+	GET_EMAIL_BY_UID,
 } from "../actions/users";
 
 const initialState = {
 	usersState: [],
 	userStarred: [],
 	isNewState: null,
+	emailToConfirm: null,
 };
 
 export default (state = initialState, action) => {
@@ -73,7 +75,11 @@ export default (state = initialState, action) => {
 			return {
 				...state,
 			};
-
+		case GET_EMAIL_BY_UID:
+			return {
+				...state,
+				emailToConfirm: action.email,
+			};
 		default:
 			return state;
 	}
