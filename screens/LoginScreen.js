@@ -306,7 +306,7 @@ const LoginScreen = (props) => {
 							<Switch
 								value={switchValue}
 								onValueChange={(value) => setSwitchValue(value)}
-								color={Colors.accent}
+								color={Colors.primary}
 							/>
 						</View>
 						{isLoading ? (
