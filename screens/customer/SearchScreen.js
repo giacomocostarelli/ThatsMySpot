@@ -77,6 +77,7 @@ const SearchScreen = (props) => {
 			<SearchBar
 				platform="android"
 				containerStyle={styles.containerStyle}
+				inputStyle={styles.inputStyle}
 				placeholder="Cerca un ristorante..."
 				onChangeText={updateSearch}
 				value={searchText}
@@ -84,12 +85,23 @@ const SearchScreen = (props) => {
 			{searchText === "" && (
 				<View
 					style={{
+						flex: 1,
 						alignItems: "center",
-						justifyContent: "flex-start",
+						justifyContent: "flex-end",
+						width: "60%",
+						borderWidth: 0,
 					}}
 				>
+					<Image
+						style={{ height: 70, width: 220 }}
+						source={require("../../assets/images/logo_large_accent.png")}
+					/>
 					<Text
-						style={{ fontSize: 18, color: Colors.accent, textAlign: "center" }}
+						style={{
+							fontSize: 16,
+							color: Colors.accent,
+							textAlign: "center",
+						}}
 					>
 						Ricordi il nome del ristorante? {"\n"}Prenota subito!
 					</Text>
@@ -119,7 +131,9 @@ const styles = StyleSheet.create({
 		margin: "5%",
 		borderRadius: 10,
 		elevation: 3,
-		backgroundColor: "#3674A1",
+		backgroundColor: "white",
+		borderColor: Colors.accent,
+		borderWidth: 2,
 	},
 	flatlist: {
 		width: "90%",
@@ -144,6 +158,10 @@ const styles = StyleSheet.create({
 	},
 	title: {
 		fontSize: 32,
+	},
+	searchIcon: {
+		color: "white",
+		marginLeft: 20,
 	},
 });
 

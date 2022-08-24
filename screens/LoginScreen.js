@@ -7,6 +7,7 @@ import {
 	StyleSheet,
 	Pressable,
 	ActivityIndicator,
+	ImageBackground,
 	Alert,
 	Button,
 } from "react-native";
@@ -159,9 +160,23 @@ const LoginScreen = (props) => {
 	let loginRegisterComponent;
 	if (!isSignup) {
 		loginRegisterComponent = (
-			<View style={[styles.centered, styles.backColor]}>
+			<ImageBackground
+				source={require("../assets/images/background-image-blue-pattern.png")}
+				resizeMode="repeat"
+				style={styles.centered}
+			>
 				<View style={styles.titleText}>
-					<Text style={styles.text}>ThatsMySpot!</Text>
+					<View
+						style={{
+							backgroundColor: "#3674A1",
+							borderRadius: 5,
+							borderColor: "white",
+							borderWidth: 1,
+							padding: 2,
+						}}
+					>
+						<Text style={styles.text}>ThatsMySpot!</Text>
+					</View>
 				</View>
 
 				<Card style={styles.cardContainer}>
@@ -227,11 +242,15 @@ const LoginScreen = (props) => {
 						</Pressable>
 					</View>
 				</Card>
-			</View>
+			</ImageBackground>
 		);
 	} else {
 		loginRegisterComponent = (
-			<View style={[styles.centered, styles.backColor]}>
+			<ImageBackground
+				source={require("../assets/images/background-image-blue-pattern.png")}
+				resizeMode="repeat"
+				style={styles.centered}
+			>
 				<View style={styles.titleTextRegister}>
 					<Text style={styles.text}>ThatsMySpot!</Text>
 				</View>
@@ -314,7 +333,7 @@ const LoginScreen = (props) => {
 						</View>
 					</View>
 				</Card>
-			</View>
+			</ImageBackground>
 		);
 	}
 

@@ -140,7 +140,7 @@ const styles = StyleSheet.create({
 	text: {
 		fontSize: 20,
 		fontFamily: "roboto-font",
-		color: Colors.accent,
+		color: "#1F425C",
 		fontWeight: "bold",
 	},
 	textWIP: {
@@ -149,6 +149,7 @@ const styles = StyleSheet.create({
 		color: "grey",
 	},
 	textDelete: {
+		marginBottom: 20,
 		fontSize: 20,
 		color: "red",
 	},
@@ -162,7 +163,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: 20,
+		marginTop: 40,
 	},
 	darkmode: {
 		flex: 1,

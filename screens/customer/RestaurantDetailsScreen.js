@@ -188,7 +188,6 @@ const BookingTab = (props) => {
 				justifyContent: "center",
 				flexDirection: "column",
 				margin: "9%",
-				backgroundColor: Colors.back,
 			}}
 		>
 			<View style={{ flex: 1 }}>
@@ -538,11 +537,12 @@ const styles = StyleSheet.create({
 
 	container: {
 		flex: 1,
-		backgroundColor: Colors.back,
+		backgroundColor: "white",
 	},
 
 	body: {
 		flex: 1,
+		backgroundColor: "white",
 	},
 
 	bodyTitleContainer: {
