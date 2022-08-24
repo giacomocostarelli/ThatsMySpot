@@ -352,7 +352,7 @@ const styles = StyleSheet.create({
 		backgroundColor: Colors.accent,
 	},
 	text: {
-		fontSize: 50,
+		fontSize: 48,
 		fontFamily: "roboto-font",
 		color: "white",
 	},
