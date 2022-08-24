@@ -155,18 +155,20 @@ const PendingReservationList = () => {
 	);
 	useEffect(() => {
 		let rowsTmp = [];
-		for (let i = 0; i < pendingList.length; i++) {
-			rowsTmp.push(
-				<ReservationRow
-					customerId={pendingList[i].customerId}
-					date={pendingList[i].date}
-					number={pendingList[i].number}
-					time={pendingList[i].time}
-					pn={i + 1}
-					key={i + 1}
-					isPendingList={true}
-				/>
-			);
+		if (pendingList.length !== "undefined") {
+			for (let i = 0; i < pendingList.length; i++) {
+				rowsTmp.push(
+					<ReservationRow
+						customerId={pendingList[i].customerId}
+						date={pendingList[i].date}
+						number={pendingList[i].number}
+						time={pendingList[i].time}
+						pn={i + 1}
+						key={i + 1}
+						isPendingList={true}
+					/>
+				);
+			}
 		}
 		setRows(rowsTmp);
 		setIsPendingExpanded(false);
@@ -220,18 +222,20 @@ const ConfirmedReservationList = () => {
 
 	useEffect(() => {
 		let rowsTmp = [];
-		for (let i = 0; i < confirmedList.length; i++) {
-			rowsTmp.push(
-				<ReservationRow
-					customerId={confirmedList[i].customerId}
-					date={confirmedList[i].date}
-					number={confirmedList[i].number}
-					time={confirmedList[i].time}
-					pn={i + 1}
-					key={i + 1}
-					isPendingList={false}
-				/>
-			);
+		if (confirmedList.length !== "undefined") {
+			for (let i = 0; i < confirmedList.length; i++) {
+				rowsTmp.push(
+					<ReservationRow
+						customerId={confirmedList[i].customerId}
+						date={confirmedList[i].date}
+						number={confirmedList[i].number}
+						time={confirmedList[i].time}
+						pn={i + 1}
+						key={i + 1}
+						isPendingList={false}
+					/>
+				);
+			}
 		}
 		setRows(rowsTmp);
 		setIsConfirmedExpanded(false);

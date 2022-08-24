@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { View } from "react-native";
 import * as SplashScreen from "expo-splash-screen";
-import { LogBox } from "react-native";
+import { LogBox, StatusBar } from "react-native";
 
 import { Provider } from "react-redux";
 import { createStore, combineReducers, applyMiddleware } from "redux";
@@ -15,6 +15,7 @@ import usersReducer from "./store/reducers/users";
 import reservationsReducer from "./store/reducers/reservations";
 
 import AppNavigator from "./navigation/AppNavigator";
+import Colors from "./constants/Colors";
 
 const rootReducer = combineReducers({
 	auth: authReducer,
@@ -28,6 +29,7 @@ const store = createStore(rootReducer, applyMiddleware(ReduxThunk));
 export default function App() {
 	const [appIsReady, setAppIsReady] = useState(false);
 
+	StatusBar.setBarStyle("ligth-content", true);
 	useEffect(() => {
 		async function prepare() {
 			console.log("\n************************************************");
