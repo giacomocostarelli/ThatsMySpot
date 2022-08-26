@@ -3,6 +3,11 @@
     "ELQdBR087gR21I1uzhC9m0hdxtB3": {
       "Hamburgeria 2": {
         "pending": {
+          "0Ng6JkO6N2Pe6NVRU3MAxrXoK832": {
+            "date": "28/08/2022",
+            "number": 2,
+            "time": "18:30"
+          },
           "HIIv4s7184hboFq65bj6vm8t6WE2": {
             "date": "25/08/2022",
             "number": 2,
@@ -44,16 +49,9 @@
       "Sushi 1": {
         "confirmed": {
           "0Ng6JkO6N2Pe6NVRU3MAxrXoK832": {
-            "date": "25/08/2022",
+            "date": "28/08/2022",
             "number": 3,
-            "time": "16:17"
-          }
-        },
-        "pending": {
-          "HIIv4s7184hboFq65bj6vm8t6WE2": {
-            "date": "27/08/2022",
-            "number": 2,
-            "time": "18:34"
+            "time": "18:30"
           }
         }
       }

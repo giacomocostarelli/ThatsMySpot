@@ -76,9 +76,10 @@ export default (state = initialState, action) => {
 				...state,
 			};
 		case GET_EMAIL_BY_UID:
+			let emailToConfirmTmp = action.email;
 			return {
 				...state,
-				emailToConfirm: action.email,
+				emailToConfirm: emailToConfirmTmp,
 			};
 		default:
 			return state;

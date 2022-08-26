@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const SIGNUP = "SIGNUP";
 export const LOGIN = "LOGIN";
 export const LOGOUT = "LOGOUT";
-export const GET_USER = "GET_USER";
+export const GET_USER_ROLE = "GET_USER_ROLE";
 export const DELETE_FIREBASE_USER = "DELETE_FIREBASE_USER";
 
 export const signup = (email, password, merchant) => {
@@ -106,14 +106,14 @@ export const getUserRole = () => {
 			}
 
 			const resData = await response.json();
-			console.log("GET_USER Request.");
+			console.log("GET_USER_ROLE Request.");
 			console.log("Role : " + resData);
 
 			//Async save role
 			storeData(resData);
 
 			dispatch({
-				type: GET_USER,
+				type: GET_USER_ROLE,
 				role: resData,
 			});
 		} catch (err) {

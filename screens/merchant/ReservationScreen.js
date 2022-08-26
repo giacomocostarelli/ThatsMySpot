@@ -15,7 +15,6 @@ import Colors from "../../constants/Colors";
 import { createRestaurant } from "../../store/actions/restaurants";
 import { getEmailByUid } from "../../store/actions/users";
 import {
-	getCurrentReservations,
 	confirmReservation,
 	denyReservation,
 } from "../../store/actions/reservations";
@@ -29,20 +28,37 @@ const ReservationRow = (props) => {
 		setCustomerEmail(emailState);
 	}, [emailState]);
 
-	const sendEmail = async () => {
-		let response = await fetch("http://192.168.1.59:3000", {
-			headers: {
-				"Content-Type": "application/json",
-			},
-			method: "POST",
-			body: JSON.stringify({
-				date: props.date,
-				time: props.time,
-				number: props.number,
-				email: customerEmail,
-			}),
-		});
-		let json = await response.json();
+	const sendEmail = async (isConfirm) => {
+		if (isConfirm) {
+			let responseConfirm = await fetch("http://192.168.178.32:3000/yes", {
+				headers: {
+					"Content-Type": "application/json",
+				},
+				method: "POST",
+				body: JSON.stringify({
+					date: props.date,
+					time: props.time,
+					number: props.number,
+					email: customerEmail,
+					id: props.customerId.slice(0, 6),
+				}),
+			});
+			let json = await responseConfirm.json();
+		} else {
+			let responseCancel = await fetch("http://192.168.178.32:3000/no", {
+				headers: {
+					"Content-Type": "application/json",
+				},
+				method: "POST",
+				body: JSON.stringify({
+					date: props.date,
+					time: props.time,
+					number: props.number,
+					email: customerEmail,
+				}),
+			});
+			let json = await responseCancel.json();
+		}
 	};
 
 	return (
@@ -91,7 +107,7 @@ const ReservationRow = (props) => {
 									})
 								);
 								dispatch(getEmailByUid(props.customerId));
-								//sendEmail();
+								sendEmail(true);
 							}}
 						/>
 						<Icon
@@ -108,6 +124,8 @@ const ReservationRow = (props) => {
 										customerId: props.customerId,
 									})
 								);
+								dispatch(getEmailByUid(props.customerId));
+								sendEmail(false);
 							}}
 						/>
 					</View>

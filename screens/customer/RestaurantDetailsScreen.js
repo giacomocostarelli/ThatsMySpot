@@ -18,6 +18,7 @@ import { Divider } from "react-native-elements/dist/divider/Divider";
 import { Icon } from "react-native-elements";
 import { removeFromFav, addToFav, getStarred } from "../../store/actions/users";
 import { askForReservation } from "../../store/actions/reservations";
+import { getEmailByUid } from "../../store/actions/users";
 
 const ProfileTab = () => {
 	const dispatch = useDispatch();
@@ -115,6 +116,15 @@ const BookingTab = (props) => {
 	const [isPressable, setIsPressable] = useState(false);
 	const [numberOfPeople, setNumberOfPeople] = useState(0);
 
+	const userId = useSelector((state) => state.auth.userId);
+
+	const emailState = useSelector((state) => state.users.emailToConfirm);
+	const [customerEmail, setCustomerEmail] = useState(emailState);
+
+	useEffect(() => {
+		setCustomerEmail(emailState);
+	}, [emailState]);
+
 	const increment = () => {
 		setNumberOfPeople(numberOfPeople + 1);
 	};
@@ -157,6 +167,20 @@ const BookingTab = (props) => {
 		setTimeFormat(datanew.toISOString().slice(11, 16));
 	};
 
+	const sendEmail = async (customerEmail) => {
+		let responseConfirm = await fetch("http://192.168.178.32:3000/pending", {
+			headers: {
+				"Content-Type": "application/json",
+			},
+			method: "POST",
+			body: JSON.stringify({
+				email: customerEmail,
+			}),
+		});
+
+		let json = await responseConfirm.json();
+	};
+
 	const submit = async () => {
 		let res = {
 			date: dateFormat,
@@ -164,6 +188,7 @@ const BookingTab = (props) => {
 			number: numberOfPeople,
 		};
 		await dispatch(askForReservation(res));
+		dispatch(getEmailByUid(userId));
 	};
 
 	return (
@@ -263,6 +288,7 @@ const BookingTab = (props) => {
 								onPress={() => {
 									setModalVisible(!modalVisible);
 									submit();
+									sendEmail(customerEmail);
 								}}
 							>
 								<Text style={styles.textStyle}>Conferma</Text>

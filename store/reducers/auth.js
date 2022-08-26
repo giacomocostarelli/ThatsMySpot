@@ -1,4 +1,4 @@
-import { LOGIN, SIGNUP, LOGOUT, GET_USER } from "../actions/auth";
+import { LOGIN, SIGNUP, LOGOUT, GET_USER_ROLE } from "../actions/auth";
 
 const initialState = {
 	token: null,
@@ -27,8 +27,9 @@ export default (state = initialState, action) => {
 				userId: null,
 				isMerchant: null,
 			};
-		case GET_USER:
-			console.log("GET_USER Reducer.");
+		case GET_USER_ROLE:
+			console.log("GET_USER_ROLE Reducer.");
+			console.log("-------------------------");
 			return {
 				...state,
 				isMerchant: action.role === "merchant" ? true : false,
