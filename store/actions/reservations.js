@@ -68,6 +68,11 @@ export const getCurrentReservations = () => {
 					pendingList.push(singleReservation);
 				}
 
+				console.log("GET_RESERVATIONS Request.");
+				console.log("Pending list:");
+				console.log(pendingList);
+				console.log("-------------------------");
+
 				// CONFIRMED Reservations
 				let confirmedObj = Object.values(resData)[0].confirmed;
 
@@ -82,9 +87,9 @@ export const getCurrentReservations = () => {
 					confirmedList.push(singleReservation);
 				}
 
-				console.log("GET_RESERVATIONS Request.");
-				console.log("-------------------------");
+				console.log("Confirmed list:");
 				console.log(confirmedList);
+				console.log("-------------------------");
 			}
 			dispatch({
 				type: GET_RESERVATIONS,

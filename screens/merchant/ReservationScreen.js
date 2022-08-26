@@ -91,7 +91,7 @@ const ReservationRow = (props) => {
 									})
 								);
 								dispatch(getEmailByUid(props.customerId));
-								sendEmail();
+								//sendEmail();
 							}}
 						/>
 						<Icon
@@ -176,13 +176,13 @@ const PendingReservationList = () => {
 	//number is the id of reservation TODO
 	const [rows, setRows] = useState([]);
 	const [isPendingExpanded, setIsPendingExpanded] = useState(false);
+	let pendingList;
 
-	const pendingList = useSelector(
-		(state) => state.reservations.pendingReservations
-	);
+	pendingList = useSelector((state) => state.reservations.pendingReservations);
+
 	useEffect(() => {
 		let rowsTmp = [];
-		if (pendingList !== "undefined") {
+		if (pendingList !== undefined) {
 			for (let i = 0; i < pendingList.length; i++) {
 				rowsTmp.push(
 					<ReservationRow
@@ -196,7 +196,10 @@ const PendingReservationList = () => {
 					/>
 				);
 			}
+		} else {
+			console.log("E' undefined? " + pendingList);
 		}
+
 		setRows(rowsTmp);
 		setIsPendingExpanded(false);
 	}, [pendingList]);
@@ -243,13 +246,15 @@ const ConfirmedReservationList = () => {
 	//number is the id of reservation TODO
 	const [isConfirmedExpanded, setIsConfirmedExpanded] = useState(false);
 	const [rows, setRows] = useState([]);
-	const confirmedList = useSelector(
+	let confirmedList;
+
+	confirmedList = useSelector(
 		(state) => state.reservations.confirmedReservations
 	);
 
 	useEffect(() => {
 		let rowsTmp = [];
-		if (confirmedList !== "undefined") {
+		if (confirmedList !== undefined) {
 			for (let i = 0; i < confirmedList.length; i++) {
 				rowsTmp.push(
 					<ReservationRow
@@ -263,6 +268,8 @@ const ConfirmedReservationList = () => {
 					/>
 				);
 			}
+		} else {
+			console.log("E' undefined? " + confirmedList);
 		}
 		setRows(rowsTmp);
 		setIsConfirmedExpanded(false);
@@ -380,20 +387,6 @@ const ReservationScreen = () => {
 			</View>
 		</View>
 	);
-};
-
-const sendEmail = async () => {
-	let response = await fetch("http://192.168.1.59:3000", {
-		headers: {
-			"Content-Type": "application/json",
-		},
-		method: "POST",
-		body: JSON.stringify({
-			date: dateFormat,
-			time: timeFormat,
-		}),
-	});
-	let json = await response.json();
 };
 
 const styles = StyleSheet.create({

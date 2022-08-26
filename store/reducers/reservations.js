@@ -13,10 +13,12 @@ const initialState = {
 export default (state = initialState, action) => {
 	switch (action.type) {
 		case GET_RESERVATIONS:
+			let pListTmp = action.pendingListAction;
+			let cListTmp = action.confirmedListAction;
 			return {
 				...state,
-				pendingReservations: action.pendingListAction,
-				confirmedReservations: action.confirmedListAction,
+				pendingReservations: pListTmp,
+				confirmedReservations: cListTmp,
 			};
 
 		case ASK_RESERVATION:
@@ -28,6 +30,7 @@ export default (state = initialState, action) => {
 			let toMoveRes = state.pendingReservations.find(
 				(reservation) => reservation.customerId === action.customerIdAction
 			);
+
 			let pendingListTmp = state.pendingReservations.filter(
 				(reservation) => reservation.customerId !== toMoveRes.customerId
 			);

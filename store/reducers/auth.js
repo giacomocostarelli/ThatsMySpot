@@ -21,7 +21,7 @@ export default (state = initialState, action) => {
 			};
 		case LOGOUT:
 			console.log("LOGOUT successful.");
-			console.log("-------------------------");
+
 			return {
 				token: null,
 				userId: null,
@@ -29,7 +29,6 @@ export default (state = initialState, action) => {
 			};
 		case GET_USER:
 			console.log("GET_USER Reducer.");
-			console.log("-------------------------");
 			return {
 				...state,
 				isMerchant: action.role === "merchant" ? true : false,
