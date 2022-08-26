@@ -70,7 +70,6 @@ const MapScreen = (props) => {
 					latitudeDelta: 0.0025,
 					longitudeDelta: 0.0025,
 				});
-				//console.log(initial);
 			}
 		})();
 	}, []);

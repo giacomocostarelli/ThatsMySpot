@@ -15,7 +15,7 @@ export const fetchRestaurants = () => {
 				"https://prog-mobile-6de61-default-rtdb.europe-west1.firebasedatabase.app/restaurants.json"
 			);
 			if (!response.ok) {
-				throw new Error("Something went wrong!");
+				throw new Error("Qualcosa è andato storto FETCH_RESTAURANTS");
 			}
 
 			const resData = await response.json();

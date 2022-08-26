@@ -69,8 +69,6 @@ export const getCurrentReservations = () => {
 				}
 
 				console.log("GET_RESERVATIONS Request.");
-				console.log("Pending list:");
-				console.log(pendingList);
 				console.log("-------------------------");
 
 				// CONFIRMED Reservations
@@ -86,10 +84,6 @@ export const getCurrentReservations = () => {
 					};
 					confirmedList.push(singleReservation);
 				}
-
-				console.log("Confirmed list:");
-				console.log(confirmedList);
-				console.log("-------------------------");
 			}
 			dispatch({
 				type: GET_RESERVATIONS,

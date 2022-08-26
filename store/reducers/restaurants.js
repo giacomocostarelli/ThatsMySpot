@@ -16,7 +16,6 @@ export default (state = initialState, action) => {
 			let restaurantsStateTmp = state.restaurantsState.concat(
 				action.restaurantData
 			);
-			console.log(action.restaurantData);
 			return {
 				...state,
 				restaurantsState: restaurantsStateTmp,

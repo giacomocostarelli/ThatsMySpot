@@ -84,7 +84,6 @@ const FavoriteScreen = (props) => {
 
 	useEffect(() => {
 		createSections();
-		//console.log(starred);
 	}, [starred]);
 
 	const createSections = () => {
@@ -102,7 +101,7 @@ const FavoriteScreen = (props) => {
 				sectionsFilled.push({ title: favs[i].title, data: favs[i].data });
 			}
 		}
-		//console.log(sectionsFilled)
+
 		setFavsState(sectionsFilled);
 	};
 	//check if favs.data is empty
