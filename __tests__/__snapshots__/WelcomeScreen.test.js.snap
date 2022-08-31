@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders screen correctly before loading 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "flex": 1,
+        "justifyContent": "center",
+      },
+      Object {
+        "backgroundColor": "#1F425C",
+      },
+    ]
+  }
+>
+  <Image
+    source={1}
+    style={
+      Object {
+        "height": "15%",
+        "width": "75%",
+      }
+    }
+  />
+  <ActivityIndicator
+    color="#e2967f"
+    size={60}
+    style={
+      Object {
+        "margin": "8%",
+      }
+    }
+  />
+</View>
+`;

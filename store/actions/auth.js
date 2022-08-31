@@ -43,7 +43,6 @@ export const signup = (email, password, merchant) => {
 			type: SIGNUP,
 			token: resData.idToken,
 			userId: resData.localId,
-
 			isMerchant: merchant,
 		});
 	};
