@@ -6,7 +6,7 @@ const initialState = {
 	isMerchant: null,
 };
 
-export default (state = initialState, action) => {
+export default reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case LOGIN:
 			return {
