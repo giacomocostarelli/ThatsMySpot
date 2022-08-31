@@ -32,18 +32,18 @@ const AppNavigator = (props) => {
 		<NavigationContainer theme={{ colors: { background: "#3674A1" } }}>
 			<Stack.Navigator>
 				<Stack.Screen
-					name="Login"
-					component={LoginScreen}
-					options={{
-						headerShown: false,
-					}}
-				/>
-				<Stack.Screen
 					options={{
 						headerShown: false,
 					}}
 					name="Welcome"
 					component={WelcomeScreen}
+				/>
+				<Stack.Screen
+					name="Login"
+					component={LoginScreen}
+					options={{
+						headerShown: false,
+					}}
 				/>
 				<Stack.Screen
 					name="Homepage"

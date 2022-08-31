@@ -10,7 +10,7 @@ const initialState = {
 	currentRestaurant: null,
 };
 
-export default (state = initialState, action) => {
+export default reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case CREATE_RESTAURANT:
 			let restaurantsStateTmp = state.restaurantsState.concat(

@@ -7,6 +7,7 @@ import {
 	ActivityIndicator,
 	Text,
 	Pressable,
+	Button,
 } from "react-native";
 import Swiper from "react-native-swiper";
 import Colors from "../constants/Colors";
@@ -16,10 +17,6 @@ const { width, height } = Dimensions.get("window");
 
 const WelcomeScreen = (props) => {
 	const [isLoaded, setIsLoaded] = useState(false);
-
-	setTimeout(() => {
-		setIsLoaded(true);
-	}, 4000);
 
 	if (isLoaded) {
 		return (
@@ -247,11 +244,15 @@ const WelcomeScreen = (props) => {
 					style={{ height: "15%", width: "75%" }}
 					source={require("../assets/images/logo_large_accent.png")}
 				/>
-				<ActivityIndicator
-					style={{ margin: "8%" }}
-					size={60}
-					color={Colors.secondary}
-				/>
+				<View style={[{ width: "70%", marginTop: 10 }]}>
+					<Button
+						color={Colors.secondary}
+						title={"Iniziamo!"}
+						onPress={() => {
+							setIsLoaded(true);
+						}}
+					/>
+				</View>
 			</View>
 		);
 	}
