@@ -10,7 +10,7 @@ const initialState = {
 	confirmedReservations: [],
 };
 
-export default (state = initialState, action) => {
+export default reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_RESERVATIONS:
 			let pListTmp = action.pendingListAction;
