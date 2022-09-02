@@ -138,6 +138,7 @@ export const logout = () => {
 			console.log("Clear dell' AsyncStorage fallito.");
 		}
 	};
+	console.log("LOGOUT successful.");
 	return { type: LOGOUT };
 };
 

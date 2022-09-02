@@ -17,7 +17,7 @@ const initialState = {
 	emailToConfirm: null,
 };
 
-export default (state = initialState, action) => {
+export default reducer = (state = initialState, action) => {
 	switch (action.type) {
 		case GET_STARRED:
 			console.log("GET_STARRED Reducer.");

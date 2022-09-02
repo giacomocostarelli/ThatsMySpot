@@ -20,13 +20,12 @@ export default reducer = (state = initialState, action) => {
 				isMerchant: action.isMerchant,
 			};
 		case LOGOUT:
-			console.log("LOGOUT successful.");
-
 			return {
 				token: null,
 				userId: null,
 				isMerchant: null,
 			};
+
 		case GET_USER_ROLE:
 			console.log("GET_USER_ROLE Reducer.");
 			console.log("-------------------------");
