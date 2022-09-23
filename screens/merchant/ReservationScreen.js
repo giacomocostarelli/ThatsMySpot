@@ -21,16 +21,10 @@ import {
 
 const ReservationRow = (props) => {
 	const dispatch = useDispatch();
-	const emailState = useSelector((state) => state.users.emailToConfirm);
-	const [customerEmail, setCustomerEmail] = useState(emailState);
-
-	useEffect(() => {
-		setCustomerEmail(emailState);
-	}, [emailState]);
 
 	const sendEmail = async (isConfirm) => {
 		if (isConfirm) {
-			let responseConfirm = await fetch("http://192.168.178.32:3000/yes", {
+			let responseConfirm = await fetch("http://192.168.205.145:3000/yes", {
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -39,13 +33,13 @@ const ReservationRow = (props) => {
 					date: props.date,
 					time: props.time,
 					number: props.number,
-					email: customerEmail,
+					email: props.email,
 					id: props.customerId.slice(0, 6),
 				}),
 			});
 			let json = await responseConfirm.json();
 		} else {
-			let responseCancel = await fetch("http://192.168.178.32:3000/no", {
+			let responseCancel = await fetch("http://192.168.205.145:3000/no", {
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -54,7 +48,7 @@ const ReservationRow = (props) => {
 					date: props.date,
 					time: props.time,
 					number: props.number,
-					email: customerEmail,
+					email: props.email,
 				}),
 			});
 			let json = await responseCancel.json();
@@ -106,7 +100,6 @@ const ReservationRow = (props) => {
 										customerId: props.customerId,
 									})
 								);
-								dispatch(getEmailByUid(props.customerId));
 								sendEmail(true);
 							}}
 						/>
@@ -124,7 +117,6 @@ const ReservationRow = (props) => {
 										customerId: props.customerId,
 									})
 								);
-								dispatch(getEmailByUid(props.customerId));
 								sendEmail(false);
 							}}
 						/>
@@ -208,6 +200,7 @@ const PendingReservationList = () => {
 						date={pendingList[i].date}
 						number={pendingList[i].number}
 						time={pendingList[i].time}
+						email={pendingList[i].email}
 						pn={i + 1}
 						key={i + 1}
 						isPendingList={true}
@@ -280,6 +273,7 @@ const ConfirmedReservationList = () => {
 						date={confirmedList[i].date}
 						number={confirmedList[i].number}
 						time={confirmedList[i].time}
+						email={confirmedList[i].email}
 						pn={i + 1}
 						key={i + 1}
 						isPendingList={false}

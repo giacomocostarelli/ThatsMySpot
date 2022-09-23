@@ -118,12 +118,7 @@ const BookingTab = (props) => {
 
 	const userId = useSelector((state) => state.auth.userId);
 
-	const emailState = useSelector((state) => state.users.emailToConfirm);
-	const [customerEmail, setCustomerEmail] = useState(emailState);
-
-	useEffect(() => {
-		setCustomerEmail(emailState);
-	}, [emailState]);
+	const customerEmail = useSelector((state) => state.auth.email);
 
 	const increment = () => {
 		setNumberOfPeople(numberOfPeople + 1);
@@ -168,7 +163,7 @@ const BookingTab = (props) => {
 	};
 
 	const sendEmail = async (customerEmail) => {
-		let responseConfirm = await fetch("http://192.168.178.32:3000/pending", {
+		let responseConfirm = await fetch("http://192.168.205.145:3000/pending", {
 			headers: {
 				"Content-Type": "application/json",
 			},
@@ -186,9 +181,9 @@ const BookingTab = (props) => {
 			date: dateFormat,
 			time: timeFormat,
 			number: numberOfPeople,
+			email: customerEmail,
 		};
 		await dispatch(askForReservation(res));
-		dispatch(getEmailByUid(userId));
 	};
 
 	return (

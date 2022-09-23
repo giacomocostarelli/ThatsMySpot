@@ -44,6 +44,7 @@ export const signup = (email, password, merchant) => {
 			token: resData.idToken,
 			userId: resData.localId,
 			isMerchant: merchant,
+			email: email,
 		});
 	};
 };
@@ -88,6 +89,7 @@ export const login = (email, password) => {
 			type: LOGIN,
 			token: resData.idToken,
 			userId: resData.localId,
+			email: resData.email,
 		});
 	};
 };

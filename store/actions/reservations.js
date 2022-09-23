@@ -23,6 +23,7 @@ export const askForReservation = (reservObj) => {
 						date: reservObj.date,
 						time: reservObj.time,
 						number: reservObj.number,
+						email: reservObj.email,
 					}),
 				}
 			);
@@ -64,6 +65,7 @@ export const getCurrentReservations = () => {
 						date: pendingObj[resObj].date,
 						time: pendingObj[resObj].time,
 						number: pendingObj[resObj].number,
+						email: pendingObj[resObj].email,
 					};
 					pendingList.push(singleReservation);
 				}
@@ -81,6 +83,7 @@ export const getCurrentReservations = () => {
 						date: confirmedObj[resObj].date,
 						time: confirmedObj[resObj].time,
 						number: confirmedObj[resObj].number,
+						email: confirmedObj[resObj].email,
 					};
 					confirmedList.push(singleReservation);
 				}
@@ -119,6 +122,7 @@ export const confirmReservation = (reservObj) => {
 						date: reservObj.date,
 						time: reservObj.time,
 						number: reservObj.number,
+						email: reservObj.email,
 					}),
 				}
 			);

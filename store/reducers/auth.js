@@ -4,6 +4,7 @@ const initialState = {
 	token: null,
 	userId: null,
 	isMerchant: null,
+	email: "",
 };
 
 export default reducer = (state = initialState, action) => {
@@ -12,18 +13,21 @@ export default reducer = (state = initialState, action) => {
 			return {
 				token: action.token,
 				userId: action.userId,
+				email: action.email,
 			};
 		case SIGNUP:
 			return {
 				token: action.token,
 				userId: action.userId,
 				isMerchant: action.isMerchant,
+				email: action.email,
 			};
 		case LOGOUT:
 			return {
 				token: null,
 				userId: null,
 				isMerchant: null,
+				email: "",
 			};
 
 		case GET_USER_ROLE:
